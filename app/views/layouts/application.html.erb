@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Paleva App" %></title>
+    <title><%= content_for(:title) || "PaLevá" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -12,14 +12,37 @@
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="icon" type="image/png" href="<%= image_url('android-chrome-512x512.png') %>">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1><%= link_to 'PaLevá', root_path, class: 'btn btn-warning btn-lg' %></h1>
+      <%= 'Usuário <user@email.com>' %>
+      <nav>
+        <button type="button" class="btn btn-warning btn-sm">Restaurante</button>
+        <button type="button" class="btn btn-warning btn-sm">Pratos</button>
+        <button type="button" class="btn btn-warning btn-sm">Bebidas</button>
+      </nav>
+    </header>
+
+    <main>
+      <br>
+      <div class="alert alert-warning">
+        <%= alert %>
+        <%= notice %>
+      </div>
+      <br>
+      <section>
+        <%= yield %>
+      </section>
+      <br>
+    </main>
+    
+    <footer>
+      <p>&copy;<a href="https://www.linkedin.com/in/marcos-grocha/" target="_blank"> marcos-grocha</a></p>
+    </footer>
   </body>
 </html>
