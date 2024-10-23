@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   
   # Defines my routes
   root "pa_leva#index"
-  devise_for :restaurant_owners
+  devise_for :users
 end

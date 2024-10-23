@@ -9,7 +9,7 @@ describe 'Usuário cria uma conta (se auntentica)' do
     fill_in 'Nome', with: 'Marcos'
     fill_in 'Sobrenome', with: 'Guimaraes'
     fill_in 'CPF', with: CPF.generate
-    fill_in 'Email', with: 'marcos@email.com'
+    fill_in 'E-mail', with: 'marcos@email.com'
     fill_in 'Senha', with: 'password1234'
     fill_in 'Confirme sua senha', with: 'password1234'
     click_on 'Sign up'
@@ -17,7 +17,7 @@ describe 'Usuário cria uma conta (se auntentica)' do
     expect(page).to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
     expect(page).to have_content 'Marcos'
     expect(page).to have_content '<marcos@email.com>'
-    user = RestaurantOwner.last
+    user = User.last
     expect(user.name).to eq 'Marcos'
   end
 end
