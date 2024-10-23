@@ -1,11 +1,11 @@
 pt-BR:
   activerecord:
     models:
-      restaurant_owner: 
-        one: Dono do Restaurante
-        other: Donos de Restaurante
+      user: 
+        one: Usuário
+        other: Usuários
     attributes:
-      restaurant_owner:
+      user:
         name: Nome
         last_name: Sobrenome
         cpf: CPF

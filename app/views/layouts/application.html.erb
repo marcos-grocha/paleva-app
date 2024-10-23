@@ -20,9 +20,9 @@
   <body>
     <header>
       <h1><%= link_to 'PaLevá', root_path, class: 'btn btn-warning btn-lg' %></h1>
-      <% if restaurant_owner_signed_in? %>
-        <%= current_restaurant_owner.description %>
-        <%= button_to 'Sair', destroy_restaurant_owner_session_path, method: :delete %>
+      <% if user_signed_in? %>
+        <%= current_user.description %>
+        <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
       <% end %>
       <nav>
         <button type="button" class="btn btn-warning btn-sm">Restaurante</button>
