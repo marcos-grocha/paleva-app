@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      restaurant_owner: 
+        one: Dono do Restaurante
+        other: Donos de Restaurante
+    attributes:
+      restaurant_owner:
+        name: Nome
+        last_name: Sobrenome
+        cpf: CPF
+        password: Senha
+        password_confirmation: Confirme sua senha
