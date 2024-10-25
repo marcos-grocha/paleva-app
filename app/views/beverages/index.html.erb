@@ -1,0 +1,13 @@
+<h3>Bebidas Disponíveis</h3>
+<%= link_to 'Cadastrar Bebida', new_beverage_path, class: 'btn btn-warning btn-sm' %>
+
+<div>
+    <% if @beverages.any? %>
+        <%= @beverages.each do |b| %>
+            <%= b.name %>
+            <%= b.description %>
+        <% end %>
+    <% else %>
+        Nenhuma bebida cadastrada!
+    <% end %>
+</div>

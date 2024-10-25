@@ -1,5 +1,7 @@
 class Establishment < ApplicationRecord
   belongs_to :user_owner
+  has_many :dishes
+  has_many :beverages
 
   before_validation :generate_code
 

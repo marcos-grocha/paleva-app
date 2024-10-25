@@ -1,0 +1,23 @@
+<h3>Cadastrar Bebida</h3>
+
+<%= form_with model: @beverage do |f| %>
+    <div class="text-start">
+        <%= f.label :name, class: 'form-label' %>
+        <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="text-start">
+        <%= f.label :description, class: 'form-label' %>
+        <%= f.text_field :description, class: 'form-control'%>
+    </div>
+    <div class="text-start">
+        <%= f.label :calories, class: 'form-label' %>
+        <%= f.text_field :calories, class: 'form-control' %>
+    </div>
+    <div class="form-check form-switch text-start">
+        <%= f.label :alcoholic, class: 'form-check-label' %>
+        <%= f.check_box :alcoholic, class: 'form-check-input' %>
+    </div>
+    <div>
+        <%= f.submit 'Salvar', class: 'btn btn-outline-warning' %>
+    </div>
+<% end %>

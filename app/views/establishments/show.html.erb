@@ -2,6 +2,7 @@
 <br>
 <div>
     <h4><strong>Código</strong>: <%= @establishment.code %></h4>
+    <%= @establishment.corporate_name %> <br>
     <%= @establishment.address %> <br>
     <%= @establishment.email %> | <%= @establishment.telephone %>
 </div>
@@ -24,4 +25,5 @@
 <br>
 <div>
     <%= link_to 'Pratos', dishes_path, class: 'btn btn-warning btn-sm' %>
+    <%= link_to 'Bebidas', beverages_path, class: 'btn btn-warning btn-sm' %>
 </div>

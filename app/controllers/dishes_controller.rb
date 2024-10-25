@@ -1,6 +1,7 @@
 class DishesController < ApplicationController
+  # before_action :authenticate_user_owner!
   def index
-    @dishes = Dish.all
+    @dishes = current_user_owner.establishment.dishes
   end
 
   def new
@@ -19,6 +20,8 @@ class DishesController < ApplicationController
     end
   end
 
+  private
+  
   def save_params
     params.require(:dish).permit(:name, :description, :calories)
   end
