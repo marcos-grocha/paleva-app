@@ -5,8 +5,13 @@
         <% @dishes.each do |d| %>
             <%= d.name %> <br>
             <%= d.description %> <br>
+            <% if d.photo.attached? %>
+                <%= image_tag d.photo, class: 'img-fluid' %>
+            <% else %>
+                <p>Sem foto disponível</p>
+            <% end %>
         <% end %>
     <% else %>
-        Nenhum prato disponível
+        <p>Nenhum prato disponível</p>
     <% end %>
 </div>

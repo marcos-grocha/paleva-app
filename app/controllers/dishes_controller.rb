@@ -23,6 +23,6 @@ class DishesController < ApplicationController
   private
   
   def save_params
-    params.require(:dish).permit(:name, :description, :calories)
+    params.require(:dish).permit(:name, :description, :calories, :photo)
   end
 end

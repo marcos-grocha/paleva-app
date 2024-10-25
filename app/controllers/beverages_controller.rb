@@ -22,6 +22,6 @@ class BeveragesController < ApplicationController
   private
 
   def save_params
-    params.require(:beverage).permit(:name, :description, :alcoholic, :calories)
+    params.require(:beverage).permit(:name, :description, :alcoholic, :calories, :photo)
   end
 end

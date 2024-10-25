@@ -12,10 +12,12 @@ describe 'Usuário cadastra um prato' do
     fill_in 'Nome', with: 'Feijoada'
     fill_in 'Descrição', with: 'Feijão preto com carne'
     fill_in 'Calorias', with: ''
+    attach_file 'Foto do Prato', Rails.root.join('spec', 'support', 'feijoada.jpg')
     click_on 'Salvar'
 
     expect(page).to have_content 'Prato cadastrado com sucesso!'
     expect(page).to have_content 'Pratos Disponíveis'
     expect(page).to have_content 'Feijoada'
+    expect(page).to have_css("img[src*='feijoada.jpg']")
   end
 end
