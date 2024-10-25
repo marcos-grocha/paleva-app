@@ -20,8 +20,9 @@ describe 'Usuário autenticado cadastra um restaurante' do
     click_on 'Cadastrar estabelecimento'
     
     expect(page).to have_content 'Estabelecimento cadastrado com sucesso!'
-    expect(page).to have_content 'Nome: Fantasy'
-    expect(page).to have_content 'Endereço: Av Dulce Diniz, 18'
-    expect(page).to have_content 'Contato: fantasy@contato.com | 79988887777'
+    expect(page).to have_content 'Fantasy'
+    expect(page).to have_content 'Av Dulce Diniz, 18'
+    expect(page).to have_content 'fantasy@contato.com | 79988887777'
+    expect(current_path).to eq establishment_path(Establishment.last)
   end
 end
