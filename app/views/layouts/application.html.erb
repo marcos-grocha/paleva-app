@@ -20,14 +20,13 @@
   <body>
     <header>
       <h1><%= link_to 'PaLevá', root_path, class: 'btn btn-warning btn-lg' %></h1>
-      <% if user_signed_in? %>
-        <%= current_user.description %>
-        <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+      <% if user_owner_signed_in? %>
+        <%= current_user_owner.description %>
+        <%= button_to 'Sair', destroy_user_owner_session_path, method: :delete, class: 'btn btn-outline-dark' %>
       <% end %>
       <nav>
-        <button type="button" class="btn btn-warning btn-sm">Restaurante</button>
-        <button type="button" class="btn btn-warning btn-sm">Pratos</button>
-        <button type="button" class="btn btn-warning btn-sm">Bebidas</button>
+        <%# <button type="button" class="btn btn-warning btn-sm">Pratos</button> %>
+        <%# <button type="button" class="btn btn-warning btn-sm">Bebidas</button> %>
       </nav>
     </header>
 

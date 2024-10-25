@@ -1,13 +1,14 @@
 pt-BR:
   activerecord:
     models:
-      user: 
-        one: Usuário
-        other: Usuários
+      user_owner: 
+        one: Dono de Estabelecimento
+        other: Donos de Estabelecimento 
     attributes:
-      user:
+      user_owner:
         name: Nome
         last_name: Sobrenome
         cpf: CPF
+        email: E-mail
         password: Senha
         password_confirmation: Confirme sua senha

@@ -10,8 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_23_184707) do
-  create_table "users", force: :cascade do |t|
+ActiveRecord::Schema[7.2].define(version: 2024_10_25_025959) do
+  create_table "establishments", force: :cascade do |t|
+    t.string "fantasy_name"
+    t.string "corporate_name"
+    t.string "cnpj"
+    t.string "address"
+    t.integer "telephone"
+    t.string "email"
+    t.string "code"
+    t.integer "user_owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "sunday"
+    t.boolean "monday"
+    t.boolean "tuesday"
+    t.boolean "wednesday"
+    t.boolean "thursday"
+    t.boolean "friday"
+    t.boolean "saturday"
+    t.time "opening_time"
+    t.time "closing_time"
+    t.index ["user_owner_id"], name: "index_establishments_on_user_owner_id"
+  end
+
+  create_table "user_owners", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -22,7 +45,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_184707) do
     t.string "cpf"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_user_owners_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_user_owners_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "establishments", "user_owners"
 end

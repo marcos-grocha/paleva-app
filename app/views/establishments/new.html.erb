@@ -1,0 +1,55 @@
+<h2><strong>Cadastro de Restaurante</strong></h2>
+
+<% if(@establishment.errors.any?) %>
+    <h4>Verifique esse problemas:</h4>
+    <% @establishment.errors.full_messages.each do |msg| %>
+        - <%= msg %> <br>
+    <% end %>
+    <br>
+<% end %>
+
+<%= form_with(model: @establishment) do |f| %>
+    <div>
+        <%= f.label :fantasy_name %>
+        <%= f.text_field :fantasy_name %>
+    </div>
+    <div>
+        <%= f.label :corporate_name %>
+        <%= f.text_field :corporate_name %>
+    </div>
+    <div>
+        <%= f.label :cnpj %>
+        <%= f.text_field :cnpj %>
+    </div>
+    <div>
+        <%= f.label :address %>
+        <%= f.text_field :address %>
+    </div>
+    <div>
+        <%= f.label :telephone %>
+        <%= f.number_field :telephone %>
+    </div>
+    <div>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+    </div>
+    <div>
+        <br>
+        <h5><strong>Dias de Funcionamento: </strong></h5>
+        <%= f.label :sunday %> <%= f.check_box :sunday %> <br>
+        <%= f.label :monday %> <%= f.check_box :monday %> <br>
+        <%= f.label :tuesday %> <%= f.check_box :tuesday %> <br>
+        <%= f.label :wednesday %> <%= f.check_box :wednesday %> <br>
+        <%= f.label :thursday %> <%= f.check_box :thursday %> <br>
+        <%= f.label :friday %> <%= f.check_box :friday %> <br>
+        <%= f.label :saturday %> <%= f.check_box :saturday %> <br>
+    </div>
+    <div>
+        <br>
+        <h5><strong>Horário de Funcionamento: </strong></h5>
+        <%= f.label :opening_time, 'Abre' %> <%= f.time_field :opening_time %>
+        <%= f.label :closing_time, 'Fecha' %> <%= f.time_field :closing_time %>
+    </div>
+    <br>
+    <%= f.submit 'Cadastrar estabelecimento', class: 'btn btn-outline-warning' %>
+<% end %>

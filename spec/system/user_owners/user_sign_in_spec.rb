@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Usuário se autentica (Faz login)' do
   it 'com sucesso' do
-    User.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
+    UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
 
     visit root_path
     fill_in 'E-mail', with: 'marcos@email.com'
@@ -14,7 +14,7 @@ describe 'Usuário se autentica (Faz login)' do
   end
 
   it 'com os dados errados' do
-    User.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
+    UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
 
     visit root_path
     fill_in 'E-mail', with: 'joao@email.com'

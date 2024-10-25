@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   
   # Defines my routes
   root "pa_leva#index"
-  devise_for :users
+  devise_for :user_owners
+
+  resources :establishments, only: [ :new, :create, :show ]
 end

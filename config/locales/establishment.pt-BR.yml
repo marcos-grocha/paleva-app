@@ -1,0 +1,23 @@
+pt-BR:
+  activerecord:
+    models:
+      establishment: 
+        one: Estabelecimento
+        other: Estabelecimentos
+    attributes:
+      establishment:
+        fantasy_name: Nome Fantasia
+        corporate_name: Razão Social
+        cnpj: CNPJ
+        address: Endereço
+        telephone: Telefone
+        email: E-mail
+        code: Código do estabelecimento
+        user_owner_id: Usuário responsável
+        sunday: DOM
+        monday: SEG
+        tuesday: TER
+        wednesday: QUA
+        thursday: QUI
+        friday: SEX
+        saturday: SAB
