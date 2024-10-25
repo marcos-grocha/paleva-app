@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   devise_for :user_owners
 
   resources :establishments, only: [ :new, :create, :show ]
+  resources :dishes, only: [ :index, :new, :create ]
 end

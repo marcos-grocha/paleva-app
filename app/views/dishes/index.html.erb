@@ -1,0 +1,12 @@
+<h3>Pratos Disponíveis</h3>
+<%= link_to 'Cadastrar Prato', new_dish_path, class: 'btn btn-warning btn-sm' %>
+<div>
+    <% if @dishes.any? %>
+        <% @dishes.each do |d| %>
+            <%= d.name %> <br>
+            <%= d.description %> <br>
+        <% end %>
+    <% else %>
+        Nenhum prato disponível
+    <% end %>
+</div>

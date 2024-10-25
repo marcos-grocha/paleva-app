@@ -21,3 +21,7 @@
     <h4><strong>Horário de Funcionamento</strong></h4>
     Abre: <%= I18n.l @establishment.opening_time, format: :short %> | Fecha: <%= I18n.l @establishment.closing_time, format: :short %>
 </div>
+<br>
+<div>
+    <%= link_to 'Pratos', dishes_path, class: 'btn btn-warning btn-sm' %>
+</div>

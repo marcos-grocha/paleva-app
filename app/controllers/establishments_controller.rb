@@ -1,4 +1,5 @@
 class EstablishmentsController < ApplicationController
+  before_action :set_params_and_check_user, only: [:show]
   def new
     @establishment = Establishment.new
   end
@@ -15,8 +16,15 @@ class EstablishmentsController < ApplicationController
     end
   end
 
-  def show
+  def show; end
+
+  private
+
+  def set_params_and_check_user
     @establishment = Establishment.find(params[:id])
+    if @establishment.user_owner != current_user_owner
+      redirect_to root_path, alert: "Você não possui acesso a este estabelecimento."
+    end
   end
 
   def save_params

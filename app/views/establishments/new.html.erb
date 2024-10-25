@@ -9,29 +9,29 @@
 <% end %>
 
 <%= form_with(model: @establishment) do |f| %>
-    <div>
-        <%= f.label :fantasy_name %>
-        <%= f.text_field :fantasy_name %>
+    <div class="text-start">
+        <%= f.label :fantasy_name, class: 'form-label' %>
+        <%= f.text_field :fantasy_name, class: 'form-control' %>
     </div>
-    <div>
-        <%= f.label :corporate_name %>
-        <%= f.text_field :corporate_name %>
+    <div class="text-start">
+        <%= f.label :corporate_name, class: 'form-label' %>
+        <%= f.text_field :corporate_name, class: 'form-control' %>
     </div>
-    <div>
-        <%= f.label :cnpj %>
-        <%= f.text_field :cnpj %>
+    <div class="text-start">
+        <%= f.label :cnpj, class: 'form-label' %>
+        <%= f.text_field :cnpj, class: 'form-control' %>
+    </div> 
+    <div class="text-start">
+        <%= f.label :address, class: 'form-label' %>
+        <%= f.text_field :address, class: 'form-control' %>
     </div>
-    <div>
-        <%= f.label :address %>
-        <%= f.text_field :address %>
+    <div class="text-start">
+        <%= f.label :telephone, class: 'form-label' %>
+        <%= f.number_field :telephone, class: 'form-control' %>
     </div>
-    <div>
-        <%= f.label :telephone %>
-        <%= f.number_field :telephone %>
-    </div>
-    <div>
-        <%= f.label :email %>
-        <%= f.text_field :email %>
+    <div class="text-start">
+        <%= f.label :email, class: 'form-label' %>
+        <%= f.text_field :email, class: 'form-control' %>
     </div>
     <div>
         <br>
