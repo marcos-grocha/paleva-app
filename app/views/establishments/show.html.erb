@@ -1,6 +1,23 @@
-<h3><strong><%= @establishment.fantasy_name %></strong></h3>
-<h4>Código: <%= @establishment.code %></h4>
+<h2><strong><%= @establishment.fantasy_name %></strong></h2>
+<br>
 <div>
+    <h4><strong>Código</strong>: <%= @establishment.code %></h4>
     <%= @establishment.address %> <br>
     <%= @establishment.email %> | <%= @establishment.telephone %>
+</div>
+<br>
+<div>
+    <h4><strong>Dias de Funcionamento</strong></h4>
+    <%= 'Domingo |' if @establishment.sunday %>
+    <%= 'Segunda |' if @establishment.monday %>
+    <%= 'Terça |' if @establishment.tuesday %>
+    <%= 'Quarta |' if @establishment.wednesday %>
+    <%= 'Quinta |' if @establishment.thursday %>
+    <%= 'Sexta |' if @establishment.friday %>
+    <%= 'Sábado' if @establishment.saturday %>
+</div>
+<br>
+<div>
+    <h4><strong>Horário de Funcionamento</strong></h4>
+    Abre: <%= I18n.l @establishment.opening_time, format: :short %> | Fecha: <%= I18n.l @establishment.closing_time, format: :short %>
 </div>

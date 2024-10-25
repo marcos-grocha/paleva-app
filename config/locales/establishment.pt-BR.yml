@@ -1,4 +1,7 @@
 pt-BR:
+  time:
+    formats:
+      short: "%H:%M"
   activerecord:
     models:
       establishment: 
