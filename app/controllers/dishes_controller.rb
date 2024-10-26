@@ -15,10 +15,16 @@ class DishesController < ApplicationController
     if @dish.save
       redirect_to dishes_path, notice: "Prato cadastrado com sucesso!"
     else
-      flash.now[:notice] = "tomara que não chegue aqui"
+      flash.now[:notice] = "Falha ao cadastrar prato"
       render :new, status: :unprocessable_entity
     end
   end
+
+  def show
+    @dish = Dish.find(params[:id])
+  end
+
+  def edit; end
 
   private
   

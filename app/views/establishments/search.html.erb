@@ -1,0 +1,11 @@
+
+<% if @results.present? %>
+  <p>Resultado da Busca: <%= pluralize(@results.size, 'item') %> encontrado(s)</p>
+  <ul>
+    <% @results.each do |item| %>
+      <li> <%= link_to item.name, polymorphic_path(item) %> - <%= link_to 'Editar', edit_polymorphic_path(item) %> </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Nenhum item encontrado.</p>
+<% end %>

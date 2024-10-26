@@ -1,17 +1,20 @@
-<h3>Pratos Disponíveis</h3>
+<h1>Pratos Disponíveis</h1>
 <%= link_to 'Cadastrar Prato', new_dish_path, class: 'btn btn-warning btn-sm' %>
 <div>
     <% if @dishes.any? %>
+        <br>
         <% @dishes.each do |d| %>
-            <%= d.name %> <br>
-            <%= d.description %> <br>
+            <h3><%= d.name %></h3>
+            <p><%= d.description %></p>
             <% if d.photo.attached? %>
-                <%= image_tag d.photo, class: 'img-fluid' %>
+                <%= image_tag d.photo, width: 150, height: 150, class: 'img-fluid' %><br>
             <% else %>
                 <p>Sem foto disponível</p>
             <% end %>
+            <br>
         <% end %>
     <% else %>
         <p>Nenhum prato disponível</p>
     <% end %>
+    <%= link_to 'voltar', establishment_path(current_user_owner), class: 'btn btn-outline-dark' %>
 </div>

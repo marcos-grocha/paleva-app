@@ -18,6 +18,19 @@ class EstablishmentsController < ApplicationController
 
   def show; end
 
+  def search
+    @establishment = current_user_owner.establishment
+    query = "%#{params[:query]}%"
+    
+    if @establishment
+      @dishes = @establishment.dishes.where('name LIKE ? OR description LIKE ?', query, query)
+      @beverages = @establishment.beverages.where('name LIKE ? OR description LIKE ?', query, query)
+      @results = @dishes + @beverages
+    else
+      @results = []
+    end
+  end
+
   private
 
   def set_params_and_check_user

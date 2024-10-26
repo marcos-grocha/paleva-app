@@ -1,0 +1,8 @@
+<h1><%= @beverage.name %></h1>
+<h3><%= @beverage.description %></h3>
+
+<% if @beverage.photo.attached? %>
+    <%= image_tag @beverage.photo, width: 150, height: 150, class: 'img-fluid' %>
+<% else %>
+    <p>Sem foto disponível</p>
+<% end %>

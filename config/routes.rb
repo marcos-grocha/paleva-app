@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   root "pa_leva#index"
   devise_for :user_owners
 
-  resources :establishments, only: [ :new, :create, :show ]
-  resources :dishes, only: [ :index, :new, :create ]
-  resources :beverages, only: [ :index, :new, :create ]
+  resources :establishments, only: [ :new, :create, :show ] do
+    get "search", on: :collection
+  end
+  resources :dishes, only: [ :index, :new, :create, :show, :edit ]
+  resources :beverages, only: [ :index, :new, :create, :show, :edit ]
 end

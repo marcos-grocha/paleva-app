@@ -14,11 +14,17 @@ class BeveragesController < ApplicationController
     if @beverage.save
       redirect_to beverages_path, notice: "Bebida cadastrada com sucesso!"
     else
-      flash.now[:alert] = "Falharia se chegasse aqui"
+      flash.now[:notice] = "Falha ao cadastrar bebida"
       render :new, status: :unprocessable_entity
     end
   end
 
+  def show
+    @beverage = Beverage.find(params[:id])
+  end
+
+  def edit; end
+  
   private
 
   def save_params

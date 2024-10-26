@@ -1,17 +1,23 @@
-<h3>Bebidas Disponíveis</h3>
+<h1>Bebidas Disponíveis</h1>
 <%= link_to 'Cadastrar Bebida', new_beverage_path, class: 'btn btn-warning btn-sm' %>
 <div>
     <% if @beverages.any? %>
-        <%= @beverages.each do |b| %>
-            <%= b.name %>
-            <%= b.description %>
+        <br>
+        <% @beverages.each do |b| %>
+            <h3><%= b.name %></h3>
+            <p><%= b.description %></p>
+            <% if b.alcoholic? %>
+                <p>Bebida Alcoolica! (+18)</p>
+            <% end %>
             <% if b.photo.attached? %>
-                <%= image_tag b.photo, class: 'img-fluid' %>
+                <%= image_tag b.photo, width: 150, height: 150, class: 'img-fluid' %><br>
             <% else %>
                 <p>Sem foto disponível</p>
             <% end %>
+            <br>
         <% end %>
     <% else %>
         <p>Nenhuma bebida disponível</p>
     <% end %>
+    <%= link_to 'voltar', establishment_path(current_user_owner), class: 'btn btn-outline-dark' %>
 </div>

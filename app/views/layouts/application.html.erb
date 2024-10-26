@@ -21,8 +21,17 @@
     <header>
       <h1><%= link_to 'PaLevá', root_path, class: 'btn btn-warning btn-lg' %></h1>
       <% if user_owner_signed_in? %>
-        <%= current_user_owner.description %>
-        <%= button_to 'Sair', destroy_user_owner_session_path, method: :delete, class: 'btn btn-outline-dark' %>
+        <p>
+          <%= current_user_owner.description %>
+          <%= button_to 'Sair', destroy_user_owner_session_path, method: :delete, class: 'btn btn-outline-dark' %>
+        </p>
+      <% end %>
+      <% if user_owner_signed_in? && !current_user_owner.establishment.nil? %>
+        <%= form_with url: search_establishments_path, method: :get, local: true do %>
+          <%= label_tag :query, 'Buscar Item' %>
+          <%= text_field_tag :query, params[:query] %>
+          <%= submit_tag 'Buscar', class: 'btn btn-warning btn-sm' %>
+        <% end %>
       <% end %>
       <nav>
         <%# <button type="button" class="btn btn-warning btn-sm">Pratos</button> %>
