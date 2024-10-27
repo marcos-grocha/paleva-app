@@ -4,7 +4,7 @@
     <% if @beverages.any? %>
         <br>
         <% @beverages.each do |b| %>
-            <h3><%= b.name %></h3>
+            <h3><%= link_to b.name, beverage_path(b), class: 'btn btn-outline-warning' %></h3>
             <p><%= b.description %></p>
             <% if b.alcoholic? %>
                 <p>Bebida Alcoolica! (+18)</p>

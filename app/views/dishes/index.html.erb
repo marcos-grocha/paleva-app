@@ -4,7 +4,7 @@
     <% if @dishes.any? %>
         <br>
         <% @dishes.each do |d| %>
-            <h3><%= d.name %></h3>
+            <h3><%= link_to d.name, dish_path(d), class: 'btn btn-outline-warning' %></h3>
             <p><%= d.description %></p>
             <% if d.photo.attached? %>
                 <%= image_tag d.photo, width: 150, height: 150, class: 'img-fluid' %><br>
