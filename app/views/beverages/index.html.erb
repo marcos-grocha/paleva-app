@@ -4,16 +4,11 @@
     <% if @beverages.any? %>
         <br>
         <% @beverages.each do |b| %>
-            <h3><%= link_to b.name, beverage_path(b), class: 'btn btn-outline-warning' %></h3>
-            <p><%= b.description %></p>
-            <% if b.alcoholic? %>
-                <p>Bebida Alcoolica! (+18)</p>
-            <% end %>
-            <% if b.photo.attached? %>
-                <%= image_tag b.photo, width: 150, height: 150, class: 'img-fluid' %><br>
-            <% else %>
-                <p>Sem foto disponível</p>
-            <% end %>
+            <div class="list-group"">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <%= link_to b.name, beverage_path(b), class: 'list-group-item list-group-item-action' %>
+                </div>
+            </div>
             <br>
         <% end %>
     <% else %>

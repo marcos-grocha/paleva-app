@@ -1,11 +1,30 @@
-<h1><%= @beverage.name %></h1>
-<h3><%= @beverage.description %></h3>
-
-<% if @beverage.photo.attached? %>
-    <%= image_tag @beverage.photo, width: 150, height: 150, class: 'img-fluid' %>
-<% else %>
-    <p>Sem foto disponível</p>
-<% end %>
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4"">
+            <% if @beverage.photo.attached? %>
+                <%= image_tag @beverage.photo, width: 150, height: 150, class: 'card-img-top' %>
+            <% else %>
+                <p>Sem foto disponível</p>
+            <% end %>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h2 class="card-title"><%= @beverage.name %></h2>
+                <h4 class="card-text"><%= @beverage.description %></h4>
+                <% if @beverage.alcoholic? %>
+                    <p class="card-text"><small class="text-body-secondary">Bebida Alcoolica! (+18)</small></p>
+                <% else %>
+                    <p class="card-text"><small class="text-body-secondary">Não Alcoolica</small></p>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
 <br>
 <%= link_to 'voltar', beverages_path, class: 'btn btn-outline-dark' %>
 <%= link_to 'editar', edit_beverage_path, class: 'btn btn-outline-warning' %>
+
+
+<div class="card mb-3" style="max-width: 540px;">
+
+</div>

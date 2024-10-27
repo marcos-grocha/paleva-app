@@ -15,6 +15,7 @@ describe 'Usuário acessa listagem de pratos' do
 
     expect(page).to have_content 'Coca-Cola'
     expect(page).to have_content 'Refrigerante de cola'
+    expect(page).to have_content 'Não Alcoolica'
     expect(current_path).to eq beverage_path(bebida)
   end
 end

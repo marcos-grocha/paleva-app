@@ -1,29 +1,29 @@
-<h2><strong><%= @establishment.fantasy_name %></strong></h2>
-<br>
-<div>
-    <h4><strong>Código</strong>: <%= @establishment.code %></h4>
-    <%= @establishment.corporate_name %> <br>
-    <%= @establishment.address %> <br>
-    <%= @establishment.email %> | <%= @establishment.telephone %>
-</div>
-<br>
-<div>
-    <h4><strong>Dias de Funcionamento</strong></h4>
-    <%= 'Domingo |' if @establishment.sunday %>
-    <%= 'Segunda |' if @establishment.monday %>
-    <%= 'Terça |' if @establishment.tuesday %>
-    <%= 'Quarta |' if @establishment.wednesday %>
-    <%= 'Quinta |' if @establishment.thursday %>
-    <%= 'Sexta |' if @establishment.friday %>
-    <%= 'Sábado' if @establishment.saturday %>
-</div>
-<br>
-<div>
-    <h4><strong>Horário de Funcionamento</strong></h4>
-    Abre: <%= I18n.l @establishment.opening_time, format: :short %> | Fecha: <%= I18n.l @establishment.closing_time, format: :short %>
-</div>
-<br>
-<div>
-    <%= link_to 'Pratos', dishes_path, class: 'btn btn-warning btn-sm' %>
-    <%= link_to 'Bebidas', beverages_path, class: 'btn btn-warning btn-sm' %>
+<div class="card text-center">
+    <h1 class="card-header" style="color: orange;"><b><%= @establishment.fantasy_name %></b></h1>
+    <div class="card-body">
+        <h4 class="card-title"><b>Código: <%= @establishment.code %></b></h4>
+        <h5><%= @establishment.corporate_name %></h5> <br>
+        <b>CNPJ:</b> <%= @establishment.cnpj %> <br>
+        <b>Endereço:</b> <%= @establishment.address %> <br>
+        <%= @establishment.email %> <b>|</b> <%= @establishment.telephone %>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title"><b>Dias de Funcionamento</b></h4>
+        <%= 'Domingo |' if @establishment.sunday %>
+        <%= 'Segunda |' if @establishment.monday %>
+        <%= 'Terça |' if @establishment.tuesday %>
+        <%= 'Quarta |' if @establishment.wednesday %>
+        <%= 'Quinta |' if @establishment.thursday %>
+        <%= 'Sexta |' if @establishment.friday %>
+        <%= 'Sábado' if @establishment.saturday %>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title"><b>Horário de Funcionamento</b></h4>
+        Abre: <%= I18n.l @establishment.opening_time, format: :short %> <b>|</b> Fecha: <%= I18n.l @establishment.closing_time, format: :short %>
+    </div>
+    <br>
+    <div class="card-footer text-body-secondary">
+        <%= link_to 'Pratos', dishes_path, class: 'btn btn-warning' %>
+        <%= link_to 'Bebidas', beverages_path, class: 'btn btn-warning' %>
+    </div>
 </div>

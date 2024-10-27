@@ -16,8 +16,9 @@
         <%= f.label :photo, "Foto do Prato", class: 'form-label' %>
         <%= f.file_field :photo, class: 'form-control' %>
     </div>
+    <br>
     <div>
-        <%= f.submit 'Salvar', class: 'btn btn-outline-warning' %>
         <%= link_to 'voltar', dishes_path, class: 'btn btn-outline-dark' %>
+        <%= f.submit 'Salvar', class: 'btn btn-outline-warning' %>
     </div>
 <% end %>

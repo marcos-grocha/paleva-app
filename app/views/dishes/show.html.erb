@@ -1,10 +1,15 @@
-<h1><%= @dish.name %></h1>
-<h3><%= @dish.description %></h3>
-<% if @dish.photo.attached? %>
-    <%= image_tag @dish.photo, width: 150, height: 150, class: 'img-fluid' %>
-<% else %>
-    <p>Sem foto disponível</p>
-<% end %>
+<div class="card" style="width: 25rem;">
+    <div class="card-body">
+        <h1 class="card-title"><%= @dish.name %></h1>
+        <h3 class="card-text"><%= @dish.description %></h3>
+    </div>
+    <% if @dish.photo.attached? %>
+        <%= image_tag @dish.photo, class: 'card-img-top' %>
+    <% else %>
+        <p>Sem foto disponível</p>
+    <% end %>
+</div>
+
 <br>
 <%= link_to 'voltar', dishes_path, class: 'btn btn-outline-dark' %>
 <%= link_to 'editar', edit_dish_path, class: 'btn btn-outline-warning' %>

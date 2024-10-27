@@ -4,13 +4,12 @@
     <% if @dishes.any? %>
         <br>
         <% @dishes.each do |d| %>
-            <h3><%= link_to d.name, dish_path(d), class: 'btn btn-outline-warning' %></h3>
-            <p><%= d.description %></p>
-            <% if d.photo.attached? %>
-                <%= image_tag d.photo, width: 150, height: 150, class: 'img-fluid' %><br>
-            <% else %>
-                <p>Sem foto disponível</p>
-            <% end %>
+            <div class="list-group">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <%= link_to d.name, dish_path(d), class: 'list-group-item list-group-item-action' %>
+                </div>
+                <br>
+            </div>
             <br>
         <% end %>
     <% else %>
