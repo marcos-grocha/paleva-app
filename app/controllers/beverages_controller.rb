@@ -1,4 +1,6 @@
 class BeveragesController < ApplicationController
+  before_action :authenticate_user_owner!
+  before_action :set_params_and_check_user_owner, only: [:show, :edit]
   def index
     @beverages = current_user_owner.establishment.beverages
   end
@@ -19,13 +21,18 @@ class BeveragesController < ApplicationController
     end
   end
 
-  def show
-    @beverage = Beverage.find(params[:id])
-  end
+  def show; end
 
   def edit; end
-  
+
   private
+
+  def set_params_and_check_user_owner
+    @beverage = Beverage.find(params[:id])
+    if @beverage.establishment.user_owner != current_user_owner
+      return redirect_to root_path, notice: "Você não possui acesso a esta bebida."
+    end
+  end
 
   def save_params
     params.require(:beverage).permit(:name, :description, :alcoholic, :calories, :photo)
