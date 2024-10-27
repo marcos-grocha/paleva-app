@@ -1,6 +1,6 @@
 class BeveragesController < ApplicationController
   before_action :authenticate_user_owner!
-  before_action :set_params_and_check_user_owner, only: [:show, :edit]
+  before_action :set_params_and_check_user_owner, only: [:show, :edit, :update]
   def index
     @beverages = current_user_owner.establishment.beverages
   end
@@ -16,7 +16,7 @@ class BeveragesController < ApplicationController
     if @beverage.save
       redirect_to beverages_path, notice: "Bebida cadastrada com sucesso!"
     else
-      flash.now[:notice] = "Falha ao cadastrar bebida"
+      flash.now[:alert] = "Falha ao cadastrar bebida"
       render :new, status: :unprocessable_entity
     end
   end
@@ -25,6 +25,15 @@ class BeveragesController < ApplicationController
 
   def edit; end
 
+  def update
+    if @beverage.update(save_params)
+      redirect_to @beverage, notice: "Bebida atualizado com sucesso."
+    else
+      flash.now[:alert] = "Falha ao cadastrar bebida"
+      render :edit, status: :unprocessable_entity
+    end
+  end
+  
   private
 
   def set_params_and_check_user_owner

@@ -1,6 +1,6 @@
 class DishesController < ApplicationController
   before_action :authenticate_user_owner!
-  before_action :set_params_and_check_user_owner, only: [:show, :edit]
+  before_action :set_params_and_check_user_owner, only: [:show, :edit, :update]
   def index
     @dishes = current_user_owner.establishment.dishes
   end
@@ -16,7 +16,7 @@ class DishesController < ApplicationController
     if @dish.save
       redirect_to dishes_path, notice: "Prato cadastrado com sucesso!"
     else
-      flash.now[:notice] = "Falha ao cadastrar prato"
+      flash.now[:alert] = "Falha ao cadastrar prato"
       render :new, status: :unprocessable_entity
     end
   end
@@ -24,6 +24,15 @@ class DishesController < ApplicationController
   def show; end
 
   def edit; end
+
+  def update
+    if @dish.update(save_params)
+      redirect_to @dish, notice: "Prato atualizado com sucesso."
+    else
+      flash.now[:alert] = "Falha ao atualizar prato"
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   private
 

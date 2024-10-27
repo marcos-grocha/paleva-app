@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   resources :establishments, only: [ :new, :create, :show ] do
     get "search", on: :collection
   end
-  resources :dishes, only: [ :index, :new, :create, :show, :edit ]
-  resources :beverages, only: [ :index, :new, :create, :show, :edit ]
+  resources :dishes, only: [ :index, :new, :create, :show, :edit, :update ]
+  resources :beverages, only: [ :index, :new, :create, :show, :edit, :update ]
 end
