@@ -77,4 +77,29 @@ RSpec.describe Establishment, type: :model do
       end
     end
   end
+
+  describe 'gera um código único e aleatório' do
+    it 'ao criar um estabelecimento' do
+    u1 = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
+    u2 = UserOwner.create!(name: 'João', last_name: 'Campus', cpf: CPF.generate, email: 'joao@email.com', password: 'password5678')
+    e1 = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: u1, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
+    e2 = Establishment.create!(fantasy_name: 'MC Donalds', corporate_name: 'Mc LTDA', cnpj: CNPJ.generate, address: 'Av Campus Code, 29', telephone: '79911112222', email: 'donalds@contato.com', user_owner: u2, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
+
+    e1.save!
+
+    expect(e1.code).not_to be_empty
+    expect(e1.code.length).to eq 6
+    expect(e1.code).not_to eq e2.code
+    end
+
+    it 'e não deve ser modificado' do 
+      u = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
+      e = Establishment.create!(fantasy_name: 'MC Donalds', corporate_name: 'Mc LTDA', cnpj: CNPJ.generate, address: 'Av Campus Code, 33', telephone: '79911112222', email: 'donalds@contato.com', user_owner: u, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
+      e_current_code = e.code
+
+      e.update!(corporate_name: 'MC Donalds LTDA')
+
+      expect(e.code).to eq e_current_code
+    end
+  end
 end

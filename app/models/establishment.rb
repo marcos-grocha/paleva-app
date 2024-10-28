@@ -3,7 +3,7 @@ class Establishment < ApplicationRecord
   has_many :dishes
   has_many :beverages
 
-  before_validation :generate_code
+  before_validation :generate_code, on: :create
 
   validates :code, :fantasy_name, :corporate_name, :cnpj, :address, :telephone, :email, presence: true
   validates :code, uniqueness: true
