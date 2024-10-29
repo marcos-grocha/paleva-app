@@ -2,6 +2,7 @@
     <div class="card-body">
         <h1 class="card-title"><%= @dish.name %></h1>
         <h3 class="card-text"><%= @dish.description %></h3>
+        <small class="text-body-secondary">Prato <%= @dish.status ? 'Ativado' : 'Desativado' %></small>
     </div>
     <% if @dish.photo.attached? %>
         <%= image_tag @dish.photo, class: 'card-img-top' %>
@@ -9,7 +10,15 @@
         <p>Sem foto disponível</p>
     <% end %>
 </div>
-
 <br>
-<%= link_to 'voltar', dishes_path, class: 'btn btn-outline-dark' %>
-<%= link_to 'editar', edit_dish_path, class: 'btn btn-outline-warning' %>
+<div class="text-start">
+  <%= link_to 'voltar', dishes_path, class: 'btn btn-outline-dark' %>
+  <%= link_to 'editar', edit_dish_path, class: 'btn btn-outline-warning' %>
+</div>
+<div class="text-end">
+  <%= form_with url: change_status_dish_path(@dish), method: :patch do %>
+    <%= hidden_field_tag :status, !@dish.status %>
+    <%= button_tag 'Desativar', type: 'submit', class: 'btn btn-danger' if @dish.status == true %>
+    <%= button_tag 'Ativar', type: 'submit', class: 'btn btn-success' if @dish.status == false %>
+  <% end %>
+</div>

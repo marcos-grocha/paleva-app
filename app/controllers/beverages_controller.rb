@@ -1,6 +1,6 @@
 class BeveragesController < ApplicationController
   before_action :authenticate_user_owner!
-  before_action :set_params_and_check_user_owner, only: [:show, :edit, :update]
+  before_action :set_params_and_check_user_owner, only: [:show, :edit, :update, :change_status]
   def index
     @beverages = current_user_owner.establishment.beverages
   end
@@ -31,6 +31,15 @@ class BeveragesController < ApplicationController
     else
       flash.now[:alert] = "Falha ao cadastrar bebida"
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def change_status
+    @beverage.status = !@beverage.status
+    if @beverage.save
+      redirect_to @beverage, notice: 'Status da bebida atualizado com sucesso.'
+    else
+      redirect_to @beverage, alert: 'Não foi possível atualizar o status da bebida.'
     end
   end
   

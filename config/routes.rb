@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   resources :establishments, only: [ :new, :create, :show ] do
     get "search", on: :collection
   end
-  resources :dishes, only: [ :index, :new, :create, :show, :edit, :update ]
-  resources :beverages, only: [ :index, :new, :create, :show, :edit, :update ]
+  resources :dishes, only: [ :index, :new, :create, :show, :edit, :update ] do
+    patch "change_status", on: :member
+  end
+  resources :beverages, only: [ :index, :new, :create, :show, :edit, :update ] do
+    patch "change_status", on: :member
+  end
 end

@@ -6,7 +6,7 @@
         <% @dishes.each do |d| %>
             <div class="list-group">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <%= link_to d.name, dish_path(d), class: 'list-group-item list-group-item-action' %>
+                    <%= link_to d.name, dish_path(d), class: 'list-group-item list-group-item-action' %> <span class="list-group-item"><%= d.status ? 'Ativado' : 'Desativado' %></span>
                 </div>
                 <br>
             </div>

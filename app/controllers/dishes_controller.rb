@@ -1,6 +1,6 @@
 class DishesController < ApplicationController
   before_action :authenticate_user_owner!
-  before_action :set_params_and_check_user_owner, only: [:show, :edit, :update]
+  before_action :set_params_and_check_user_owner, only: [:show, :edit, :update, :change_status]
   def index
     @dishes = current_user_owner.establishment.dishes
   end
@@ -31,6 +31,15 @@ class DishesController < ApplicationController
     else
       flash.now[:alert] = "Falha ao atualizar prato"
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def change_status
+    @dish.status = !@dish.status
+    if @dish.save
+      redirect_to @dish, notice: 'Status do prato atualizado com sucesso.'
+    else
+      redirect_to @dish, alert: 'Não foi possível atualizar o status do prato.'
     end
   end
 

@@ -6,7 +6,7 @@
         <% @beverages.each do |b| %>
             <div class="list-group"">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <%= link_to b.name, beverage_path(b), class: 'list-group-item list-group-item-action' %>
+                    <%= link_to b.name, beverage_path(b), class: 'list-group-item list-group-item-action' %> <span class="list-group-item"><%= b.status ? 'Ativado' : 'Desativado' %></span>
                 </div>
             </div>
             <br>

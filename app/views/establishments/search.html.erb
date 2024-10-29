@@ -1,7 +1,7 @@
 
 <div class="list-group">
   <% if @results.present? %>
-    <p class="list-group-item list-group-item-action active" style="background-color: orange;">Resultado da Busca: <%= pluralize(@results.size, 'item') %> encontrado(s)</p>
+    <p class="list-group-item list-group-item-action active" style="background-color: orange; border-color: orange; padding: 15px;">Resultado da Busca: <%= pluralize(@results.size, 'item') %> encontrado(s)</p>
     <% @results.each do |item| %>
       <div class="d-grid gap-2 d-md-flex justify-content-md-center"><%= link_to item.name, polymorphic_path(item), class: 'list-group-item list-group-item-action' %> <%= link_to 'Editar', edit_polymorphic_path(item), class: 'btn btn-outline-warning' %></div>
     <% end %>
