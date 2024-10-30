@@ -21,6 +21,12 @@ section {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.65);
 }
 
+.list-group-item-action.active {
+    background-color: orange;
+    border-color: orange;
+    padding: 15px;
+}
+
 footer {
     color: white;
     text-align: center;

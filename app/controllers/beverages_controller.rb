@@ -3,6 +3,12 @@ class BeveragesController < ApplicationController
   before_action :set_params_and_check_user_owner, only: [:show, :edit, :update, :change_status]
   def index
     @beverages = current_user_owner.establishment.beverages
+
+    if params[:alcoholic] == 'true'
+      @beverages = @beverages.where(alcoholic: true)
+    elsif params[:alcoholic] == 'false'
+      @beverages = @beverages.where(alcoholic: false)
+    end
   end
 
   def new

@@ -3,6 +3,11 @@ class DishesController < ApplicationController
   before_action :set_params_and_check_user_owner, only: [:show, :edit, :update, :change_status]
   def index
     @dishes = current_user_owner.establishment.dishes
+
+    filter_params = params.slice(:spicy, :vegetarian, :vegan, :gluten_free, :sugar_free)
+    filter_params.each do |key, value|
+      @dishes = @dishes.where(key => true) if value == 'true'
+    end
   end
 
   def new
@@ -53,6 +58,6 @@ class DishesController < ApplicationController
   end
   
   def save_params
-    params.require(:dish).permit(:name, :description, :calories, :photo)
+    params.require(:dish).permit(:name, :description, :calories, :vegetarian, :vegan, :gluten_free, :sugar_free, :spicy, :photo)
   end
 end

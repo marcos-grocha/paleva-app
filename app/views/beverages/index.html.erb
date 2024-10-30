@@ -1,5 +1,9 @@
 <h1>Bebidas Disponíveis</h1>
-<%= link_to 'Cadastrar Bebida', new_beverage_path, class: 'btn btn-warning btn-sm' %>
+<div class="btn-group btn-group-sm" aria-label="Small button group">
+    <%= link_to 'Alcoólicas', beverages_path(alcoholic: true), class: 'btn btn-outline-danger btn-sm' %>
+    <%= link_to 'Não Alcoólicas', beverages_path(alcoholic: false), class: 'btn btn-outline-success btn-sm' %>
+    <%= link_to 'Todas', beverages_path, class: 'btn btn-outline-dark btn-sm' %>
+</div>
 <div>
     <% if @beverages.any? %>
         <br>
@@ -14,5 +18,6 @@
     <% else %>
         <p>Nenhuma bebida disponível</p>
     <% end %>
-    <%= link_to 'voltar', establishment_path(current_user_owner), class: 'btn btn-outline-dark' %>
 </div>
+<%= link_to 'voltar', establishment_path(current_user_owner), class: 'btn btn-outline-dark' %>
+<%= link_to 'Cadastrar Bebida', new_beverage_path, class: 'btn btn-warning' %>

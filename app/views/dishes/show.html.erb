@@ -2,7 +2,27 @@
     <div class="card-body">
         <h1 class="card-title"><%= @dish.name %></h1>
         <h3 class="card-text"><%= @dish.description %></h3>
-        <small class="text-body-secondary">Prato <%= @dish.status ? 'Ativado' : 'Desativado' %></small>
+        <div>
+          <% if @dish.vegetarian? %>
+            <small class="text-body-secondary">Prato Vegetariano</small><br>
+          <% end %>
+          <% if @dish.vegan? %>
+            <small class="text-body-secondary">Prato Vegano</small><br>
+          <% end %>
+          <% if @dish.gluten_free? %>
+            <small class="text-body-secondary">Prato Sem Glúten</small><br>
+          <% end %>
+          <% if @dish.sugar_free? %>
+            <small class="text-body-secondary">Prato Sem Açúcar</small><br>
+          <% end %>
+          <% if @dish.spicy? %>
+            <small class="text-body-secondary">Prato Apimentado</small><br>
+          <% end %>
+        </div>
+        <br>
+        <p class="card-text">
+          <small class="text-body-secondary">Prato <%= @dish.status ? 'Ativado' : 'Desativado' %></small>
+        </p>
     </div>
     <% if @dish.photo.attached? %>
         <%= image_tag @dish.photo, class: 'card-img-top' %>

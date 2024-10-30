@@ -14,11 +14,15 @@ describe 'Usuário acessa detalhes de um prato' do
     click_on 'Feijoada'
     click_on 'editar'
     fill_in 'Descrição', with: 'Feijão marrom com calabresa'
+    check 'Sem Glúten'
+    check 'Apimentado'
     click_on 'Salvar'
 
     expect(page).to have_content 'Prato atualizado com sucesso.'
     expect(page).to have_content prato.name
     expect(page).to have_content 'Feijão marrom com calabresa'
+    expect(page).to have_content 'Prato Sem Glúten'
+    expect(page).to have_content 'Prato Apimentado'
     expect(page).not_to have_content 'Feijão preto com carne'
   end
 

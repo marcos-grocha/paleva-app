@@ -12,6 +12,15 @@
         <%= f.label :calories, class: 'form-label' %>
         <%= f.number_field :calories, class: 'form-control' %>
     </div>
+    <div class="form-check form-switch form-check-reverse text-end">
+        <br>
+        <h5><strong>Características Adicionais: </strong></h5>
+        <%= f.label :vegetarian, class: 'form-check-label' %> <%= f.check_box :vegetarian, class: 'form-check-input' %> <br>
+        <%= f.label :vegan %> <%= f.check_box :vegan, class: 'form-check-input' %><br>
+        <%= f.label :gluten_free %> <%= f.check_box :gluten_free, class: 'form-check-input' %><br>
+        <%= f.label :sugar_free %> <%= f.check_box :sugar_free, class: 'form-check-input' %><br>
+        <%= f.label :spicy %> <%= f.check_box :spicy, class: 'form-check-input' %><br>
+    </div>
     <div class="text-start">
         <%= f.label :photo, "Foto do Prato", class: 'form-label' %>
         <%= f.file_field :photo, class: 'form-control' %>
