@@ -1,5 +1,4 @@
 <h1>Pratos Disponíveis</h1>
-
 <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
   <%= link_to 'Apimentados', dishes_path(spicy: true), class: 'btn btn-warning btn-sm' %>
   <%= link_to 'Vegetarianos', dishes_path(vegetarian: true), class: 'btn btn-warning btn-sm' %>
@@ -9,7 +8,6 @@
   <%= link_to 'Sem Glúten', dishes_path(gluten_free: true), class: 'btn btn-outline-light btn-sm' %>
   <%= link_to 'Sem Açúcar', dishes_path(sugar_free: true), class: 'btn btn-outline-light btn-sm' %>
 </div>
-
 <div>
     <% if @dishes.any? %>
         <br>
@@ -20,7 +18,6 @@
                 </div>
                 <br>
             </div>
-            <br>
         <% end %>
     <% else %>
         <p>Nenhum prato disponível</p>

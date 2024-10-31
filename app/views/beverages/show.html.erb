@@ -22,9 +22,24 @@
     </div>
 </div>
 <br>
+<div>
+  <% if @beverage.portions.any? %>
+    <h2>Porções</h2>
+    <% @beverage.portions.each do |portion| %>
+      <p>
+        <b><%= portion.description %>:</b> <%= number_to_currency(portion.price) %>
+        <%= link_to 'Editar', edit_beverage_portion_path(@beverage, portion), class: 'btn btn-outline-warning btn-sm' %>
+        <%= link_to 'Histórico', beverage_portion_path(@beverage, portion), class: 'btn btn-outline-secondary btn-sm' %>
+      </p>
+    <% end %>
+  <% else %>
+    <p>Sem porção disponível</p>
+  <% end %>
+</div>
 <div class="text-start">
     <%= link_to 'voltar', beverages_path, class: 'btn btn-outline-dark' %>
     <%= link_to 'editar', edit_beverage_path, class: 'btn btn-outline-warning' %>
+    <%= link_to 'Adicionar porção', new_beverage_portion_path(@beverage), class: 'btn btn-warning' %>
 </div>
 <div class="text-end">
   <%= form_with url: change_status_beverage_path(@beverage), method: :patch do %>
