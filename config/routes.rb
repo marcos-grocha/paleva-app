@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :portions, only: [ :new, :create, :show, :edit, :update ]
     resources :additional_features, only: [ :new, :create, :edit, :update ]
     patch "change_status", on: :member
+    get "search", on: :collection
   end
   resources :beverages, only: [ :index, :new, :create, :show, :edit, :update ] do
     resources :portions, only: [ :new, :create, :show, :edit, :update ]

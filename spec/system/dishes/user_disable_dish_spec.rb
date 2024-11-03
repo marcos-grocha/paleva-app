@@ -16,7 +16,7 @@ describe 'Usuário clica em Pratos' do
     expect(page).to have_content prato.name
     expect(page).to have_content prato.description
     expect(page).to have_content 'Desativado'
-    expect(page).not_to have_content 'Ativado'
+    expect(page).not_to have_content 'Ativo'
   end
 
   it 'vai em detalhes e habilita um prato' do
@@ -33,7 +33,7 @@ describe 'Usuário clica em Pratos' do
     expect(page).to have_content 'Status do prato atualizado com sucesso.'
     expect(page).to have_content prato.name
     expect(page).to have_content prato.description
-    expect(page).to have_content 'Ativado'
+    expect(page).to have_content 'Ativo'
     expect(page).not_to have_content 'Desativado'
   end
 end

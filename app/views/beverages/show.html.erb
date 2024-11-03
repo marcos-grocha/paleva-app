@@ -35,16 +35,22 @@
   <% else %>
     <p>Sem porção disponível</p>
   <% end %>
+  <%= link_to 'Adicionar Porção', new_beverage_portion_path(@beverage), class: 'btn btn-warning' %>
 </div>
-<div class="text-start">
-    <%= link_to 'voltar', beverages_path, class: 'btn btn-outline-dark' %>
-    <%= link_to 'editar', edit_beverage_path, class: 'btn btn-outline-warning' %>
-    <%= link_to 'Adicionar porção', new_beverage_portion_path(@beverage), class: 'btn btn-warning' %>
-</div>
-<div class="text-end">
-  <%= form_with url: change_status_beverage_path(@beverage), method: :patch do %>
-    <%= hidden_field_tag :status, !@beverage.status %>
-    <%= button_tag 'Desativar', type: 'submit', class: 'btn btn-danger' if @beverage.status == true %>
-    <%= button_tag 'Ativar', type: 'submit', class: 'btn btn-success' if @beverage.status == false %>
-  <% end %>
+<br>
+
+<div class="d-flex justify-content-center">
+  <div class="row g-2 align-items-center">
+    <div class="col-auto">
+        <%= link_to 'voltar', beverages_path, class: 'btn btn-outline-dark' %>
+        <%= link_to 'editar', edit_beverage_path, class: 'btn btn-outline-warning' %>
+    </div>
+    <div class="col-auto">
+      <%= form_with url: change_status_beverage_path(@beverage), method: :patch do %>
+        <%= hidden_field_tag :status, !@beverage.status %>
+        <%= button_tag 'Desativar', type: 'submit', class: 'btn btn-outline-danger' if @beverage.status == true %>
+        <%= button_tag 'Ativar', type: 'submit', class: 'btn btn-outline-success' if @beverage.status == false %>
+      <% end %>
+    </div>
+  </div>
 </div>

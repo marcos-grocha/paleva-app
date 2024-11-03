@@ -10,7 +10,7 @@ describe 'Usuário registra uma porção' do
     visit root_path
     click_on 'Pratos'
     click_on dish.name
-    click_on 'Adicionar porção'
+    click_on 'Adicionar Porção'
     fill_in 'Descrição', with: 'Porção pequena (350ml)'
     fill_in 'Preço', with: 18.00
     click_on 'Criar Porção'
@@ -29,7 +29,7 @@ describe 'Usuário registra uma porção' do
     visit root_path
     click_on 'Bebidas'
     click_on beverage.name
-    click_on 'Adicionar porção'
+    click_on 'Adicionar Porção'
     fill_in 'Descrição', with: 'Longneck (355ml)'
     fill_in 'Preço', with: 15.00
     click_on 'Criar Porção'

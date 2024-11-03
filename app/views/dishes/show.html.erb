@@ -2,12 +2,8 @@
     <div class="card-body">
         <h1 class="card-title"><%= @dish.name %></h1>
         <h3 class="card-text"><%= @dish.description %></h3>
-        <div>
-          caracteristicas -- refatorar
-        </div>
-        <br>
         <p class="card-text">
-          <small class="text-body-secondary">Prato <%= @dish.status ? 'Ativado' : 'Desativado' %></small>
+          <small class="text-body-secondary">Prato <%= @dish.status ? 'Ativo' : 'Desativado' %></small>
         </p>
     </div>
     <% if @dish.photo.attached? %>
@@ -17,10 +13,20 @@
     <% end %>
 </div>
 <br>
-<div class="text-end">
-  <%= link_to 'Adicionar Característica', new_dish_additional_feature_path(@dish), class: 'btn btn-warning' %>
+
+<div>
+  <% if @dish.additional_features.any? %>
+    <h3>Marcadores</h3>
+    <% @dish.additional_features.each do |feature| %>
+      <li>Prato <%= feature.name %></li>
+    <% end %>
+  <% else %>
+    <p>Sem marcadores cadastrados</p>
+  <% end %><br>
+  <%= link_to 'Adicionar Marcador', new_dish_additional_feature_path(@dish), class: 'btn btn-warning btn-sm' %>
 </div>
 <br>
+
 <div>
   <% if @dish.portions.any? %>
     <h3>Porções</h3>
@@ -34,17 +40,20 @@
   <% else %>
     <p>Sem porção disponível</p>
   <% end %>
+  <%= link_to 'Adicionar Porção', new_dish_portion_path(@dish), class: 'btn btn-warning btn-sm' %>
 </div>
 <br>
-<div class="text-start">
-  <%= link_to 'voltar', dishes_path, class: 'btn btn-outline-dark' %>
-  <%= link_to 'editar', edit_dish_path, class: 'btn btn-outline-warning' %>
-  <%= link_to 'Adicionar porção', new_dish_portion_path(@dish), class: 'btn btn-warning' %>
-</div>
-<div class="text-end">
-  <%= form_with url: change_status_dish_path(@dish), method: :patch do %>
-    <%= hidden_field_tag :status, !@dish.status %>
-    <%= button_tag 'Desativar', type: 'submit', class: 'btn btn-danger' if @dish.status == true %>
-    <%= button_tag 'Ativar', type: 'submit', class: 'btn btn-success' if @dish.status == false %>
-  <% end %>
+
+<div class="d-flex justify-content-center">
+  <div class="row g-3 align-items-center">
+    <div class="col-auto"><%= link_to 'voltar', dishes_path, class: 'btn btn-outline-dark' %></div>
+    <div class="col-auto"><%= link_to 'editar', edit_dish_path, class: 'btn btn-outline-warning' %></div>
+    <div class="col-auto">
+      <%= form_with url: change_status_dish_path(@dish), method: :patch do %>
+        <%= hidden_field_tag :status, !@dish.status %>
+        <%= button_tag 'Desativar', type: 'submit', class: 'btn btn-outline-danger' if @dish.status == true %>
+        <%= button_tag 'Ativar', type: 'submit', class: 'btn btn-outline-success' if @dish.status == false %>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -10,8 +10,16 @@ def create_dish(establishment)
   Dish.create!(name: 'Feijoada', description: 'Descrição do support/auto_create.rb', establishment: establishment)
 end
 
+def create_second_dish(establishment)
+  Dish.create!(name: 'Arroz', description: 'Descrição do support/auto_create.rb', establishment: establishment)
+end
+
 def create_beverage(establishment)
   Beverage.create!(name: 'Coca-Cola', description: 'Descrição do support/auto_create.rb', establishment: establishment)
+end
+
+def create_second_beverage(establishment)
+  Beverage.create!(name: 'Heineken', description: 'Descrição do support/auto_create.rb', establishment: establishment)
 end
 
 def create_portion_dish(dish)
@@ -20,4 +28,12 @@ end
 
 def create_portion_beverage(beverage)
   Portion.create!(description: 'Descrição do support/auto_create.rb', price: '99.00', beverage: beverage)
+end
+
+def create_additional_features_spicy(dish)
+  AdditionalFeature.create!(name: 'Apimentado', active: true, dish: dish)
+end
+
+def create_additional_features_vegan(dish)
+  AdditionalFeature.create!(name: 'Vegano', active: true, dish: dish)
 end

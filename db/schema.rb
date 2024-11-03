@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_02_191901) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_03_203402) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -68,11 +68,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_02_191901) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "status", default: true
-    t.boolean "vegetarian", default: false
-    t.boolean "vegan", default: false
-    t.boolean "gluten_free", default: false
-    t.boolean "sugar_free", default: false
-    t.boolean "spicy", default: false
     t.index ["establishment_id"], name: "index_dishes_on_establishment_id"
   end
 
