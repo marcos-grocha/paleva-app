@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe 'Usuário autenticado cadastra um restaurante' do
   it 'com sucesso' do
-    user = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
+    user_owner = create_user()
     
-    login_as user
+    login_as user_owner
     visit root_path
     fill_in 'Nome Fantasia', with: 'Fantasy'
     fill_in 'Razão Social', with: 'Irã Refeições LTDA'

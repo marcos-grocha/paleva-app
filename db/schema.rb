@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_30_195944) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_02_191901) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_30_195944) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "additional_features", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active"
+    t.integer "dish_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_additional_features_on_dish_id"
   end
 
   create_table "beverages", force: :cascade do |t|
@@ -128,6 +137,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_30_195944) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "additional_features", "dishes"
   add_foreign_key "beverages", "establishments"
   add_foreign_key "dishes", "establishments"
   add_foreign_key "establishments", "user_owners"

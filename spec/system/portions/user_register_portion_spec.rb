@@ -2,16 +2,14 @@ require 'rails_helper'
 
 describe 'Usuário registra uma porção' do
   it 'através da página de detalhes de um prato' do
-    marcos = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', 
-      cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
-    establ = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', 
-      cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: marcos, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
-    prato = Dish.create!(name: 'Feijoada', description: 'Feijão preto com carne', establishment: establ, status: true)
+    user_owner = create_user()
+    establishment = create_establishment(user_owner)
+    dish = create_dish(establishment)
 
-    login_as marcos
+    login_as user_owner
     visit root_path
     click_on 'Pratos'
-    click_on prato.name
+    click_on dish.name
     click_on 'Adicionar porção'
     fill_in 'Descrição', with: 'Porção pequena (350ml)'
     fill_in 'Preço', with: 18.00
@@ -23,16 +21,14 @@ describe 'Usuário registra uma porção' do
   end
 
   it 'através da página de detalhes de uma bebida' do
-    marcos = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', 
-      cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
-    establ = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', 
-      cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: marcos, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
-    breja = Beverage.create!(name: 'Heineken', description: 'Cerveja Puro-Malte', establishment: establ, alcoholic: true)
+    user_owner = create_user()
+    establishment = create_establishment(user_owner)
+    beverage = create_beverage(establishment)
 
-    login_as marcos
+    login_as user_owner
     visit root_path
     click_on 'Bebidas'
-    click_on breja.name
+    click_on beverage.name
     click_on 'Adicionar porção'
     fill_in 'Descrição', with: 'Longneck (355ml)'
     fill_in 'Preço', with: 15.00

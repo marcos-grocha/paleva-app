@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   resources :dishes, only: [ :index, :new, :create, :show, :edit, :update ] do
     resources :portions, only: [ :new, :create, :show, :edit, :update ]
+    resources :additional_features, only: [ :new, :create, :edit, :update ]
     patch "change_status", on: :member
   end
   resources :beverages, only: [ :index, :new, :create, :show, :edit, :update ] do

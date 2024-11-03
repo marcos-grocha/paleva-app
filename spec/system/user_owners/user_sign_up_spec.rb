@@ -17,7 +17,7 @@ describe 'Usuário cria uma conta (se auntentica)' do
     expect(page).to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
     expect(page).to have_content 'Marcos'
     expect(page).to have_content 'marcos@email.com'
-    user = UserOwner.last
-    expect(user.name).to eq 'Marcos'
+    user_owner = UserOwner.last
+    expect(user_owner.name).to eq 'Marcos'
   end
 end

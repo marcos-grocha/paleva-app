@@ -3,21 +3,7 @@
         <h1 class="card-title"><%= @dish.name %></h1>
         <h3 class="card-text"><%= @dish.description %></h3>
         <div>
-          <% if @dish.vegetarian? %>
-            <small class="text-body-secondary">Prato Vegetariano</small><br>
-          <% end %>
-          <% if @dish.vegan? %>
-            <small class="text-body-secondary">Prato Vegano</small><br>
-          <% end %>
-          <% if @dish.gluten_free? %>
-            <small class="text-body-secondary">Prato Sem Glúten</small><br>
-          <% end %>
-          <% if @dish.sugar_free? %>
-            <small class="text-body-secondary">Prato Sem Açúcar</small><br>
-          <% end %>
-          <% if @dish.spicy? %>
-            <small class="text-body-secondary">Prato Apimentado</small><br>
-          <% end %>
+          caracteristicas -- refatorar
         </div>
         <br>
         <p class="card-text">
@@ -29,6 +15,10 @@
     <% else %>
         <p>Sem foto disponível</p>
     <% end %>
+</div>
+<br>
+<div class="text-end">
+  <%= link_to 'Adicionar Característica', new_dish_additional_feature_path(@dish), class: 'btn btn-warning' %>
 </div>
 <br>
 <div>

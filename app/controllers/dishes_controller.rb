@@ -4,6 +4,7 @@ class DishesController < ApplicationController
   def index
     @dishes = current_user_owner.establishment.dishes
 
+    # refatorar abaixo -- caracteristicas
     filter_params = params.slice(:spicy, :vegetarian, :vegan, :gluten_free, :sugar_free)
     filter_params.each do |key, value|
       @dishes = @dishes.where(key => true) if value == 'true'
@@ -58,6 +59,6 @@ class DishesController < ApplicationController
   end
   
   def save_params
-    params.require(:dish).permit(:name, :description, :calories, :vegetarian, :vegan, :gluten_free, :sugar_free, :spicy, :photo)
+    params.require(:dish).permit(:name, :description, :calories, :photo, additional_features_attributes: [:id, :name, :active, :_destroy])
   end
 end

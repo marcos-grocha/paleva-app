@@ -10,42 +10,42 @@ describe 'Usuário busca por itens' do
   end
 
   it 'e encontra um prato' do
-    marcos = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
-    fantasy = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: marcos, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
-    feijoada = Dish.create!(name: 'Feijoada', description: 'Feijão preto com carne', establishment: fantasy)
+    user_owner = create_user()
+    establishment = create_establishment(user_owner)
+    dish = create_dish(establishment)
 
-    login_as marcos
+    login_as user_owner
     visit root_path
-    fill_in 'Buscar Item', with: feijoada.name
+    fill_in 'Buscar Item', with: dish.name
     click_on 'Buscar'
     
     expect(page).to have_content 'Resultado da Busca: 1 item encontrado'
-    expect(page).to have_content 'Feijoada'
+    expect(page).to have_content dish.name
     expect(page).to have_content 'Editar'
   end
 
   it 'e vê detalhes de um prato' do
-    marcos = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
-    fantasy = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: marcos, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
-    feijoada = Dish.create!(name: 'Feijoada', description: 'Feijão preto com carne', establishment: fantasy)
+    user_owner = create_user()
+    establishment = create_establishment(user_owner)
+    dish = create_dish(establishment)
 
-    login_as marcos
+    login_as user_owner
     visit root_path
-    fill_in 'Buscar Item', with: feijoada.name
+    fill_in 'Buscar Item', with: dish.name
     click_on 'Buscar'
-    click_on 'Feijoada'
+    click_on dish.name
     
-    expect(page).to have_content 'Feijão preto com carne'
+    expect(page).to have_content dish.description
   end
 
   it 'e edita um prato' do
-    marcos = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
-    fantasy = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: marcos, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
-    feijoada = Dish.create!(name: 'Feijoada', description: 'Feijão preto com carne', establishment: fantasy)
+    user_owner = create_user()
+    establishment = create_establishment(user_owner)
+    dish = create_dish(establishment)
 
-    login_as marcos
+    login_as user_owner
     visit root_path
-    fill_in 'Buscar Item', with: feijoada.name
+    fill_in 'Buscar Item', with: dish.name
     click_on 'Buscar'
     click_on 'Editar'
     
@@ -53,42 +53,42 @@ describe 'Usuário busca por itens' do
   end
 
   it 'e encontra uma bebida' do
-    marcos = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
-    fantasy = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: marcos, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
-    coca = Beverage.create!(name: 'Coca-Cola', description: 'Refrigerante de cola', establishment: fantasy)
+    user_owner = create_user()
+    establishment = create_establishment(user_owner)
+    beverage = create_beverage(establishment)
 
-    login_as marcos
+    login_as user_owner
     visit root_path
-    fill_in 'Buscar Item', with: coca.name
+    fill_in 'Buscar Item', with: beverage.name
     click_on 'Buscar'
     
     expect(page).to have_content 'Resultado da Busca: 1 item encontrado'
-    expect(page).to have_content 'Coca-Cola'
+    expect(page).to have_content beverage.name
     expect(page).to have_content 'Editar'
   end
 
   it 'e vê detalhes de uma bebida' do
-    marcos = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
-    fantasy = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: marcos, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
-    coca = Beverage.create!(name: 'Coca-Cola', description: 'Refrigerante de cola', establishment: fantasy)
+    user_owner = create_user()
+    establishment = create_establishment(user_owner)
+    beverage = create_beverage(establishment)
 
-    login_as marcos
+    login_as user_owner
     visit root_path
-    fill_in 'Buscar Item', with: coca.name
+    fill_in 'Buscar Item', with: beverage.name
     click_on 'Buscar'
-    click_on 'Coca-Cola'
+    click_on beverage.name
     
-    expect(page).to have_content 'Refrigerante de cola'
+    expect(page).to have_content beverage.description
   end
 
   it 'e edita uma bebida' do
-    marcos = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
-    fantasy = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: marcos, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
-    coca = Beverage.create!(name: 'Coca-Cola', description: 'Refrigerante de cola', establishment: fantasy)
+    user_owner = create_user()
+    establishment = create_establishment(user_owner)
+    beverage = create_beverage(establishment)
 
-    login_as marcos
+    login_as user_owner
     visit root_path
-    fill_in 'Buscar Item', with: coca.name
+    fill_in 'Buscar Item', with: beverage.name
     click_on 'Buscar'
     click_on 'Editar'
     
