@@ -22,11 +22,11 @@ describe 'Usuário autenticado cadastra um restaurante' do
     expect(page).to have_content 'Estabelecimento cadastrado com sucesso!'
     expect(page).to have_content 'Fantasy'
     expect(page).to have_content 'Av Dulce Diniz, 18'
-    expect(page).to have_content 'fantasy@contato.com | 79988887777'
+    expect(page).to have_content 'fantasy@contato.com - 79988887777'
     expect(page).to have_content 'Segunda'
     expect(page).to have_content 'Terça'
     expect(page).to have_content 'Sexta'
-    expect(page).to have_content 'Abre: 15:00 | Fecha: 23:00'
+    expect(page).to have_content 'Abre: 15:00 / Fecha: 23:00'
     expect(current_path).to eq establishment_path(Establishment.last)
   end
 end

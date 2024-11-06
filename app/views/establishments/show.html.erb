@@ -1,11 +1,10 @@
-<div class="card text-center" style="border-color: orange;">
-    <h1 class="card-header" style="color: orange;"><b><%= @establishment.fantasy_name %></b></h1>
+<div class="card text-center" style="background:  rgba(255, 255, 255, 0.25);">
+    <h1 class="card-header" style="color: darkorange;"><b><%= @establishment.fantasy_name %></b></h1>
     <div class="card-body">
-        <h4 class="card-title"><b>Código: <%= @establishment.code %></b></h4>
-        <h5><%= @establishment.corporate_name %></h5> <br>
-        <b>CNPJ:</b> <%= @establishment.cnpj %> <br>
-        <b>Endereço:</b> <%= @establishment.address %> <br>
-        <%= @establishment.email %> <b>|</b> <%= @establishment.telephone %>
+        <h4 class="card-title"><b>Código: <%= @establishment.code %></b></h4><br>
+        <h5><%= @establishment.corporate_name %></h5>
+        <b>CNPJ:</b> <%= @establishment.cnpj %><br>
+        <b>Endereço:</b> <%= @establishment.address %>
     </div>
     <div class="card-body">
         <h4 class="card-title"><b>Dias de Funcionamento</b></h4>
@@ -19,11 +18,9 @@
     </div>
     <div class="card-body">
         <h4 class="card-title"><b>Horário de Funcionamento</b></h4>
-        Abre: <%= I18n.l @establishment.opening_time, format: :short %> <b>|</b> Fecha: <%= I18n.l @establishment.closing_time, format: :short %>
+        Abre: <%= I18n.l @establishment.opening_time, format: :short %> <b>/</b> Fecha: <%= I18n.l @establishment.closing_time, format: :short %>
     </div>
-    <br>
     <div class="card-footer text-body-secondary">
-        <%= link_to 'Pratos', dishes_path, class: 'btn btn-warning' %>
-        <%= link_to 'Bebidas', beverages_path, class: 'btn btn-warning' %>
+        <%= @establishment.email %> <b>-</b> <%= @establishment.telephone %>
     </div>
 </div>

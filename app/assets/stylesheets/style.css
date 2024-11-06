@@ -1,14 +1,21 @@
 header {
     text-align: center;
 }
+.header {
+    padding: 15px;
+    background-color: rgba(254, 254, 254, 0.75);
+}
+nav {
+    padding: 10px;
+}
 
 body {
-    height: 100vh;
-    background-color: rgba(150, 150, 150, 0.65);
-    background-image: url('wallpaper.jpeg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    background: linear-gradient(300deg, #000000bd, #14213db3, #fca211b9, #e5e5e5, #ffffff);
+    min-height: 100vh;
+    margin: 0;
 }
 
 section {
