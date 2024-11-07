@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_03_203402) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_06_185950) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -94,6 +94,33 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_203402) do
     t.index ["user_owner_id"], name: "index_establishments_on_user_owner_id"
   end
 
+  create_table "menu_beverages", force: :cascade do |t|
+    t.integer "menu_id", null: false
+    t.integer "beverage_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["beverage_id"], name: "index_menu_beverages_on_beverage_id"
+    t.index ["menu_id"], name: "index_menu_beverages_on_menu_id"
+  end
+
+  create_table "menu_dishes", force: :cascade do |t|
+    t.integer "menu_id", null: false
+    t.integer "dish_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_menu_dishes_on_dish_id"
+    t.index ["menu_id"], name: "index_menu_dishes_on_menu_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "user_owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "user_owner_id"], name: "index_menus_on_name_and_user_owner_id", unique: true
+    t.index ["user_owner_id"], name: "index_menus_on_user_owner_id"
+  end
+
   create_table "portions", force: :cascade do |t|
     t.string "description"
     t.decimal "price"
@@ -136,6 +163,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_203402) do
   add_foreign_key "beverages", "establishments"
   add_foreign_key "dishes", "establishments"
   add_foreign_key "establishments", "user_owners"
+  add_foreign_key "menu_beverages", "beverages"
+  add_foreign_key "menu_beverages", "menus"
+  add_foreign_key "menu_dishes", "dishes"
+  add_foreign_key "menu_dishes", "menus"
+  add_foreign_key "menus", "user_owners"
   add_foreign_key "portions", "beverages"
   add_foreign_key "portions", "dishes"
   add_foreign_key "price_histories", "portions"

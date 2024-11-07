@@ -27,6 +27,6 @@ describe 'Usuário visita a rota raiz' do
     fill_in 'Senha', with: 'password1234'
     click_on 'Log in'
 
-    expect(current_path).to eq establishment_path(Establishment.last)
+    expect(current_path).to eq menus_path
   end
 end

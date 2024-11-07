@@ -8,6 +8,7 @@ describe 'Usuário acessa rota do estabelecimento' do
     visit establishment_path(establishment)
     
     expect(current_path).to eq new_user_owner_session_path
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
   
   it 'autenticado mas sem ser o dono' do
@@ -27,8 +28,9 @@ describe 'Usuário acessa rota do estabelecimento' do
     establishment = create_establishment(user_owner)
 
     login_as user_owner
-    visit root_path
+    visit establishment_path(establishment)
     
     expect(current_path).to eq establishment_path(establishment)
+    expect(page).to have_content establishment.fantasy_name
   end
 end

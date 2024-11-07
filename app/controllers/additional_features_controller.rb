@@ -1,4 +1,5 @@
 class AdditionalFeaturesController < ApplicationController
+  before_action :authenticate_user_owner!
   def new
     @dish = Dish.find(params[:dish_id])
     @additional_feature = @dish.additional_features.new

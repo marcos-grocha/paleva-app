@@ -1,0 +1,16 @@
+<h1>Cardápios Disponíveis</h1><br>
+<div>
+    <% if @menus.any? %>
+        <% @menus.each do |m| %>
+            <div class="list-group">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <%= link_to m.name, menu_path(m), class: 'list-group-item list-group-item-action' %>
+                </div>
+            </div>
+        <% end %>
+    <% else %>
+        <p>Nenhum cardápio disponível</p>
+    <% end %>
+</div><br>
+
+<%= link_to 'Cadastrar Cardápio', new_menu_path, class: 'btn btn-warning' %>

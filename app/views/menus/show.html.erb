@@ -1,0 +1,32 @@
+<h1><%= @menu.name %></h1><br>
+<div>
+    <% if @menu.dishes.any? %>
+        <h3>Pratos Disponíveis</h3>
+        <% @menu.dishes.each do |d| %>
+            <% if d.status %>
+                <div class="list-group list-group-flush">
+                    <%= link_to d.name, dish_path(d), class: 'btn btn-warning' %>
+                    <% d.portions.each do |portion| %>
+                        <div class="list-group-item"><b><%= portion.description %>:</b> <%= number_to_currency(portion.price) %></div>
+                    <% end %>
+                </div><br>
+            <% end %>
+        <% end %>
+    <% end %>
+</div><br>
+
+<div>
+    <% if @menu.beverages.any? %>
+        <h3>Bebidas Disponíveis</h3>
+        <% @menu.beverages.each do |b| %>
+            <% if b.status %>
+                <div class="list-group list-group-flush">
+                    <%= link_to b.name, beverage_path(b), class: 'btn btn-warning' %>
+                    <% b.portions.each do |portion| %>
+                        <div class="list-group-item"><b><%= portion.description %>:</b> <%= number_to_currency(portion.price) %></div>
+                    <% end %>
+                </div><br>
+            <% end %>
+        <% end %>
+    <% end %>
+</div>
