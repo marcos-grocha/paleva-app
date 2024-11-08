@@ -1,4 +1,13 @@
 <h3>Cadastrar Bebida</h3>
+
+<% if(@beverage.errors.any?) %>
+    <h4>Verifique esse problemas:</h4>
+    <% @beverage.errors.full_messages.each do |msg| %>
+        - <%= msg %> <br>
+    <% end %>
+    <br>
+<% end %>
+
 <%= form_with model: @beverage do |f| %>
     <div class="text-start">
         <%= f.label :name, class: 'form-label' %>

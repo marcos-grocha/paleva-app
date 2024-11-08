@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe 'Usuário procura por um marcador' do
   it 'e encontra pratos apimentados' do
-    user_owner = create_user
+    user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
-    spicy_dish = create_dish(establishment)
-    create_additional_features_spicy(spicy_dish)
-    vegan_dish = create_second_dish(establishment)
-    create_additional_features_vegan(vegan_dish)
+    feijoada = Dish.create!(name: 'Feijoada', description: 'Descrição da feijoada', establishment: establishment)
+    AdditionalFeature.create!(name: 'Apimentado', active: true, dish: feijoada)
+    arroz = Dish.create!(name: 'Arroz', description: 'Descrição do arroz', establishment: establishment)
+    AdditionalFeature.create!(name: 'Vegano', active: true, dish: arroz)
 
     login_as user_owner
     visit root_path
@@ -16,17 +16,17 @@ describe 'Usuário procura por um marcador' do
     click_on 'Filtrar'
 
     expect(page).to have_content 'Resultado de pratos com a tag pesquisada'
-    expect(page).to have_content spicy_dish.name
-    expect(page).not_to have_content vegan_dish.name
+    expect(page).to have_content 'Feijoada'
+    expect(page).not_to have_content 'Arroz'
   end
   
   it 'e encontra pratos veganos' do
-    user_owner = create_user
+    user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
-    spicy_dish = create_dish(establishment)
-    create_additional_features_spicy(spicy_dish)
-    vegan_dish = create_second_dish(establishment)
-    create_additional_features_vegan(vegan_dish)
+    feijoada = Dish.create!(name: 'Feijoada', description: 'Descrição da feijoada', establishment: establishment)
+    AdditionalFeature.create!(name: 'Apimentado', active: true, dish: feijoada)
+    arroz = Dish.create!(name: 'Arroz', description: 'Descrição do arroz', establishment: establishment)
+    AdditionalFeature.create!(name: 'Vegano', active: true, dish: arroz)
 
     login_as user_owner
     visit root_path
@@ -35,7 +35,7 @@ describe 'Usuário procura por um marcador' do
     click_on 'Filtrar'
 
     expect(page).to have_content 'Resultado de pratos com a tag pesquisada'
-    expect(page).to have_content vegan_dish.name
-    expect(page).not_to have_content spicy_dish.name
+    expect(page).to have_content 'Arroz'
+    expect(page).not_to have_content 'Feijoada'
   end
 end

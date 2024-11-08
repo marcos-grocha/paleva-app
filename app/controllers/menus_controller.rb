@@ -13,12 +13,16 @@ class MenusController < ApplicationController
     if @menu.save
       redirect_to menus_path, notice: "Cardápio cadastrado com sucesso!"
     else
-      render :new, alert: "Não foi possível cadastrar o cardápio."
+      flash.now[:alert] = "Não foi possível cadastrar o cardápio."
+      render :new
     end
   end
 
   def show
     @menu = current_user_owner.menus.find(params[:id])
+    if @menu.user_owner != current_user_owner
+      return redirect_to root_path_path, alert: "Você não possui acesso a este menu."
+    end
   end
 
   private

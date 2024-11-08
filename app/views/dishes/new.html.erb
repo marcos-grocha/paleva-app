@@ -1,4 +1,13 @@
 <h3>Cadastrar Prato</h3>
+
+<% if(@dish.errors.any?) %>
+    <h4>Verifique esse problemas:</h4>
+    <% @dish.errors.full_messages.each do |msg| %>
+        - <%= msg %> <br>
+    <% end %>
+    <br>
+<% end %>
+
 <%= form_with model: @dish, multipart: true do |f| %>
     <div class="text-start">
         <%= f.label :name, class: 'form-label' %>

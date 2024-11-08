@@ -12,7 +12,8 @@ class PortionsController < ApplicationController
     if @portion.save
       redirect_to @parent, notice: 'Porção cadastrada com sucesso.'
     else
-      render :new, alert: 'Não foi possível cadastrar a porção.'
+      flash.now[:alert] = "Não foi possível cadastrar a porção."
+      render :new
     end
   end
 

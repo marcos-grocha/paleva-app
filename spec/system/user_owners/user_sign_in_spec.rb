@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário se autentica (Faz login)' do
+describe 'Usuário faz login' do
   it 'com sucesso' do
     UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
 

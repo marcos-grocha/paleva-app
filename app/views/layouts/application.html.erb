@@ -50,13 +50,14 @@
         <% end %>
       </div>
       <nav>
-        <% if user_owner_signed_in? && !current_user_owner.establishment.nil? %>
+        <% if user_owner_signed_in? && current_user_owner.establishment&.persisted? %>
           <div class="d-flex justify-content-center">
             <div class="row g-3 align-items-center">
               <div class="col-auto"><%= link_to 'Restaurante', establishment_path(current_user_owner.establishment), class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
-              <div class="col-auto"><%= link_to 'Cardápio', menus_path, class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
               <div class="col-auto"><%= link_to 'Pratos', dishes_path, class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
               <div class="col-auto"><%= link_to 'Bebidas', beverages_path, class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
+              <div class="col-auto"><%= link_to 'Cardápios', menus_path, class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
+              <div class="col-auto"><%= link_to 'Pedidos', root_path, class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
             </div>
           </div>
         <% end %>

@@ -1,4 +1,11 @@
 <h3>Cadastrar Cardápio</h3><br>
+<% if(@menu.errors.any?) %>
+    <h4>Verifique esse problemas:</h4>
+    <% @menu.errors.full_messages.each do |msg| %>
+        - <%= msg %> <br>
+    <% end %>
+    <br>
+<% end %>
 <%= form_with model: @menu, local: true do |form| %>
     <div class="text-start">
         <%= form.label :name, "Nome do Cardápio", class: 'form-label' %>

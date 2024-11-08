@@ -12,7 +12,7 @@ class EstablishmentsController < ApplicationController
     if @establishment.save()
       redirect_to @establishment, notice: "Estabelecimento cadastrado com sucesso!"
     else
-      flash.now[:notice] = "Falha ao cadastrar estabelecimento!"
+      flash.now[:alert] = "Falha ao cadastrar estabelecimento!"
       render :new, status: :unprocessable_entity
     end
   end
