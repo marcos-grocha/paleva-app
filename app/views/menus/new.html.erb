@@ -1,4 +1,5 @@
 <h3>Cadastrar Cardápio</h3><br>
+
 <% if(@menu.errors.any?) %>
     <h4>Verifique esse problemas:</h4>
     <% @menu.errors.full_messages.each do |msg| %>
@@ -6,10 +7,11 @@
     <% end %>
     <br>
 <% end %>
-<%= form_with model: @menu, local: true do |form| %>
+
+<%= form_with model: @menu, local: true do |f| %>
     <div class="text-start">
-        <%= form.label :name, "Nome do Cardápio", class: 'form-label' %>
-        <%= form.text_field :name, class: 'form-control' %>
+        <%= f.label :name, "Nome do Cardápio", class: 'form-label' %>
+        <%= f.text_field :name, class: 'form-control' %>
     </div><br>
 
     <div class="text-start">
@@ -34,6 +36,6 @@
     
     <div>
         <%= link_to 'voltar', menus_path, class: 'btn btn-outline-dark' %>
-        <%= form.submit "Salvar", class: 'btn btn-outline-warning' %>
+        <%= f.submit "Salvar", class: 'btn btn-outline-warning' %>
     </div>
 <% end %>

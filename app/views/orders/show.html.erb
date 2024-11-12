@@ -1,0 +1,20 @@
+<h1>Código: <%= @order.order_code %></h1><br>
+<div>
+    <div>Cliente: <b><%= @order.customer_name %></b></div><br>
+    <div>
+        <% if @order.order_items.any? %>
+            <% @order.order_items.each do |item| %>
+                <div>
+                    <b><%= item.dish&.name || item.beverage&.name %></b><br>
+                    <%= item.dish&.description || item.beverage&.description %>
+                    <b>|</b> <%= item.portion.description %>
+                    : <b>R$ <%= item.portion.price %></b>
+                </div><br>
+            <% end %>
+        <% else %>
+            <p>Nenhum item no pedido.</p>
+        <% end %>
+    </div><br>
+    <div>Valor total do pedido: <b>R$ <%= @order.total_price %></b></div><br>
+    <div>Status: <b><%= I18n.t("enums.order.status.#{@order.status}") %></b></div>
+</div><br>

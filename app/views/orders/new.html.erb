@@ -1,0 +1,31 @@
+<h3>Cadastrar Pedido</h3><br>
+
+<% if(@order.errors.any?) %>
+    <h4>Verifique esse problemas:</h4>
+    <% @order.errors.full_messages.each do |msg| %>
+        - <%= msg %> <br>
+    <% end %>
+    <br>
+<% end %>
+
+<%= form_with model: @order, local: true do |f| %>
+    <div class="text-start">
+        <%= f.label :customer_name, class: 'form-label' %>
+        <%= f.text_field :customer_name, class: 'form-control' %>
+    </div><br>
+    <div class="text-start">
+        <%= f.label :contact_phone, class: 'form-label' %>
+        <%= f.text_field :contact_phone, class: 'form-control' %>
+    </div><br>
+    <div class="text-start">
+        <%= f.label :contact_email, class: 'form-label' %>
+        <%= f.text_field :contact_email, class: 'form-control' %>
+    </div><br>
+    <div class="text-start">
+        <%= f.label :cpf, class: 'form-label' %>
+        <%= f.text_field :cpf, class: 'form-control' %>
+    </div><br>
+    <div>
+        <%= f.submit "Salvar", class: 'btn btn-outline-warning' %>
+    </div>
+<% end %>

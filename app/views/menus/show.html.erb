@@ -1,13 +1,32 @@
 <h1><%= @menu.name %></h1><br>
+
+<div>
+    <h3>Pedido Atual</h3>
+    <% if session[:order_items].present? %>
+      <% session[:order_items].each do |item| %>
+        <% portion = Portion.find(item['portion_id']) %>
+        <%= portion.description %> - <%= number_to_currency(portion.price) %>
+        <%= button_to 'Remover', remove_item_from_order_menu_path(@menu, portion), method: :delete, class: 'btn btn-sm btn-danger btn-sm' %>
+      <% end %><br>
+      <%= link_to 'Finalizar Pedido', new_order_path, class: 'btn btn-success btn-sm' %>
+    <% else %>
+      <p>Nenhum item adicionado ao pedido.</p>
+    <% end %>
+</div><br>
+
 <div>
     <% if @menu.dishes.any? %>
         <h3>Pratos Disponíveis</h3>
         <% @menu.dishes.each do |d| %>
             <% if d.status %>
-                <div class="list-group list-group-flush">
+                <div id="dish_<%= d.id %>" class="list-group list-group-flush">
                     <%= link_to d.name, dish_path(d), class: 'btn btn-warning' %>
+
                     <% d.portions.each do |portion| %>
-                        <div class="list-group-item"><b><%= portion.description %>:</b> <%= number_to_currency(portion.price) %></div>
+                        <div id="portion_<%= portion.id %>" class="list-group-item">
+                            <b><%= portion.description %>:</b> <%= number_to_currency(portion.price) %>
+                            <%= button_to 'Adicionar ao Pedido', add_item_to_order_menu_path(@menu, portion_id: portion.id), method: :post, class: 'btn btn-sm btn-primary' %>
+                        </div>
                     <% end %>
                 </div><br>
             <% end %>
@@ -20,13 +39,24 @@
         <h3>Bebidas Disponíveis</h3>
         <% @menu.beverages.each do |b| %>
             <% if b.status %>
-                <div class="list-group list-group-flush">
+                <div id="beverage_<%= b.id %>" class="list-group list-group-flush">
                     <%= link_to b.name, beverage_path(b), class: 'btn btn-warning' %>
+
                     <% b.portions.each do |portion| %>
-                        <div class="list-group-item"><b><%= portion.description %>:</b> <%= number_to_currency(portion.price) %></div>
+                        <div id="portion_<%= portion.id %>" class="list-group-item">
+                            <b><%= portion.description %>:</b> <%= number_to_currency(portion.price) %> 
+                            <%= button_to 'Adicionar ao Pedido', add_item_to_order_menu_path(@menu, portion_id: portion.id), method: :post, class: 'btn btn-sm btn-primary' %>
+                        </div>
                     <% end %>
                 </div><br>
             <% end %>
         <% end %>
     <% end %>
-</div>
+</div><br>
+
+<div class="d-flex justify-content-center">
+  <div class="row g-3 align-items-center">
+    <div class="col-auto"><%= link_to 'voltar', menus_path, class: 'btn btn-outline-dark' %></div>
+    <div class="col-auto"><%= link_to 'editar', edit_menu_path, class: 'btn btn-outline-warning' %></div>
+  </div>
+</div><br>

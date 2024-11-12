@@ -14,15 +14,38 @@ class MenusController < ApplicationController
       redirect_to menus_path, notice: "Cardápio cadastrado com sucesso!"
     else
       flash.now[:alert] = "Não foi possível cadastrar o cardápio."
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
-
+  
   def show
     @menu = current_user_owner.menus.find(params[:id])
     if @menu.user_owner != current_user_owner
-      return redirect_to root_path_path, alert: "Você não possui acesso a este menu."
+      return redirect_to root_path, alert: "Você não possui acesso a este menu."
     end
+  end
+
+  def edit; end
+
+  def add_item_to_order
+    session[:order_items] ||= []
+
+    portion = Portion.find(params[:portion_id])
+    item = { portion_id: portion.id, quantity: 1, dish_id: portion.dish_id, beverage_id: portion.beverage_id }
+
+    session[:order_items] << item unless session[:order_items].include?(item)
+
+    redirect_to menu_path(params[:id]), notice: 'Item adicionado ao pedido.'
+  end
+
+  def remove_item_from_order
+    if session[:order_items]
+      session[:order_items].reject! do |item| 
+        item[:portion_id] == params[:portion_id]
+      end
+    end
+
+    redirect_to menu_path(params[:id]), notice: 'Item removido do pedido.'
   end
 
   private

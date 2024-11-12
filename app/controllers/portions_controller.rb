@@ -13,7 +13,7 @@ class PortionsController < ApplicationController
       redirect_to @parent, notice: 'Porção cadastrada com sucesso.'
     else
       flash.now[:alert] = "Não foi possível cadastrar a porção."
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -27,7 +27,8 @@ class PortionsController < ApplicationController
     if @portion.update(save_params)
       redirect_to @parent, notice: 'Porção atualizada com sucesso.'
     else
-      render :edit, alert: 'Não foi possível editar a porção.'
+      flash.now[:alert] = "Não foi possível editar a porção."
+      render :edit, status: :unprocessable_entity
     end
   end
 

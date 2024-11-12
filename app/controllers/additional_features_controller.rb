@@ -12,7 +12,7 @@ class AdditionalFeaturesController < ApplicationController
       redirect_to @dish, notice: 'Marcador adicionado com sucesso.'
     else
       flash.now[:alert] = "Não foi possível cadastrar o marcador."
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

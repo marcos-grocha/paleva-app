@@ -1,0 +1,14 @@
+<h1>Pedidos Disponíveis</h1><br>
+<div>
+    <% if @orders.any? %>
+        <% @orders.each do |o| %>
+            <div class="list-group">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <%= link_to o.order_code, order_path(o), class: 'list-group-item list-group-item-action' %>
+                </div>
+            </div>
+        <% end %>
+    <% else %>
+        <p>Nenhum pedido disponível</p>
+    <% end %>
+</div><br>

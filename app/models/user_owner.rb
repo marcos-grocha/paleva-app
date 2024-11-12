@@ -6,6 +6,7 @@ class UserOwner < ApplicationRecord
 
   has_one :establishment
   has_many :menus, dependent: :destroy
+  has_many :orders, dependent: :destroy
   
   validates :name, :last_name, :cpf, presence: true
   validates :cpf, uniqueness: true

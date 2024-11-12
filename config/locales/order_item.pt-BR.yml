@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      order_item:
+        one: Item de Pedido
+        other: Itens de Pedido
+    attributes:
+      order_item:
+        quantity: Quantidade
+        note: Observação
+        

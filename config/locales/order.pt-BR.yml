@@ -1,0 +1,26 @@
+pt-BR:
+  activerecord:
+    models:
+      order:
+        one: Pedido
+        other: Pedidos
+    attributes:
+      order:
+        customer_name: Nome do cliente
+        cpf: CPF
+        contact_phone: Telefone
+        contact_email: E-mail
+    errors:
+      models:
+        order:
+          attributes:
+            base:
+              contact_validator: Informe pelo menos um telefone ou e-mail de contato.
+  enums:
+    order:
+      status:
+        waiting_confirmation: "Aguardando confirmação"
+        in_preparation: "Em preparação"
+        cancelled: "Cancelado"
+        ready: "Pronto"
+        delivered: "Entregue"
