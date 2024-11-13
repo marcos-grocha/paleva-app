@@ -1,0 +1,26 @@
+<h3>Cadastrar Funcionário</h3>
+
+<% if(@pre_registrations.errors.any?) %>
+    <h4>Verifique esse problemas:</h4>
+    <% @pre_registrations.errors.full_messages.each do |msg| %>
+        - <%= msg %> <br>
+    <% end %>
+    <br>
+<% end %>
+
+<%= form_with model: @pre_registrations do |f| %>
+    <div class="text-start">
+        <%= f.label :cpf, class: 'form-label' %>
+        <%= f.text_field :cpf, class: 'form-control' %>
+    </div>
+
+    <div class="text-start">
+        <%= f.label :email, class: 'form-label' %>
+        <%= f.text_field :email, class: 'form-control' %>
+    </div><br>
+
+    <div>
+        <%= link_to 'voltar', employee_pre_registrations_path, class: 'btn btn-outline-dark' %>
+        <%= f.submit 'Cadastrar', class: 'btn btn-outline-warning' %>
+    </div>
+<% end %>

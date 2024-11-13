@@ -10,7 +10,7 @@ describe 'Usuário cadastra um pedido' do
     
     visit new_order_path
 
-    expect(current_path).to eq new_user_owner_session_path
+    expect(current_path).to eq pa_leva_session_path
   end
 
   it 'com sucesso' do

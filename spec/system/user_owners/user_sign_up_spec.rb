@@ -2,27 +2,27 @@ require 'rails_helper'
 
 describe 'Usuário cria uma conta de dono' do
   it 'com sucesso' do
-    
-
     visit root_path
+    click_on 'Dono de Estabelecimento'
     click_on 'Sign up'
-    fill_in 'Nome', with: 'Marcos'
-    fill_in 'Sobrenome', with: 'Guimaraes'
+    fill_in 'Nome', with: 'Usuário'
+    fill_in 'Sobrenome', with: 'Dono'
     fill_in 'CPF', with: CPF.generate
-    fill_in 'E-mail', with: 'marcos@email.com'
+    fill_in 'E-mail', with: 'usuario@email.com'
     fill_in 'Senha', with: 'password1234'
     fill_in 'Confirme sua senha', with: 'password1234'
     click_on 'Sign up'
 
     expect(page).to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
-    expect(page).to have_content 'Marcos'
-    expect(page).to have_content 'marcos@email.com'
+    expect(page).to have_content 'Usuário'
+    expect(page).to have_content 'usuario@email.com'
     user_owner = UserOwner.last
-    expect(user_owner.name).to eq 'Marcos'
+    expect(user_owner.name).to eq 'Usuário'
   end
 
   it 'com os dados errados' do
     visit root_path
+    click_on 'Dono de Estabelecimento'
     click_on 'Sign up'
     fill_in 'Nome', with: ''
     fill_in 'Sobrenome', with: ''

@@ -2,6 +2,14 @@ def create_user_owner
   UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
 end
 
+def create_employee_pre_registration(user_owner, establishment)
+  EmployeePreRegistration.create!(email: 'usuario@funcionario.com', cpf: '59306160003', user_owner: user_owner, establishment: establishment)
+end
+
+def create_user_employee(user_owner, establishment)
+  UserEmployee.create!(name: 'User', last_name: 'Employee', cpf: '59306160003', email: 'usuario@funcionario.com', password: 'password1234', user_owner: user_owner, establishment: establishment)
+end
+
 def create_establishment(user_owner)
   Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('12:00'), closing_time: Time.parse('15:00'))
 end

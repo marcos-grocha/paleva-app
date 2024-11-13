@@ -2,6 +2,7 @@ class Establishment < ApplicationRecord
   belongs_to :user_owner
   has_many :dishes
   has_many :beverages
+  has_many :employee_pre_registrations, dependent: :destroy
 
   before_validation :generate_code, on: :create
 

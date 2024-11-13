@@ -45,8 +45,25 @@
               </div>
             </div>
           </div>
-        <% else %>
-          <%= image_tag 'android-chrome-192x192.png', class: 'img-fluid rounded-start', style: 'width: 80px' %>
+        <% end %>
+        <% if user_employee_signed_in? %>
+          <div class="d-flex justify-content-center">
+            <div class="row g-3 align-items-center">
+              <div class="col-auto"><%= link_to 'PaLevá', menus_path, class: 'btn btn-warning' %></div>
+              <div class="col-auto">
+                <b><%= current_user_employee.name %> <%= current_user_employee.last_name %></b><br>
+                <%= current_user_employee.email %>
+              </div>
+              <div class="col-auto">
+                <%= button_to 'Sair', destroy_user_employee_session_path, method: :delete, class: 'btn btn-outline-dark' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% unless user_owner_signed_in? || user_employee_signed_in? %>
+          <%= link_to pa_leva_session_path do %>
+            <%= image_tag 'android-chrome-192x192.png', class: 'img-fluid rounded-start', style: 'width: 80px' %>
+          <% end %>
         <% end %>
       </div>
       <nav>
@@ -54,6 +71,7 @@
           <div class="d-flex justify-content-center">
             <div class="row g-3 align-items-center">
               <div class="col-auto"><%= link_to 'Restaurante', establishment_path(current_user_owner.establishment), class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
+              <div class="col-auto"><%= link_to 'Funcionários', employee_pre_registrations_path, class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
               <div class="col-auto"><%= link_to 'Pratos', dishes_path, class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
               <div class="col-auto"><%= link_to 'Bebidas', beverages_path, class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
               <div class="col-auto"><%= link_to 'Cardápios', menus_path, class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
@@ -61,8 +79,18 @@
             </div>
           </div>
         <% end %>
+        <% if user_employee_signed_in? %>
+          <div class="d-flex justify-content-center">
+            <div class="row g-3 align-items-center">
+              <div class="col-auto"><%= link_to 'Restaurante', establishment_path(current_user_employee.establishment), class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
+              <div class="col-auto"><%= link_to 'Cardápios', menus_path, class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
+              <div class="col-auto"><%= link_to 'Pedidos', orders_path, class: 'btn btn-warning btn-sm', style: 'border-color: black;' %></div>
+            </div>
+          </div>
+        <% end %>
       </nav>
     </header>
+
     <main>
       <% if alert || notice %>
         <div class="d-flex justify-content-center">
@@ -75,8 +103,9 @@
       <section>
         <%= yield %>
       </section>
-    </main>
-    <br><footer>
+    </main><br>
+
+    <footer>
       <p>&copy;<a href="https://www.linkedin.com/in/marcos-grocha/" target="_blank"> marcos-grocha</a></p>
     </footer><br>
   </body>

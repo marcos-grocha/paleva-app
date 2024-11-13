@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      employee_pre_registration:
+        one: Pré-Cadastro de Funcionário
+        other: Pré-Cadastros de Funcionário
+    attributes:
+      employee_pre_registration:
+        cpf: CPF
+        email: Email
+  enums:
+    employee_pre_registration:
+      status:
+        pending: Pendente
+        registered: Cadastrado

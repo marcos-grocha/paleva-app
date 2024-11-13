@@ -1,0 +1,26 @@
+<h1>Funcionários</h1><br>
+
+<% if @pre_registrations.any? %>
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>CPF</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @pre_registrations.each do |pre|%>
+            <tr>
+                <td><%= pre.cpf %></td>
+                <td><%= pre.email %></td>
+                <td><%= I18n.t("enums.employee_pre_registration.status.#{pre.status}") %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+<% else %>
+    <p>Nenhum funcionário cadastrado</p>
+<% end %><br>
+
+<%= link_to 'Cadastrar Funcionário', new_employee_pre_registration_path, class: 'btn btn-warning' %>

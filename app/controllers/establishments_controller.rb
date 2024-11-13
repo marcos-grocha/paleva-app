@@ -1,6 +1,5 @@
 class EstablishmentsController < ApplicationController
-  before_action :authenticate_user_owner!
-  before_action :set_params_and_check_user_owner, only: [:show]
+  before_action :authenticate_user_owner!, only: [:new, :create, :search]
   def new
     @establishment = Establishment.new
   end
@@ -17,7 +16,21 @@ class EstablishmentsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    if user_owner_signed_in?
+      @establishment = Establishment.find(params[:id])
+      if @establishment.user_owner != current_user_owner
+        redirect_to root_path, alert: "Você não possui acesso a este estabelecimento."
+      end
+    elsif user_employee_signed_in?
+      @establishment = Establishment.find(params[:id])
+      if @establishment.user_owner != current_user_employee.user_owner
+        redirect_to root_path, alert: "Você não possui acesso a este estabelecimento."
+      end
+    else
+      redirect_to pa_leva_session_path, alert: 'Para continuar, faça login ou registre-se.'
+    end
+  end
 
   def search
     @establishment = current_user_owner.establishment
@@ -33,13 +46,6 @@ class EstablishmentsController < ApplicationController
   end
 
   private
-
-  def set_params_and_check_user_owner
-    @establishment = Establishment.find(params[:id])
-    if @establishment.user_owner != current_user_owner
-      redirect_to root_path, alert: "Você não possui acesso a este estabelecimento."
-    end
-  end
 
   def save_params
     params.require(:establishment).permit(:fantasy_name, :corporate_name, :cnpj, :address, :telephone, :email, :code, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :opening_time, :closing_time)

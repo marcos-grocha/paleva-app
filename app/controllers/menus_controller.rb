@@ -1,7 +1,8 @@
 class MenusController < ApplicationController
-  before_action :authenticate_user_owner!
+  before_action :authenticate_user_owner!, only: [ :new, :create, :edit ]
   def index
-    @menus = current_user_owner.menus
+    @menus = current_user_owner.menus if user_owner_signed_in?
+    @menus = current_user_employee.user_owner.menus if user_employee_signed_in?
   end
 
   def new
@@ -19,9 +20,18 @@ class MenusController < ApplicationController
   end
   
   def show
-    @menu = current_user_owner.menus.find(params[:id])
-    if @menu.user_owner != current_user_owner
-      return redirect_to root_path, alert: "Você não possui acesso a este menu."
+    if user_owner_signed_in?
+      @menu = current_user_owner.menus.find(params[:id])
+      if @menu.user_owner != current_user_owner
+        return redirect_to root_path, alert: "Você não possui acesso a este menu."
+      end
+    elsif user_employee_signed_in?
+      @menu = current_user_employee.user_owner.menus.find(params[:id])
+      if @menu.user_owner != current_user_employee.user_owner
+        return redirect_to root_path, alert: "Você não possui acesso a este menu."
+      end
+    else
+      redirect_to pa_leva_session_path, alert: 'Para continuar, faça login ou registre-se.'
     end
   end
 

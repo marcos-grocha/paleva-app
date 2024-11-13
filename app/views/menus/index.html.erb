@@ -13,4 +13,6 @@
     <% end %>
 </div><br>
 
-<%= link_to 'Cadastrar Cardápio', new_menu_path, class: 'btn btn-warning' %>
+<% if user_owner_signed_in? %>
+    <%= link_to 'Cadastrar Cardápio', new_menu_path, class: 'btn btn-warning' %>
+<% end %>

@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-describe 'Usuário faz login' do
+describe 'Dono faz login' do
   it 'com sucesso' do
     UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
 
     visit root_path
+    click_on 'Dono de Estabelecimento'
     fill_in 'E-mail', with: 'marcos@email.com'
     fill_in 'Senha', with: 'password1234'
     click_on 'Log in'
@@ -17,6 +18,7 @@ describe 'Usuário faz login' do
     UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
 
     visit root_path
+    click_on 'Dono de Estabelecimento'
     fill_in 'E-mail', with: 'joao@email.com'
     fill_in 'Senha', with: 'password5555'
     click_on 'Log in'

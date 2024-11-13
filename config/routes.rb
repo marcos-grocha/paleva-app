@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   
   # Defines my routes #
-  root "pa_leva#index"
-  get '/pa-leva/details', to: "pa_leva#show"
+  root "pa_leva#start"
+  get '/pa-leva/session', to: "pa_leva#session"
+  get '/pa-leva/details', to: "pa_leva#details"
   devise_for :user_owners
+  devise_for :user_employees
 
   resources :establishments, only: [ :new, :create, :show ] do
     get "search", on: :collection
@@ -32,5 +34,7 @@ Rails.application.routes.draw do
   resources :orders, only: [ :index, :new, :create, :show ] do
     resources :order_items, only: [ :create, :destroy ]
   end
+
+  resources :employee_pre_registrations, only: [ :index, :new, :create ]
   
 end

@@ -2,11 +2,14 @@ require 'rails_helper'
 
 describe 'Usuário busca por itens' do
   it 'mas não está logado' do
+    user_owner = create_user_owner()
+    create_establishment(user_owner)
+    
     visit root_path
 
     expect(page).not_to have_field 'Buscar Item'
     expect(page).not_to have_button 'Buscar'
-    expect(current_path).to eq new_user_owner_session_path
+    expect(current_path).to eq pa_leva_session_path
   end
 
   it 'e encontra um prato' do

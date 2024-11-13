@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_08_232214) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_13_044948) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -69,6 +69,20 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_232214) do
     t.datetime "updated_at", null: false
     t.boolean "status", default: true
     t.index ["establishment_id"], name: "index_dishes_on_establishment_id"
+  end
+
+  create_table "employee_pre_registrations", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "cpf", null: false
+    t.integer "user_owner_id", null: false
+    t.integer "establishment_id", null: false
+    t.boolean "status", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cpf"], name: "index_employee_pre_registrations_on_cpf", unique: true
+    t.index ["email"], name: "index_employee_pre_registrations_on_email", unique: true
+    t.index ["establishment_id"], name: "index_employee_pre_registrations_on_establishment_id"
+    t.index ["user_owner_id"], name: "index_employee_pre_registrations_on_user_owner_id"
   end
 
   create_table "establishments", force: :cascade do |t|
@@ -170,6 +184,26 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_232214) do
     t.index ["portion_id"], name: "index_price_histories_on_portion_id"
   end
 
+  create_table "user_employees", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "name"
+    t.string "last_name"
+    t.string "cpf", null: false
+    t.integer "user_owner_id", null: false
+    t.integer "establishment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cpf"], name: "index_user_employees_on_cpf", unique: true
+    t.index ["email"], name: "index_user_employees_on_email", unique: true
+    t.index ["establishment_id"], name: "index_user_employees_on_establishment_id"
+    t.index ["reset_password_token"], name: "index_user_employees_on_reset_password_token", unique: true
+    t.index ["user_owner_id"], name: "index_user_employees_on_user_owner_id"
+  end
+
   create_table "user_owners", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -190,6 +224,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_232214) do
   add_foreign_key "additional_features", "dishes"
   add_foreign_key "beverages", "establishments"
   add_foreign_key "dishes", "establishments"
+  add_foreign_key "employee_pre_registrations", "establishments"
+  add_foreign_key "employee_pre_registrations", "user_owners"
   add_foreign_key "establishments", "user_owners"
   add_foreign_key "menu_beverages", "beverages"
   add_foreign_key "menu_beverages", "menus"
@@ -204,4 +240,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_232214) do
   add_foreign_key "portions", "beverages"
   add_foreign_key "portions", "dishes"
   add_foreign_key "price_histories", "portions"
+  add_foreign_key "user_employees", "establishments"
+  add_foreign_key "user_employees", "user_owners"
 end

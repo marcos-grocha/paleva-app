@@ -1,10 +1,16 @@
 class PaLevaController < ApplicationController
-  before_action :authenticate_user_owner!
-  def index
-    redirect_to new_establishment_path if current_user_owner.establishment.nil?
+  def start
+    redirect_to pa_leva_session_path unless user_owner_signed_in? || user_employee_signed_in?
 
-    redirect_to menus_path unless current_user_owner.establishment.nil?
+    redirect_to new_establishment_path if user_owner_signed_in? && current_user_owner.establishment.nil?
+      
+    redirect_to menus_path if user_owner_signed_in? && !current_user_owner.establishment.nil?
+
+    redirect_to menus_path if user_employee_signed_in?
   end
 
-  def show; end
+  def details; end
+
+  def session; end
+
 end

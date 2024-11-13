@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-describe 'Usuário acessa rota do estabelecimento' do
+describe 'Dono acessa rota do estabelecimento' do
   it 'sem estar logado' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
 
     visit establishment_path(establishment)
     
-    expect(current_path).to eq new_user_owner_session_path
+    expect(current_path).to eq pa_leva_session_path
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
   
-  it 'logado mas sem ser o dono' do
+  it 'está logado mas não tem vínculo' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
     user_impostor = UserOwner.create!(name: 'Impostor', last_name: 'Zé', cpf: CPF.generate, email: 'impostor@email.com', password: 'password1234')
@@ -23,7 +23,7 @@ describe 'Usuário acessa rota do estabelecimento' do
     expect(page).to have_content 'Você não possui acesso a este estabelecimento.'
   end
 
-  it 'logado como o dono' do
+  it 'e está logado' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
 
