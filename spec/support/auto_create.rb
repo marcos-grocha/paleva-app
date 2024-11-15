@@ -11,7 +11,7 @@ def create_user_employee(user_owner, establishment)
 end
 
 def create_establishment(user_owner)
-  Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('12:00'), closing_time: Time.parse('15:00'))
+  Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
 end
 
 def create_dish_feijoada(establishment)
@@ -23,11 +23,11 @@ def create_dish_arroz(establishment)
 end
 
 def create_beverage_refri(establishment)
-  Beverage.create!(name: 'Refri', description: 'Descrição do support/auto_create.rb', establishment: establishment)
+  Beverage.create!(name: 'Refri', description: 'Descrição do support/auto_create.rb', establishment: establishment, alcoholic: false)
 end
 
 def create_beverage_cerveja(establishment)
-  Beverage.create!(name: 'Cerveja', description: 'Descrição do support/auto_create.rb', establishment: establishment)
+  Beverage.create!(name: 'Cerveja', description: 'Descrição do support/auto_create.rb', establishment: establishment, alcoholic: true)
 end
 
 def create_portion_dish(dish)

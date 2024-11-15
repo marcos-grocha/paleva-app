@@ -37,4 +37,9 @@ Rails.application.routes.draw do
 
   resources :employee_pre_registrations, only: [ :index, :new, :create ]
   
+  namespace :api do
+    namespace :v1 do
+      resources :orders, only: [ :show, :index, :create ]
+    end
+  end
 end
