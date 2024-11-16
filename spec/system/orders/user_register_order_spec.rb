@@ -6,7 +6,7 @@ describe 'Usuário cadastra um pedido' do
     establishment = create_establishment(user_owner)
     create_dish_feijoada(establishment)
     create_beverage_refri(establishment)
-    create_menu(user_owner)
+    create_menu(establishment)
     
     visit new_order_path
 
@@ -20,7 +20,7 @@ describe 'Usuário cadastra um pedido' do
     dish_portion = Portion.create!(description: 'Porção de feijoada', price: '20.00', dish: dish)
     beverage = Beverage.create!(name: 'Refri', description: 'Descrição do refri', establishment: establishment)
     beverage_portion = Portion.create!(description: 'Porção de refri', price: '10.00', beverage: beverage)
-    menu = Menu.create!(name: 'Primeiro Cardápio', user_owner: user_owner)
+    menu = Menu.create!(name: 'Primeiro Cardápio', establishment: establishment)
     MenuDish.create!(menu: menu, dish: dish)
     MenuBeverage.create!(menu: menu, beverage: beverage)
 
@@ -59,7 +59,7 @@ describe 'Usuário cadastra um pedido' do
     dish_portion = Portion.create!(description: 'Porção de feijoada', price: '20.00', dish: dish)
     beverage = Beverage.create!(name: 'Refri', description: 'Descrição do refri', establishment: establishment)
     beverage_portion = Portion.create!(description: 'Porção de refri', price: '10.00', beverage: beverage)
-    menu = Menu.create!(name: 'Primeiro Cardápio', user_owner: user_owner)
+    menu = Menu.create!(name: 'Primeiro Cardápio', establishment: establishment)
     MenuDish.create!(menu: menu, dish: dish)
     MenuBeverage.create!(menu: menu, beverage: beverage)
 
@@ -105,7 +105,7 @@ describe 'Usuário cadastra um pedido' do
     dish_portion = create_portion_dish(dish)
     beverage = create_beverage_refri(establishment)
     beverage_portion = create_portion_beverage(beverage)
-    menu = Menu.create!(name: 'Primeiro Cardápio', user_owner: user_owner)
+    menu = Menu.create!(name: 'Primeiro Cardápio', establishment: establishment)
     MenuDish.create!(menu: menu, dish: dish)
     MenuBeverage.create!(menu: menu, beverage: beverage)
 

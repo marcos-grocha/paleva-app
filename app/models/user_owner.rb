@@ -5,8 +5,7 @@ class UserOwner < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :establishment
-  has_many :menus, dependent: :destroy
-  has_many :orders, dependent: :destroy
+  has_many :menus, through: :establishment
   has_many :employee_pre_registrations, dependent: :destroy
   
   validates :name, :last_name, :cpf, presence: true

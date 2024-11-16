@@ -79,18 +79,18 @@ Portion.create!(description: 'Caipirinha M', price: '20.00', beverage: caipirinh
 Portion.create!(description: 'Caipirinha G', price: '25.00', beverage: caipirinha)
 
 # 3 menus
-cafe = Menu.create!(name: 'Café da manhã', user_owner: user_owner)
+cafe = Menu.create!(name: 'Café da manhã', establishment: establishment)
 MenuDish.create!(menu: cafe, dish: fritas)
 MenuDish.create!(menu: cafe, dish: bolonhesa)
 MenuBeverage.create!(menu: cafe, beverage: suco_laranja)
 
-almoco = Menu.create!(name: 'Almoço', user_owner: user_owner)
+almoco = Menu.create!(name: 'Almoço', establishment: establishment)
 MenuDish.create!(menu: almoco, dish: feijoada)
 MenuDish.create!(menu: almoco, dish: moqueca)
 MenuBeverage.create!(menu: almoco, beverage: coca)
 MenuBeverage.create!(menu: almoco, beverage: agua_gas)
 
-janta = Menu.create!(name: 'Janta', user_owner: user_owner)
+janta = Menu.create!(name: 'Janta', establishment: establishment)
 MenuDish.create!(menu: janta, dish: parmegiana)
 MenuDish.create!(menu: janta, dish: feijoada)
 MenuBeverage.create!(menu: janta, beverage: heineken)

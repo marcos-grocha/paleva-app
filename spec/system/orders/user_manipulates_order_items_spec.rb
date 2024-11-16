@@ -8,7 +8,7 @@ describe 'Usuário acessa os menus' do
     Portion.create!(description: 'Porção de feijoada', price: '20.00', dish: dish)
     beverage = Beverage.create!(name: 'Refri', description: 'Descrição do refri', establishment: establishment)
     Portion.create!(description: 'Porção de refri', price: '10.00', beverage: beverage)
-    menu = Menu.create!(name: 'Primeiro Cardápio', user_owner: user_owner)
+    menu = Menu.create!(name: 'Primeiro Cardápio', establishment: establishment)
     MenuDish.create!(menu: menu, dish: dish)
     MenuBeverage.create!(menu: menu, beverage: beverage)
 
@@ -39,7 +39,7 @@ describe 'Usuário acessa os menus' do
     dish_portion = create_portion_dish(dish)
     beverage = create_beverage_refri(establishment)
     beverage_portion = create_portion_beverage(beverage)
-    menu = Menu.create!(name: 'Primeiro Cardápio', user_owner: user_owner)
+    menu = Menu.create!(name: 'Primeiro Cardápio', establishment: establishment)
     MenuDish.create!(menu: menu, dish: dish)
     MenuBeverage.create!(menu: menu, beverage: beverage)
   
@@ -68,7 +68,7 @@ describe 'Usuário acessa os menus' do
     establishment = create_establishment(user_owner)
     dish = create_dish_feijoada(establishment)
     dish_portion = create_portion_dish(dish)
-    menu = Menu.create!(name: 'Primeiro Cardápio', user_owner: user_owner)
+    menu = Menu.create!(name: 'Primeiro Cardápio', establishment: establishment)
     menu.dishes << dish
 
     login_as user_owner

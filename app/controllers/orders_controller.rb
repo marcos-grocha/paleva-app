@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
   def index
-    @orders = current_user_owner.orders if user_owner_signed_in?
-    @orders = current_user_employee.user_owner.orders if user_employee_signed_in?
+    if user_owner_signed_in?
+      @orders = current_user_owner.establishment.orders
+    elsif user_employee_signed_in?
+      @orders = current_user_employee.user_owner.establishment.orders
+    else
+      redirect_to root_path, alert: 'Acesso negado.'
+    end
   end
 
   def new
@@ -14,42 +19,26 @@ class OrdersController < ApplicationController
   
   def create
     if user_owner_signed_in?
-      @order = current_user_owner.orders.build(save_params)
-      if @order.save
-        session[:order_items].each do |item|
-          @order.order_items.create!(
-            portion_id: item['portion_id'], 
-            quantity: item['quantity'],
-            note: item['note'],
-            dish_id: item['dish_id'], 
-            beverage_id: item['beverage_id'])
-        end
-
-        session.delete(:order_items)
-        redirect_to orders_path, notice: 'Pedido realizado com sucesso'
-      else
-        flash.now[:alert] = 'Falha ao realizar pedido'
-        render :new, status: :unprocessable_entity
-      end
+      @order = current_user_owner.establishment.orders.build(save_params)
     elsif user_employee_signed_in?
-      @order = current_user_employee.user_owner.orders.build(save_params)
-      if @order.save
-        session[:order_items].each do |item|
-          @order.order_items.create!(
-            portion_id: item['portion_id'], 
-            quantity: item['quantity'], 
-            dish_id: item['dish_id'], 
-            beverage_id: item['beverage_id'])
-        end
-
-        session.delete(:order_items)
-        redirect_to orders_path, notice: 'Pedido realizado com sucesso'
-      else
-        flash.now[:alert] = 'Falha ao realizar pedido'
-        render :new, status: :unprocessable_entity
+      @order = current_user_employee.user_owner.establishment.orders.build(save_params)
+    end
+  
+    if @order.save
+      session[:order_items].each do |item|
+        @order.order_items.create!(
+          portion_id: item['portion_id'], 
+          quantity: item['quantity'],
+          note: item['note'],
+          dish_id: item['dish_id'], 
+          beverage_id: item['beverage_id']
+        )
       end
+      session.delete(:order_items)
+      redirect_to orders_path, notice: 'Pedido realizado com sucesso'
     else
-      redirect_to root_path, alert: 'Acesso negado.'
+      flash.now[:alert] = 'Falha ao realizar pedido'
+      render :new, status: :unprocessable_entity
     end
   end
 

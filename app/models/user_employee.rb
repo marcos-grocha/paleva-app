@@ -6,6 +6,7 @@ class UserEmployee < ApplicationRecord
 
   belongs_to :user_owner
   belongs_to :establishment
+  has_many :menus, through: :establishment
 
   validates :name, :last_name, :cpf, presence: true
   validates :cpf, uniqueness: true

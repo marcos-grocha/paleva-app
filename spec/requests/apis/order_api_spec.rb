@@ -10,10 +10,10 @@ describe 'Order API' do
         fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45')
         )
       Order.create!(
-        customer_name: 'Primeiro Cliente', contact_phone: '79988887771', contact_email: 'cliente1@email.com', user_owner: user_owner
+        customer_name: 'Primeiro Cliente', contact_phone: '79988887771', contact_email: 'cliente1@email.com', establishment: establishment
         )
       Order.create!(
-        customer_name: 'Segundo Cliente', contact_phone: '79988887772', contact_email: 'cliente2@email.com', user_owner: user_owner
+        customer_name: 'Segundo Cliente', contact_phone: '79988887772', contact_email: 'cliente2@email.com', establishment: establishment
         )
       
       get "/api/v1/orders/#{establishment.code}"

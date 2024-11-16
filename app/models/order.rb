@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  belongs_to :user_owner
+  belongs_to :establishment
   has_many :order_items, dependent: :destroy
 
   enum :status, { waiting_confirmation: 0, in_preparation: 2, cancelled: 4, ready: 6, delivered: 8 }, default: 0

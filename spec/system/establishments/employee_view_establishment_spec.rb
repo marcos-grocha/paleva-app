@@ -16,6 +16,7 @@ describe 'Funcionário acessa rota do estabelecimento' do
   it 'está logado mas não tem vínculo' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
+    create_menu(establishment)
     create_employee_pre_registration(user_owner, establishment)
     create_user_employee(user_owner, establishment)
 

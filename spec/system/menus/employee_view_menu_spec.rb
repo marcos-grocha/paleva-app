@@ -4,7 +4,7 @@ describe 'Funcionário acessa rota de menus' do
   it 'sem estar logado' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
-    menu = create_menu(user_owner)
+    menu = create_menu(establishment)
     create_employee_pre_registration(user_owner, establishment)
     create_user_employee(user_owner, establishment)
 
@@ -17,7 +17,7 @@ describe 'Funcionário acessa rota de menus' do
   it 'logado mas não tem vínculo' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
-    menu = create_menu(user_owner)
+    menu = create_menu(establishment)
     create_employee_pre_registration(user_owner, establishment)
     create_user_employee(user_owner, establishment)
 
@@ -46,7 +46,7 @@ describe 'Funcionário acessa rota de menus' do
   it 'e está logado' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
-    menu = create_menu(user_owner)
+    menu = create_menu(establishment)
     create_employee_pre_registration(user_owner, establishment)
     user_employee = create_user_employee(user_owner, establishment)
     

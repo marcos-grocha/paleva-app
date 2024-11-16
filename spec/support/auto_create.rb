@@ -46,6 +46,18 @@ def create_additional_features_vegan(dish)
   AdditionalFeature.create!(name: 'Vegano', active: true, dish: dish)
 end
 
-def create_menu(user_owner)
-  Menu.create!(name: 'Menu', user_owner: user_owner)
+def create_menu(establishment)
+  Menu.create!(name: 'Menu', establishment: establishment)
+end
+
+def association_menu_dish(menu, dish)
+  
+end
+
+def association_menu_beverage(menu, beverage)
+  
+end
+
+def create_order(establishment)
+  
 end

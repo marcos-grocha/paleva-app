@@ -9,7 +9,7 @@ class Api::V1::ApiController < ActionController::API
   end
 
   def return_404
-    render status: 404, json: { error: 'Establishment not found' }
+    render status: 404
   end
 
 end
