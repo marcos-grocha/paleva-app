@@ -6,9 +6,9 @@
             <% @order.order_items.each do |item| %>
                 <div>
                     <b><%= item.dish&.name || item.beverage&.name %></b><br>
-                    <%= item.dish&.description || item.beverage&.description %>
-                    <b>|</b> <%= item.portion.description %>
-                    : <b>R$ <%= item.portion.price %></b>
+                    <%= item.dish&.description || item.beverage&.description %><br>
+                    <%= item.portion.description %> : <b>R$ <%= item.portion.price %></b>
+                     x <%= item.quantity %>
                 </div><br>
             <% end %>
         <% else %>

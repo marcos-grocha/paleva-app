@@ -37,7 +37,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :orders, only: [ :show, :index, :create ]
+      resources :orders, only: [ :index, :show, :create ] do
+        get ':establishment_code', to: 'orders#index', as: :by_establishment, on: :collection
+      end
     end
   end
+
 end

@@ -5,11 +5,19 @@
     <% if session[:order_items].present? %>
       <% session[:order_items].each do |item| %>
         <% portion = Portion.find(item['portion_id']) %>
-        <%= portion.description %> - <%= number_to_currency(portion.price) %> x <%= item['quantity'] %><br>
-        <% if item['note'].present? %>
-            <strong>Observação:</strong> <%= item['note'] %>
-        <% end %>
-        <%= button_to 'Remover', remove_item_from_order_menu_path(@menu, portion), method: :delete, class: 'btn btn-sm btn-danger btn-sm' %>
+        <div class="d-flex justify-content-center" style="border: 1px solid black; height: 55px;">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <b><%= portion.description %></b> | <%= number_to_currency(portion.price) %> | x <%= item['quantity'] %><br>
+                    <% if item['note'].present? %>
+                        <b>Observação:</b> <%= item['note'] %>
+                    <% end %>
+                </div>
+                <div class="col-auto">
+                    <%= button_to 'Remover', remove_item_from_order_menu_path(@menu, portion), method: :delete, class: 'btn btn-danger btn-sm' %>
+                </div>
+            </div>
+        </div><br>
       <% end %><br>
       <%= link_to 'Finalizar Pedido', new_order_path, class: 'btn btn-success btn-sm' %>
     <% else %>
