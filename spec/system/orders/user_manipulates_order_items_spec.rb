@@ -9,8 +9,8 @@ describe 'Usuário acessa os menus' do
     beverage = Beverage.create!(name: 'Refri', description: 'Descrição do refri', establishment: establishment)
     Portion.create!(description: 'Porção de refri', price: '10.00', beverage: beverage)
     menu = Menu.create!(name: 'Primeiro Cardápio', user_owner: user_owner)
-    menu.dishes << dish
-    menu.beverages << beverage
+    MenuDish.create!(menu: menu, dish: dish)
+    MenuBeverage.create!(menu: menu, beverage: beverage)
 
     login_as user_owner
     visit root_path
@@ -25,7 +25,11 @@ describe 'Usuário acessa os menus' do
     expect(page).to have_content 'Bebidas Disponíveis'
     expect(page).to have_content 'Refri'
     expect(page).to have_content 'Porção de refri: R$ 10,00'
-    expect(page).to have_content 'Adicionar ao Pedido'
+    within "#dish_#{dish.id}" do
+      within "#portion_#{dish.portions.first.id}" do
+        expect(page).to have_button 'Adicionar ao Pedido'
+      end
+    end
   end
 
   it 'e adiciona itens ao pedido' do
@@ -36,8 +40,8 @@ describe 'Usuário acessa os menus' do
     beverage = create_beverage_refri(establishment)
     beverage_portion = create_portion_beverage(beverage)
     menu = Menu.create!(name: 'Primeiro Cardápio', user_owner: user_owner)
-    menu.dishes << dish
-    menu.beverages << beverage
+    MenuDish.create!(menu: menu, dish: dish)
+    MenuBeverage.create!(menu: menu, beverage: beverage)
   
     login_as user_owner
     visit root_path

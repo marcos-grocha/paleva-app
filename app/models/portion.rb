@@ -2,6 +2,7 @@ class Portion < ApplicationRecord
   belongs_to :dish, optional: true
   belongs_to :beverage, optional: true
   has_many :price_histories, dependent: :destroy
+  has_many :order_items
 
   validates :description, :price, presence: true
   before_update :record_price_history

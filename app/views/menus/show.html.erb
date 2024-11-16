@@ -5,7 +5,10 @@
     <% if session[:order_items].present? %>
       <% session[:order_items].each do |item| %>
         <% portion = Portion.find(item['portion_id']) %>
-        <%= portion.description %> - <%= number_to_currency(portion.price) %>
+        <%= portion.description %> - <%= number_to_currency(portion.price) %> x <%= item['quantity'] %><br>
+        <% if item['note'].present? %>
+            <strong>Observação:</strong> <%= item['note'] %>
+        <% end %>
         <%= button_to 'Remover', remove_item_from_order_menu_path(@menu, portion), method: :delete, class: 'btn btn-sm btn-danger btn-sm' %>
       <% end %><br>
       <%= link_to 'Finalizar Pedido', new_order_path, class: 'btn btn-success btn-sm' %>
@@ -25,7 +28,15 @@
                     <% d.portions.each do |portion| %>
                         <div id="portion_<%= portion.id %>" class="list-group-item">
                             <b><%= portion.description %>:</b> <%= number_to_currency(portion.price) %>
-                            <%= button_to 'Adicionar ao Pedido', add_item_to_order_menu_path(@menu, portion_id: portion.id), method: :post, class: 'btn btn-sm btn-primary' %>
+
+                            <%= form_with url: add_item_to_order_menu_path(@menu, portion_id: portion.id), method: :post, local: true do |f| %>
+                                <div>
+                                <%= f.label :quantity, 'Quantidade:' %>
+                                <%= f.number_field :quantity, value: 1, min: 1, class: 'form-control' %>
+                                <%= f.text_field :note, placeholder: 'Observação', class: 'form-control' %>
+                                </div>
+                                <%= f.submit 'Adicionar ao Pedido', class: 'btn btn-sm btn-primary' %>
+                            <% end %>
                         </div>
                     <% end %>
                 </div><br>
@@ -45,7 +56,15 @@
                     <% b.portions.each do |portion| %>
                         <div id="portion_<%= portion.id %>" class="list-group-item">
                             <b><%= portion.description %>:</b> <%= number_to_currency(portion.price) %> 
-                            <%= button_to 'Adicionar ao Pedido', add_item_to_order_menu_path(@menu, portion_id: portion.id), method: :post, class: 'btn btn-sm btn-primary' %>
+                            
+                            <%= form_with url: add_item_to_order_menu_path(@menu, portion_id: portion.id), method: :post, local: true do |f| %>
+                                <div>
+                                <%= f.label :quantity, 'Quantidade:' %>
+                                <%= f.number_field :quantity, value: 1, min: 1, class: 'form-control' %>
+                                <%= f.text_field :note, placeholder: 'Observação', class: 'form-control' %>
+                                </div>
+                                <%= f.submit 'Adicionar ao Pedido', class: 'btn btn-sm btn-primary' %>
+                            <% end %>
                         </div>
                     <% end %>
                 </div><br>

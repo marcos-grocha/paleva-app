@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   root "pa_leva#start"
   get '/pa-leva/session', to: "pa_leva#session"
   get '/pa-leva/details', to: "pa_leva#details"
+
   devise_for :user_owners
   devise_for :user_employees
+  resources :employee_pre_registrations, only: [ :index, :new, :create ]
 
   resources :establishments, only: [ :new, :create, :show ] do
     get "search", on: :collection
@@ -31,12 +33,8 @@ Rails.application.routes.draw do
     delete "remove_item_from_order", on: :member
   end
 
-  resources :orders, only: [ :index, :new, :create, :show ] do
-    resources :order_items, only: [ :create, :destroy ]
-  end
+  resources :orders, only: [ :index, :new, :create, :show ]
 
-  resources :employee_pre_registrations, only: [ :index, :new, :create ]
-  
   namespace :api do
     namespace :v1 do
       resources :orders, only: [ :show, :index, :create ]

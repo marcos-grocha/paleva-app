@@ -41,17 +41,35 @@ class MenusController < ApplicationController
     session[:order_items] ||= []
 
     portion = Portion.find(params[:portion_id])
-    item = { portion_id: portion.id, quantity: 1, dish_id: portion.dish_id, beverage_id: portion.beverage_id }
+    quantity = params[:quantity].to_i
+    quantity = 1 if quantity <= 0
+    
+    item = { 
+      portion_id: portion.id, 
+      quantity: params[:quantity].to_i, 
+      note: params[:note],
+      dish_id: portion.dish_id, 
+      beverage_id: portion.beverage_id 
+    }
 
-    session[:order_items] << item unless session[:order_items].include?(item)
+    existing_item = session[:order_items].find { |i| i['portion_id'] == item[:portion_id] }
+    if existing_item
+      existing_item['quantity'] += item[:quantity]
+      existing_item['note'] = item[:note] if item[:note].present?
+    else
+      session[:order_items] << item
+    end
 
     redirect_to menu_path(params[:id]), notice: 'Item adicionado ao pedido.'
   end
 
   def remove_item_from_order
     if session[:order_items]
-      session[:order_items].reject! do |item| 
-        item[:portion_id] == params[:portion_id]
+      session[:order_items].each_with_index do |item, index|
+        if item[:portion_id] == params[:portion_id]
+          session[:order_items].delete_at(index)
+          break
+        end
       end
     end
 

@@ -21,19 +21,21 @@ describe 'Usuário cadastra um pedido' do
     beverage = Beverage.create!(name: 'Refri', description: 'Descrição do refri', establishment: establishment)
     beverage_portion = Portion.create!(description: 'Porção de refri', price: '10.00', beverage: beverage)
     menu = Menu.create!(name: 'Primeiro Cardápio', user_owner: user_owner)
-    menu.dishes << dish
-    menu.beverages << beverage
+    MenuDish.create!(menu: menu, dish: dish)
+    MenuBeverage.create!(menu: menu, beverage: beverage)
 
     login_as user_owner
     visit root_path
     click_on 'Primeiro Cardápio'
     within "#dish_#{dish.id}" do
       within "#portion_#{dish_portion.id}" do
+        fill_in 'Quantidade:', with: 2
         click_on 'Adicionar ao Pedido'
       end
     end
     within "#beverage_#{beverage.id}" do
       within "#portion_#{beverage_portion.id}" do
+        fill_in 'Quantidade:', with: 1
         click_on 'Adicionar ao Pedido'
       end
     end
@@ -58,19 +60,21 @@ describe 'Usuário cadastra um pedido' do
     beverage = Beverage.create!(name: 'Refri', description: 'Descrição do refri', establishment: establishment)
     beverage_portion = Portion.create!(description: 'Porção de refri', price: '10.00', beverage: beverage)
     menu = Menu.create!(name: 'Primeiro Cardápio', user_owner: user_owner)
-    menu.dishes << dish
-    menu.beverages << beverage
+    MenuDish.create!(menu: menu, dish: dish)
+    MenuBeverage.create!(menu: menu, beverage: beverage)
 
     login_as user_owner
     visit root_path
     click_on 'Primeiro Cardápio'
     within "#dish_#{dish.id}" do
       within "#portion_#{dish_portion.id}" do
+        fill_in 'Quantidade:', with: 2
         click_on 'Adicionar ao Pedido'
       end
     end
     within "#beverage_#{beverage.id}" do
       within "#portion_#{beverage_portion.id}" do
+        fill_in 'Quantidade:', with: 3
         click_on 'Adicionar ao Pedido'
       end
     end
@@ -90,7 +94,7 @@ describe 'Usuário cadastra um pedido' do
     expect(page).to have_content 'Refri'
     expect(page).to have_content 'Porção de refri'
     expect(page).to have_content '10.0'
-    expect(page).to have_content 'Valor total do pedido: R$ 30.0'
+    expect(page).to have_content 'Valor total do pedido: R$ 70.0'
     expect(page).to have_content 'Status: Aguardando confirmação'
   end
 
@@ -102,8 +106,8 @@ describe 'Usuário cadastra um pedido' do
     beverage = create_beverage_refri(establishment)
     beverage_portion = create_portion_beverage(beverage)
     menu = Menu.create!(name: 'Primeiro Cardápio', user_owner: user_owner)
-    menu.dishes << dish
-    menu.beverages << beverage
+    MenuDish.create!(menu: menu, dish: dish)
+    MenuBeverage.create!(menu: menu, beverage: beverage)
 
     login_as user_owner
     visit root_path

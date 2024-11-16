@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_13_044948) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_15_213359) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -155,7 +155,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_13_044948) do
     t.string "contact_phone"
     t.string "contact_email"
     t.string "cpf"
-    t.integer "status"
+    t.integer "status", default: 0
     t.string "order_code"
     t.integer "user_owner_id", null: false
     t.datetime "created_at", null: false

@@ -19,7 +19,8 @@ class OrdersController < ApplicationController
         session[:order_items].each do |item|
           @order.order_items.create!(
             portion_id: item['portion_id'], 
-            quantity: item['quantity'], 
+            quantity: item['quantity'],
+            note: item['note'],
             dish_id: item['dish_id'], 
             beverage_id: item['beverage_id'])
         end
