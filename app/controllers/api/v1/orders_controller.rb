@@ -9,12 +9,12 @@ class Api::V1::OrdersController < Api::V1::ApiController
       orders = orders.where(status: params[:status])
     end
 
-    render status: 200, json: orders.as_json(except: [:created_at, :updated_at])
+    render status: 200, json: orders.as_json(except: [:updated_at])
   end
 
   def show 
     order_details = @order.as_json(
-      only: [:customer_name, :status, :created_at],
+      only: [:order_code, :customer_name, :status, :created_at],
       methods: [:order_items_details]
     )
 
