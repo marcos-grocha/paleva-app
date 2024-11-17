@@ -4,7 +4,10 @@
         <% @orders.each do |o| %>
             <div class="list-group">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <%= link_to o.order_code, order_path(o), class: 'list-group-item list-group-item-action' %>
+                    <span class="list-group-item" style="background-color: #14213db3; color: white; border-radius: 15px;">
+                        Pedido do <%= o.customer_name %> :
+                    </span>
+                    <%= link_to o.order_code, order_path(o), class: 'list-group-item list-group-item-action', style: 'width: 130px;' %> 
                 </div>
             </div>
         <% end %>

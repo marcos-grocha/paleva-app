@@ -8,7 +8,8 @@
                     <b><%= item.dish&.name || item.beverage&.name %></b><br>
                     <%= item.dish&.description || item.beverage&.description %><br>
                     <%= item.portion.description %> : <b>R$ <%= item.portion.price %></b>
-                     x <%= item.quantity %>
+                     x <%= item.quantity %><br>
+                    <%= item.note %>
                 </div><br>
             <% end %>
         <% else %>

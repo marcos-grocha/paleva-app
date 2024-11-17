@@ -37,8 +37,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :orders, only: [ :index, :show, :create ] do
-        get ':establishment_code', to: 'orders#index', as: :by_establishment, on: :collection
+      resources :establishments, param: :code, only: [] do
+        resources :orders, param: :order_code, only: [:index, :show, :update]
       end
     end
   end

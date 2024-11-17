@@ -38,11 +38,11 @@
                             <b><%= portion.description %>:</b> <%= number_to_currency(portion.price) %>
 
                             <%= form_with url: add_item_to_order_menu_path(@menu, portion_id: portion.id), method: :post, local: true do |f| %>
-                                <div>
-                                <%= f.label :quantity, 'Quantidade:' %>
-                                <%= f.number_field :quantity, value: 1, min: 1, class: 'form-control' %>
-                                <%= f.text_field :note, placeholder: 'Observação', class: 'form-control' %>
-                                </div>
+                                <div class="input-group">
+                                    <%= f.label :quantity, 'Quantidade:', class: 'input-group-text' %>
+                                    <%= f.number_field :quantity, value: 1, min: 1, class: 'form-control' %>
+                                    <%= f.text_field :note, placeholder: 'Observação', class: 'form-control', style: 'width: 170px;' %>
+                                </div><br>
                                 <%= f.submit 'Adicionar ao Pedido', class: 'btn btn-sm btn-primary' %>
                             <% end %>
                         </div>
@@ -66,11 +66,11 @@
                             <b><%= portion.description %>:</b> <%= number_to_currency(portion.price) %> 
                             
                             <%= form_with url: add_item_to_order_menu_path(@menu, portion_id: portion.id), method: :post, local: true do |f| %>
-                                <div>
-                                <%= f.label :quantity, 'Quantidade:' %>
-                                <%= f.number_field :quantity, value: 1, min: 1, class: 'form-control' %>
-                                <%= f.text_field :note, placeholder: 'Observação', class: 'form-control' %>
-                                </div>
+                                <div class="input-group">
+                                    <%= f.label :quantity, 'Quantidade:', class: 'input-group-text' %>
+                                    <%= f.number_field :quantity, value: 1, min: 1, class: 'form-control' %>
+                                    <%= f.text_field :note, placeholder: 'Observação', class: 'form-control', style: 'width: 170px;' %>
+                                </div><br>
                                 <%= f.submit 'Adicionar ao Pedido', class: 'btn btn-sm btn-primary' %>
                             <% end %>
                         </div>

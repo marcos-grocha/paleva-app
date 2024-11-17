@@ -12,7 +12,19 @@ class Order < ApplicationRecord
 
   def total_price
     order_items.includes(:portion).sum { |item| item.quantity * item.portion.price }
-  end    
+  end
+
+  def order_items_details
+    order_items.map do |item|
+      {
+        dish_name: item.dish&.name,
+        beverage_name: item.beverage&.name,
+        portion_name: item.portion&.description,
+        quantity: item.quantity,
+        note: item.note
+      }
+    end
+  end
   
   private
 
