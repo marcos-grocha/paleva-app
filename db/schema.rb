@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_16_182830) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_18_031209) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_182830) do
   end
 
   create_table "additional_features", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.boolean "active"
     t.integer "dish_id", null: false
     t.datetime "created_at", null: false
@@ -49,8 +49,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_182830) do
   end
 
   create_table "beverages", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
+    t.string "name", null: false
+    t.string "description", null: false
     t.boolean "alcoholic"
     t.integer "calories"
     t.integer "establishment_id", null: false
@@ -61,8 +61,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_182830) do
   end
 
   create_table "dishes", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
+    t.string "name", null: false
+    t.string "description", null: false
     t.integer "calories"
     t.integer "establishment_id", null: false
     t.datetime "created_at", null: false
@@ -86,12 +86,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_182830) do
   end
 
   create_table "establishments", force: :cascade do |t|
-    t.string "fantasy_name"
-    t.string "corporate_name"
-    t.string "cnpj"
-    t.string "address"
-    t.integer "telephone"
-    t.string "email"
+    t.string "fantasy_name", null: false
+    t.string "corporate_name", null: false
+    t.string "cnpj", null: false
+    t.string "address", null: false
+    t.integer "telephone", null: false
+    t.string "email", null: false
     t.string "code"
     t.integer "user_owner_id", null: false
     t.datetime "created_at", null: false
@@ -164,8 +164,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_182830) do
   end
 
   create_table "portions", force: :cascade do |t|
-    t.string "description"
-    t.decimal "price"
+    t.string "description", null: false
+    t.decimal "price", null: false
     t.integer "dish_id"
     t.integer "beverage_id"
     t.datetime "created_at", null: false
@@ -190,8 +190,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_182830) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name"
-    t.string "last_name"
+    t.string "name", null: false
+    t.string "last_name", null: false
     t.string "cpf", null: false
     t.integer "user_owner_id", null: false
     t.integer "establishment_id", null: false

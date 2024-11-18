@@ -22,6 +22,7 @@
     </div>
 </div>
 <br>
+
 <div>
   <% if @beverage.portions.any? %>
     <h2>Porções</h2>
@@ -40,11 +41,9 @@
 <br>
 
 <div class="d-flex justify-content-center">
-  <div class="row g-2 align-items-center">
-    <div class="col-auto">
-        <%= link_to 'voltar', beverages_path, class: 'btn btn-outline-dark' %>
-        <%= link_to 'editar', edit_beverage_path, class: 'btn btn-outline-warning' %>
-    </div>
+  <div class="row g-3 align-items-center">
+    <div class="col-auto"><%= link_to 'voltar', beverages_path, class: 'btn btn-outline-dark' %></div>
+    <div class="col-auto"><%= link_to 'editar', edit_beverage_path, class: 'btn btn-outline-warning' %></div>
     <div class="col-auto">
       <%= form_with url: change_status_beverage_path(@beverage), method: :patch do %>
         <%= hidden_field_tag :status, !@beverage.status %>

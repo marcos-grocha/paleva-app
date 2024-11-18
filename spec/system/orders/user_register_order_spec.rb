@@ -90,11 +90,11 @@ describe 'Usuário cadastra um pedido' do
     expect(page).to have_content 'Cliente Marcos'
     expect(page).to have_content 'Feijoada'
     expect(page).to have_content 'Porção de feijoada'
-    expect(page).to have_content '20.0'
+    expect(page).to have_content '20,0'
     expect(page).to have_content 'Refri'
     expect(page).to have_content 'Porção de refri'
-    expect(page).to have_content '10.0'
-    expect(page).to have_content 'Valor total do pedido: R$ 70.0'
+    expect(page).to have_content '10,0'
+    expect(page).to have_content 'Valor total do pedido: R$ 70,0'
     expect(page).to have_content 'Status: Aguardando confirmação'
   end
 

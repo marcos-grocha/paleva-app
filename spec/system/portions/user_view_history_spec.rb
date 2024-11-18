@@ -17,7 +17,7 @@ describe 'Usuário vê o histórico de uma porção' do
     expect(page).to have_content 'Detalhes da Porção'
     expect(page).to have_content 'Histórico de Alterações'
     expect(page).to have_content 'Descrição da porção'
-    expect(page).to have_content 'R$ 25.0'
+    expect(page).to have_content 'R$ 25,0'
   end
 
   it 'através da página de detalhes de uma bebida' do
@@ -36,6 +36,6 @@ describe 'Usuário vê o histórico de uma porção' do
     expect(page).to have_content 'Detalhes da Porção'
     expect(page).to have_content 'Histórico de Alterações'
     expect(page).to have_content 'Descrição da porção'
-    expect(page).to have_content 'R$ 15.0'
+    expect(page).to have_content 'R$ 15,0'
   end
 end

@@ -13,7 +13,7 @@ describe 'Dono visita a rota raiz' do
     UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
 
     visit root_path
-    click_on 'Dono de Estabelecimento'
+    click_on 'Administrador'
     fill_in 'E-mail', with: 'user@owner.com'
     fill_in 'Senha', with: 'password1234'
     click_on 'Log in'
@@ -26,7 +26,7 @@ describe 'Dono visita a rota raiz' do
     Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('12:00'), closing_time: Time.parse('15:00'))
 
     visit root_path
-    click_on 'Dono de Estabelecimento'
+    click_on 'Administrador'
     fill_in 'E-mail', with: 'user@owner.com'
     fill_in 'Senha', with: 'password1234'
     click_on 'Log in'

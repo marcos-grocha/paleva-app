@@ -4,5 +4,6 @@ class OrderItem < ApplicationRecord
   belongs_to :dish, optional: true
   belongs_to :beverage, optional: true
 
+  validates :quantity, presence: true
   validates :quantity, numericality: { greater_than: 0 }
 end

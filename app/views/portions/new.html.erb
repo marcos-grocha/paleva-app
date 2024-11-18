@@ -1,20 +1,10 @@
 <h3>Criar porção</h3>
+
 <% if(@portion.errors.any?) %>
     <h4>Verifique esse problemas:</h4>
     <% @portion.errors.full_messages.each do |msg| %>
         - <%= msg %> <br>
-    <% end %>
-    <br>
+    <% end %> <br>
 <% end %>
-<%= form_with model: [ @parent, @portion ] do |f| %>
-  <div class="text-start">
-    <%= f.label :description, class: 'form-label' %>
-    <%= f.text_field :description, class: 'form-control' %>
-  </div>
-  <div class="text-start">
-    <%= f.label :price, class: 'form-label' %>
-    <%= f.number_field :price, step: 0.01, class: 'form-control' %>
-  </div>
-  <br>
-  <%= f.submit class: 'btn btn-outline-warning' %>
-<% end %>
+
+<%= render 'form' %>

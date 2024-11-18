@@ -4,12 +4,17 @@ header {
 .header {
     padding: 15px;
     background-color: rgba(254, 254, 254, 0.75);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    top: 0;
 }
 nav {
     padding: 10px;
 }
 
 body {
+    padding-top: 95px;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -51,8 +56,6 @@ footer a:hover {
     color: orange;
     text-decoration: underline;
 }
-
-
 table {
     width:  400px;
     border-collapse: collapse;
@@ -62,4 +65,25 @@ table {
 td, th {
     border: 1px solid black;
     padding: 10px;
+}
+.order-list {
+    margin: 20px 0;
+}
+.order-item {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.order-item:hover {
+    background-color: #f9f9f9;
+}
+.order-details {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 12px;
 }

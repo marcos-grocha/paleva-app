@@ -1,17 +1,17 @@
 <h1>Cardápios Disponíveis</h1><br>
-<div>
-    <% if @menus.any? %>
-        <% @menus.each do |m| %>
-            <div class="list-group">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <%= link_to m.name, menu_path(m), class: 'list-group-item list-group-item-action' %>
-                </div>
+
+<% if @menus.any? %>
+    <% @menus.each do |m| %>
+        <div class="list-group">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <%= link_to m.name, menu_path(m), class: 'list-group-item list-group-item-action' %>
             </div>
-        <% end %>
-    <% else %>
-        <p>Nenhum cardápio disponível</p>
+        </div>
+        <br>
     <% end %>
-</div><br>
+<% else %>
+    <p>Nenhum cardápio disponível</p>
+<% end %>
 
 <% if user_owner_signed_in? %>
     <%= link_to 'Cadastrar Cardápio', new_menu_path, class: 'btn btn-warning' %>

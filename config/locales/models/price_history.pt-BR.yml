@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      price_history:
+        one: Histórico de Preço
+        other: Histórico de Preços
+    attributes:
+      price_history:
+        description_was: Descrição antiga
+        price_was: Preço antigo
+        registration_date: Data do registro

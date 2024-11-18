@@ -18,7 +18,7 @@
   <% if @dish.additional_features.any? %>
     <h3>Marcadores</h3>
     <% @dish.additional_features.each do |feature| %>
-      <li>Prato <%= feature.name %></li>
+      <p>Prato <%= feature.name %></p>
     <% end %>
   <% else %>
     <p>Sem marcadores cadastrados</p>

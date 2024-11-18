@@ -1,22 +1,23 @@
 <h1>Bebidas Disponíveis</h1><br>
+
 <div class="btn-group btn-group-sm" aria-label="Small button group">
     <%= link_to 'Alcoólicas', beverages_path(alcoholic: true), class: 'btn btn-outline-secondary btn-sm' %>
     <%= link_to 'Não Alcoólicas', beverages_path(alcoholic: false), class: 'btn btn-outline-secondary btn-sm' %>
     <%= link_to 'Todas', beverages_path, class: 'btn btn-outline-dark btn-sm' %>
-</div>
-<div>
-    <% if @beverages.any? %>
-        <br>
-        <% @beverages.each do |b| %>
-            <div class="list-group"">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <%= link_to b.name, beverage_path(b), class: 'list-group-item list-group-item-action' %> <span class="list-group-item"><%= b.status ? 'Ativado' : 'Desativado' %></span>
-                </div>
+</div><br>
+
+<% if @beverages.any? %>
+    <br>
+    <% @beverages.each do |b| %>
+        <div class="list-group">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <%= link_to b.name, beverage_path(b), class: 'list-group-item list-group-item-action' %> <span class="list-group-item"><%= b.status ? 'Ativado' : 'Desativado' %></span>
             </div>
-            <br>
-        <% end %>
-    <% else %>
-        <p>Nenhuma bebida disponível</p>
+        </div>
+        <br>
     <% end %>
-</div>
+<% else %>
+    <p>Nenhuma bebida disponível</p>
+<% end %>
+
 <%= link_to 'Cadastrar Bebida', new_beverage_path, class: 'btn btn-warning' %>

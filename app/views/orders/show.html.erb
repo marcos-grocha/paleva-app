@@ -1,21 +1,22 @@
-<h1>Código: <%= @order.order_code %></h1><br>
-<div>
-    <div>Cliente: <b><%= @order.customer_name %></b></div><br>
-    <div>
-        <% if @order.order_items.any? %>
+
+<div class="order-details">
+    <h2>Detalhes do Pedido <br># <%= @order.order_code %></h2><br>
+    <p>Cliente: <b><%= @order.customer_name %></b></p>
+    <p>Status: <b><%= I18n.t("enums.order.status.#{@order.status}") %></b></p>
+    <% if @order.order_items.any? %>
+        <div class="order-list">
             <% @order.order_items.each do |item| %>
-                <div>
+                <div class="order-item">
                     <b><%= item.dish&.name || item.beverage&.name %></b><br>
-                    <%= item.dish&.description || item.beverage&.description %><br>
-                    <%= item.portion.description %> : <b>R$ <%= item.portion.price %></b>
-                     x <%= item.quantity %><br>
+                    <%= item.dish&.description || item.beverage&.description %>
+                    <%= item.portion.description %> : <b><%= number_to_currency(item.portion.price) %></b>
+                        x <%= item.quantity %>
                     <%= item.note %>
-                </div><br>
+                </div>
             <% end %>
-        <% else %>
-            <p>Nenhum item no pedido.</p>
-        <% end %>
-    </div><br>
-    <div>Valor total do pedido: <b>R$ <%= @order.total_price %></b></div><br>
-    <div>Status: <b><%= I18n.t("enums.order.status.#{@order.status}") %></b></div>
-</div><br>
+        </div>
+    <% else %>
+        <p>Nenhum item no pedido.</p>
+    <% end %>
+    <p>Valor total do pedido: <b><%= number_to_currency(@order.total_price) %></b></p>
+</div>

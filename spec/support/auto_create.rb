@@ -3,11 +3,11 @@ def create_user_owner
 end
 
 def create_employee_pre_registration(user_owner, establishment)
-  EmployeePreRegistration.create!(email: 'usuario@funcionario.com', cpf: '59306160003', user_owner: user_owner, establishment: establishment)
+  EmployeePreRegistration.create!(email: 'user@employee.com', cpf: '59306160003', user_owner: user_owner, establishment: establishment)
 end
 
 def create_user_employee(user_owner, establishment)
-  UserEmployee.create!(name: 'User', last_name: 'Employee', cpf: '59306160003', email: 'usuario@funcionario.com', password: 'password1234', user_owner: user_owner, establishment: establishment)
+  UserEmployee.create!(name: 'User', last_name: 'Employee', cpf: '59306160003', email: 'user@employee.com', password: 'password1234', user_owner: user_owner, establishment: establishment)
 end
 
 def create_establishment(user_owner)
@@ -51,17 +51,21 @@ def create_menu(establishment)
 end
 
 def association_menu_dish(menu, dish)
-  
+  MenuDish.create!(menu: menu, dish: dish)
 end
 
 def association_menu_beverage(menu, beverage)
-  
+  MenuBeverage.create!(menu: menu, beverage: beverage)
 end
 
 def create_order(establishment)
-  
+  Order.create!(customer_name: 'Cliente', contact_phone: '11977778888', contact_email: 'cliente@email.com', cpf: CPF.generate, establishment: establishment)
 end
 
-def create_order_item(order)
-  
+def create_order_item(order, portion)
+  OrderItem.create!(quantity: 1, note: "Sem cebola", order: order, portion: portion)
+end
+
+def create_price_history(portion)
+  PriceHistory.create!(portion: portion)
 end

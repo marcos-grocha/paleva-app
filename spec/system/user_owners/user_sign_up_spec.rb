@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário cria uma conta de dono' do
   it 'com sucesso' do
     visit root_path
-    click_on 'Dono de Estabelecimento'
+    click_on 'Administrador'
     click_on 'Sign up'
     fill_in 'Nome', with: 'Usuário'
     fill_in 'Sobrenome', with: 'Dono'
@@ -22,7 +22,7 @@ describe 'Usuário cria uma conta de dono' do
 
   it 'com os dados errados' do
     visit root_path
-    click_on 'Dono de Estabelecimento'
+    click_on 'Administrador'
     click_on 'Sign up'
     fill_in 'Nome', with: ''
     fill_in 'Sobrenome', with: ''

@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      additional_feature:
+        one: Característica Adicional
+        other: Características Adicionais
+    attributes:
+      additional_feature:
+        name: Nome
+        active: status

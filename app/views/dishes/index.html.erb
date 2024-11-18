@@ -1,28 +1,26 @@
 <h1>Pratos Disponíveis</h1><br>
-<div>
-    <%= form_with url: search_dishes_path, method: :get, local: true do %>
-        <div class="d-flex justify-content-center">
-            <div class="row g-3 align-items-center">
-                <div class="col-auto"><%= text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Digite um Marcador' %></div>
-                <div class="col-auto"><%= submit_tag 'Filtrar', class: 'btn btn-warning' %></div>
+
+<%= form_with url: search_dishes_path, method: :get, local: true do %>
+    <div class="d-flex justify-content-center">
+        <div class="row g-3 align-items-center">
+            <div class="col-auto"><%= text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Digite um Marcador' %></div>
+            <div class="col-auto"><%= submit_tag 'Filtrar', class: 'btn btn-warning' %></div>
+        </div>
+    </div>
+<% end %><br>
+
+<% if @dishes.any? %>
+    <br>
+    <% @dishes.each do |d| %>
+        <div class="list-group">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <%= link_to d.name, dish_path(d), class: 'list-group-item list-group-item-action' %> <span class="list-group-item"><%= d.status ? 'Ativado' : 'Desativado' %></span>
             </div>
         </div>
-    <% end %>
-</div>
-
-<div>
-    <% if @dishes.any? %>
         <br>
-        <% @dishes.each do |d| %>
-            <div class="list-group">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <%= link_to d.name, dish_path(d), class: 'list-group-item list-group-item-action' %> <span class="list-group-item"><%= d.status ? 'Ativado' : 'Desativado' %></span>
-                </div>
-                <br>
-            </div>
-        <% end %>
-    <% else %>
-        <p>Nenhum prato disponível</p>
     <% end %>
-</div>
+<% else %>
+    <p>Nenhum prato disponível</p>
+<% end %><br>
+
 <%= link_to 'Cadastrar Prato', new_dish_path, class: 'btn btn-warning' %>

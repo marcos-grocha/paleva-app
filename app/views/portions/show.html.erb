@@ -1,7 +1,7 @@
 <h3>Detalhes da Porção</h3>
 <div>
   Descrição: <%= @portion.description %><br>
-  Preço Atual: <%= @portion.price %>
+  Preço Atual: <%= number_to_currency(@portion.price) %>
 </div>
 <br>
 <h3>Histórico de Alterações</h3>
@@ -9,7 +9,7 @@
   <% @portion.price_histories.each do |history| %>
     <div>
       <b>Descrição</b>: <%= history.description_was %><br>
-      <b>Preço: R$</b> <%= history.price_was %><br>
+      <b>Preço: </b> <%= number_to_currency(history.price_was) %><br>
       <b>Criado em</b>: <%= l(history.registration_date, format: :long) %><br>
       <b>Alterado em</b>: <%= l(history.created_at, format: :long) %><br>
     </div>

@@ -7,6 +7,8 @@ class Order < ApplicationRecord
   validates :customer_name, presence: true
   validate :cpf_validator, if: -> { cpf.present? }
   validate :contact_validator
+  validates :contact_email, format: { with: URI::MailTo::EMAIL_REGEXP, message: 'inválido' }, if: -> { contact_email.present? }
+  validates :contact_phone, length: { in: 10..11, message: 'deve conter 10 ou 11 dígitos' }, if: -> { contact_phone.present? }
 
   before_validation :generate_code, on: :create
 

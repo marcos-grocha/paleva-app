@@ -1,105 +1,129 @@
 require 'rails_helper'
 
 RSpec.describe Establishment, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
-  describe '#valid?' do
-    context 'casos específicos' do
-      it 'false when cnpj is invalid (less)' do
-        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Corporate LTDA', cnpj: '12345', address: 'Av das flores, 100', telephone: '79988887777', email: 'teste@email.com')
-        result = establishment.valid?
-        expect(result).to eq false
+  describe 'É válido?' do
+    it 'sucesso' do
+      user_owner = UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
+      establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
+
+      expect(establishment.valid?).to eq true
+    end
+
+    context 'presença obrigatória:' do # validates presence: true
+      it 'falso quando nome fantasia está vazio' do #:fantasy_name,
+        user_owner = create_user_owner
+        establishment = Establishment.new(fantasy_name: '', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
+
+        expect(establishment.valid?).to eq false
       end
       
-      it 'false when cnpj is invalid (more)' do
-        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Corporate LTDA', cnpj: '123451234512345', address: 'Av das flores, 100', telephone: '79988887777', email: 'teste@email.com')
-        result = establishment.valid?
-        expect(result).to eq false
-      end
+      it 'falso quando nome corporativo está vazio' do # :corporate_name,
+        user_owner = create_user_owner
+        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: '', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
 
-      it 'false when telephone is invalid (less)' do
-        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Corporate LTDA', cnpj: CNPJ.generate, address: 'Av das flores, 100', telephone: '988887777', email: 'teste@email.com')
-        result = establishment.valid?
-        expect(result).to eq false
-      end
-
-      it 'false when telephone is invalid (more)' do
-        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Corporate LTDA', cnpj: CNPJ.generate, address: 'Av das flores, 100', telephone: '799888877770', email: 'teste@email.com')
-        result = establishment.valid?
-        expect(result).to eq false
-      end
-
-      it 'false when email is invalid' do
-        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Corporate LTDA', cnpj: CNPJ.generate, address: 'Av das flores, 100', telephone: '79988887777', email: 'testeemail')
-        result = establishment.valid?
-        expect(result).to eq false
+        expect(establishment.valid?).to eq false
       end
       
-      it 'false when code is invalid' do
-        # TO-DO
+      it 'falso quando cnpj está vazio' do # :cnpj,
+        user_owner = create_user_owner
+        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: '', address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
+
+        expect(establishment.valid?).to eq false
+      end
+      
+      it 'falso quando endereço está vazio' do # :address,
+        user_owner = create_user_owner
+        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: '', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
+
+        expect(establishment.valid?).to eq false
+      end
+      
+      it 'falso quando telefone está vazio' do # :telephone,
+        user_owner = create_user_owner
+        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
+
+        expect(establishment.valid?).to eq false
+      end
+      
+      it 'falso quando e-mail está vazio' do # :email,
+        user_owner = create_user_owner
+        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: '', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
+
+        expect(establishment.valid?).to eq false
       end
     end
 
-    context 'presence' do
-      it 'false when fantasy_name is empty' do
-        establishment = Establishment.new(fantasy_name: '', corporate_name: 'Corporate LTDA', cnpj: CNPJ.generate, address: 'Av das flores, 100', telephone: '79988887777', email: 'teste@email.com')
-        result = establishment.valid?
-        expect(result).to eq false
+    context 'atributo único:' do # validates :code, uniqueness: true, presence: true
+      it 'gera um código único e aleatório ao criar um estabelecimento' do # :generate_code, on: :create
+        first_owner = UserOwner.create!(
+          name: 'First', last_name: 'Owner', cpf: CPF.generate, email: 'first@owner.com', password: 'password1234'
+        )
+        first_establishment = Establishment.create!(
+          fantasy_name: 'First', corporate_name: 'First LTDA', cnpj: CNPJ.generate, address: 'Av First, 1', telephone: '11911112222', email: 'first@contato.com', user_owner: first_owner, opening_time: Time.parse('01:00'), closing_time: Time.parse('02:00')
+        )
+        second_owner = UserOwner.create!(
+          name: 'Second', last_name: 'Owner', cpf: CPF.generate, email: 'second@owner.com', password: 'password1234'
+        )
+        second_establishment = Establishment.create!(
+          fantasy_name: 'Second', corporate_name: 'Second LTDA', cnpj: CNPJ.generate, address: 'Av Second, 1', telephone: '11922223333', email: 'second@contato.com', user_owner: second_owner, opening_time: Time.parse('03:00'), closing_time: Time.parse('04:00')
+        )
+
+        expect(first_establishment.code).not_to be_empty
+        expect(second_establishment.code).not_to be_empty
+        expect(first_establishment.code.length).to eq 6
+        expect(second_establishment.code.length).to eq 6
+        expect(first_establishment.code).not_to eq second_establishment.code
       end
-      
-      it 'false when corporate_name is empty' do
-        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: '', cnpj: CNPJ.generate, address: 'Av das flores, 100', telephone: '79988887777', email: 'teste@email.com')
-        result = establishment.valid?
-        expect(result).to eq false
-      end
-      
-      it 'false when cnpj is empty' do
-        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Corporate LTDA', cnpj: '', address: 'Av das flores, 100', telephone: '79988887777', email: 'teste@email.com')
-        result = establishment.valid?
-        expect(result).to eq false
-      end
-      
-      it 'false when address is empty' do
-        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Corporate LTDA', cnpj: CNPJ.generate, address: '', telephone: '79988887777', email: 'teste@email.com')
-        result = establishment.valid?
-        expect(result).to eq false
-      end
-      
-      it 'false when telephone is empty' do
-        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Corporate LTDA', cnpj: CNPJ.generate, address: 'Av das flores, 100', telephone: '', email: 'teste@email.com')
-        result = establishment.valid?
-        expect(result).to eq false
-      end
-      
-      it 'false when email is empty' do
-        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Corporate LTDA', cnpj: CNPJ.generate, address: 'Av das flores, 100', telephone: '79988887777', email: '')
-        result = establishment.valid?
-        expect(result).to eq false
+
+      it 'não altera o atributo único ao fazer updates' do
+        user_owner = UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
+        establishment = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
+
+        code_before_update = establishment.code
+        establishment.update!(corporate_name: 'MC Donalds LTDA')
+
+        expect(establishment.corporate_name).to eq 'MC Donalds LTDA'
+        expect(establishment.code).to eq code_before_update
       end
     end
-  end
 
-  describe 'gera um código único e aleatório' do
-    it 'ao criar um estabelecimento' do
-    u1 = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
-    u2 = UserOwner.create!(name: 'João', last_name: 'Campus', cpf: CPF.generate, email: 'joao@email.com', password: 'password5678')
-    e1 = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: u1, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
-    e2 = Establishment.create!(fantasy_name: 'MC Donalds', corporate_name: 'Mc LTDA', cnpj: CNPJ.generate, address: 'Av Campus Code, 29', telephone: '79911112222', email: 'donalds@contato.com', user_owner: u2, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
+    context 'atributo correto:' do
+      it 'falso quando cnpj não existe' do # validate :cnpj_validator
+        user_owner = create_user_owner
+        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: '11111111111111', address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
 
-    e1.save!
+        expect(establishment.valid?).to eq false
+      end
 
-    expect(e1.code).not_to be_empty
-    expect(e1.code.length).to eq 6
-    expect(e1.code).not_to eq e2.code
+      it 'falso quando email não existe' do # validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+        user_owner = UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
+        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'emaildifferent', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
+
+        expect(establishment.valid?).to eq false
+      end
+
+      it 'falso quando telefone é muito grande' do # validates :telephone length: deve conter 10 ou 11 dígitos / tem 12
+        user_owner = UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
+        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '119777788881', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
+  
+        expect(establishment.valid?).to eq false
+      end
+
+      it 'falso quando telefone é muito pequeno' do # validates :telephone length: deve conter 10 ou 11 dígitos / tem 9
+        user_owner = UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
+        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '117777888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'))
+  
+        expect(establishment.valid?).to eq false
+      end
     end
 
-    it 'e não deve ser modificado' do 
-      u = UserOwner.create!(name: 'Marcos', last_name: 'Guimarães', cpf: CPF.generate, email: 'marcos@email.com', password: 'password1234')
-      e = Establishment.create!(fantasy_name: 'MC Donalds', corporate_name: 'Mc LTDA', cnpj: CNPJ.generate, address: 'Av Campus Code, 33', telephone: '79911112222', email: 'donalds@contato.com', user_owner: u, opening_time: Time.parse('09:00'), closing_time: Time.parse('15:00'))
-      e_current_code = e.code
+    context 'amarrações obrigatórias:' do
+      it 'falso quando dono de restaurante está vazio' do # belongs_to :user_owner
+        create_user_owner
+        establishment = Establishment.new(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'), user_owner: nil)
 
-      e.update!(corporate_name: 'MC Donalds LTDA')
-
-      expect(e.code).to eq e_current_code
+        expect(establishment.valid?).to eq false
+      end
     end
   end
 end

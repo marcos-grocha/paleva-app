@@ -17,7 +17,11 @@ class Establishment < ApplicationRecord
   private
 
   def generate_code
-    self.code = SecureRandom.alphanumeric(6).upcase
+    if ENV['SEED_MODE'] == 'true'
+      self.code = 'N9KN8J'
+    else
+      self.code = SecureRandom.alphanumeric(6).upcase
+    end
   end
 
   def cnpj_validator

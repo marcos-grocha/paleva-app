@@ -14,6 +14,8 @@ UserEmployee.destroy_all
 Establishment.destroy_all
 UserOwner.destroy_all
 
+ENV['SEED_MODE'] = 'true'
+
 # Cria 01 dono, 01 restaurante, 01 funcionário e 02 pré-cadastros
 user_owner = UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
 establishment = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'), sunday: true, wednesday: true, thursday: true, friday: true, saturday: true)
@@ -96,4 +98,5 @@ MenuDish.create!(menu: janta, dish: feijoada)
 MenuBeverage.create!(menu: janta, beverage: heineken)
 MenuBeverage.create!(menu: janta, beverage: caipirinha)
 
+ENV.delete('SEED_MODE')
 puts 'O PaLevá do Marcos foi populado com sucesso!'

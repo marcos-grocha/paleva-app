@@ -1,0 +1,23 @@
+<%= form_with model: @dish, multipart: true do |f| %>
+    <div class="text-start">
+        <%= f.label :name, class: 'form-label' %>
+        <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="text-start">
+        <%= f.label :description, class: 'form-label' %>
+        <%= f.text_field :description, class: 'form-control' %>
+    </div>
+    <div class="text-start">
+        <%= f.label :calories, class: 'form-label' %>
+        <%= f.number_field :calories, class: 'form-control' %>
+    </div>
+    <div class="text-start">
+        <%= f.label :photo, "Foto do Prato", class: 'form-label' %>
+        <%= f.file_field :photo, class: 'form-control' %>
+    </div>
+    <br>
+    <div>
+        <%= link_to 'voltar', @dish, class: 'btn btn-outline-dark' %>
+        <%= f.submit 'Salvar', class: 'btn btn-outline-warning' %>
+    </div>
+<% end %>

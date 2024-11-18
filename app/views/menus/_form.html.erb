@@ -1,0 +1,31 @@
+<%= form_with model: @menu, local: true do |f| %>
+    <div class="text-start">
+        <%= f.label :name, "Nome do Cardápio", class: 'form-label' %>
+        <%= f.text_field :name, class: 'form-control' %>
+    </div><br>
+
+    <div class="text-start">
+        <h5>Selecione os Pratos</h5>
+        <% Dish.all.each do |dish| %>
+            <div class="form-check">
+                <%= check_box_tag 'menu[dish_ids][]', dish.id, @menu.dishes.include?(dish), id: "menu_dish_ids_#{dish.id}", class: 'form-check-input' %>
+                <%= label_tag "menu_dish_ids_#{dish.id}", dish.name, class: 'form-check-label' %>
+            </div>
+        <% end %>
+    </div><br>
+
+    <div class="text-start">
+        <h5>Selecione as Bebidas</h5>
+        <% Beverage.all.each do |beverage| %>
+            <div>
+                <%= check_box_tag 'menu[beverage_ids][]', beverage.id, @menu.beverages.include?(beverage), id: "menu_beverage_ids_#{beverage.id}", class: 'form-check-input' %>
+                <%= label_tag "menu_beverage_ids_#{beverage.id}", beverage.name, class: 'form-check-label' %>
+            </div>
+        <% end %>
+    </div><br>
+    
+    <div>
+        <%= link_to 'voltar', menus_path, class: 'btn btn-outline-dark' %>
+        <%= f.submit "Salvar", class: 'btn btn-outline-warning' %>
+    </div>
+<% end %>
