@@ -8,48 +8,4 @@
     <br>
 <% end %>
 
-<%= form_with(model: @establishment) do |f| %>
-    <div class="text-start">
-        <%= f.label :fantasy_name, class: 'form-label' %>
-        <%= f.text_field :fantasy_name, class: 'form-control' %>
-    </div>
-    <div class="text-start">
-        <%= f.label :corporate_name, class: 'form-label' %>
-        <%= f.text_field :corporate_name, class: 'form-control' %>
-    </div>
-    <div class="text-start">
-        <%= f.label :cnpj, class: 'form-label' %>
-        <%= f.text_field :cnpj, class: 'form-control' %>
-    </div> 
-    <div class="text-start">
-        <%= f.label :address, class: 'form-label' %>
-        <%= f.text_field :address, class: 'form-control' %>
-    </div>
-    <div class="text-start">
-        <%= f.label :telephone, class: 'form-label' %>
-        <%= f.number_field :telephone, class: 'form-control' %>
-    </div>
-    <div class="text-start">
-        <%= f.label :email, class: 'form-label' %>
-        <%= f.text_field :email, class: 'form-control' %>
-    </div>
-    <div>
-        <br>
-        <h5><strong>Dias de Funcionamento: </strong></h5>
-        <%= f.label :sunday %> <%= f.check_box :sunday %> <br>
-        <%= f.label :monday %> <%= f.check_box :monday %> <br>
-        <%= f.label :tuesday %> <%= f.check_box :tuesday %> <br>
-        <%= f.label :wednesday %> <%= f.check_box :wednesday %> <br>
-        <%= f.label :thursday %> <%= f.check_box :thursday %> <br>
-        <%= f.label :friday %> <%= f.check_box :friday %> <br>
-        <%= f.label :saturday %> <%= f.check_box :saturday %> <br>
-    </div>
-    <div>
-        <br>
-        <h5><strong>Horário de Funcionamento: </strong></h5>
-        <%= f.label :opening_time, 'Abre' %> <%= f.time_field :opening_time %>
-        <%= f.label :closing_time, 'Fecha' %> <%= f.time_field :closing_time %>
-    </div>
-    <br>
-    <%= f.submit 'Cadastrar estabelecimento', class: 'btn btn-outline-warning' %>
-<% end %>
+<%= render 'form' %>

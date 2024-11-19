@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   devise_for :user_employees
   resources :employee_pre_registrations, only: [ :index, :new, :create ]
 
-  resources :establishments, only: [ :new, :create, :show ] do
+  resources :establishments, only: [ :new, :create, :show, :edit, :update ] do
     get "search", on: :collection
   end
 

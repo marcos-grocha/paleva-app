@@ -1,5 +1,6 @@
 class MenusController < ApplicationController
-  before_action :authenticate_user_owner!, only: [ :new, :create, :edit ]
+  before_action :authenticate_user_owner!, only: [ :new, :create, :edit, :update ]
+  before_action :set_params_and_check_user_owner, only: [ :edit, :update ]
   def index
     if user_owner_signed_in?
       @menus = current_user_owner.menus
@@ -25,13 +26,12 @@ class MenusController < ApplicationController
   end
   
   def show
+    @menu = Menu.find(params[:id])
     if user_owner_signed_in?
-      @menu = current_user_owner.menus.find(params[:id])
       if @menu.establishment.user_owner != current_user_owner
         return redirect_to root_path, alert: "Você não possui acesso a este menu."
       end
     elsif user_employee_signed_in?
-      @menu = current_user_employee.menus.find(params[:id])
       if @menu.establishment.user_owner != current_user_employee.user_owner
         return redirect_to root_path, alert: "Você não possui acesso a este menu."
       end
@@ -42,6 +42,15 @@ class MenusController < ApplicationController
 
   def edit; end
 
+  def update
+    if @menu.update(save_params)
+      redirect_to @menu, notice: "Cardápio atualizado com sucesso."
+    else
+      flash.now[:alert] = "Falha ao atualizar cardápio"
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def add_item_to_order
     session[:order_items] ||= []
 
@@ -50,17 +59,17 @@ class MenusController < ApplicationController
     quantity = 1 if quantity <= 0
     
     item = { 
-      portion_id: portion.id, 
-      quantity: params[:quantity].to_i, 
-      note: params[:note],
-      dish_id: portion.dish_id, 
-      beverage_id: portion.beverage_id 
+    'portion_id' => portion.id, 
+    'quantity' => quantity, 
+    'note' => params[:note],
+    'dish_id' => portion.dish_id, 
+    'beverage_id' => portion.beverage_id 
     }
 
-    existing_item = session[:order_items].find { |i| i['portion_id'] == item[:portion_id] }
+    existing_item = session[:order_items].find { |i| i['portion_id'] == item['portion_id'] }
     if existing_item
-      existing_item['quantity'] += item[:quantity]
-      existing_item['note'] = item[:note] if item[:note].present?
+      existing_item['quantity'] += item['quantity']
+      existing_item['note'] = item['note'] if item['note'].present?
     else
       session[:order_items] << item
     end
@@ -71,7 +80,7 @@ class MenusController < ApplicationController
   def remove_item_from_order
     if session[:order_items]
       session[:order_items].each_with_index do |item, index|
-        if item[:portion_id] == params[:portion_id]
+        if item['portion_id'] == params[:portion_id].to_i
           session[:order_items].delete_at(index)
           break
         end
@@ -82,6 +91,13 @@ class MenusController < ApplicationController
   end
 
   private
+
+  def set_params_and_check_user_owner
+    @menu = Menu.find(params[:id])
+    if @menu.establishment.user_owner != current_user_owner
+      return redirect_to root_path, alert: "Você não possui acesso a este cardápio."
+    end
+  end
 
   def save_params
     params.require(:menu).permit(:name, dish_ids: [], beverage_ids: [])

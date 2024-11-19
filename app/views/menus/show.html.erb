@@ -14,7 +14,7 @@
                     <% end %>
                 </div>
                 <div class="col-auto">
-                    <%= button_to 'Remover', remove_item_from_order_menu_path(@menu, portion), method: :delete, class: 'btn btn-danger btn-sm' %>
+                    <%= button_to 'Remover', remove_item_from_order_menu_path(@menu, portion_id: portion.id), method: :delete, class: 'btn btn-danger btn-sm' %>
                 </div>
             </div>
         </div><br>
@@ -82,8 +82,10 @@
 </div><br>
 
 <div class="d-flex justify-content-center">
-  <div class="row g-3 align-items-center">
+  <div class="row g-2 align-items-center">
     <div class="col-auto"><%= link_to 'voltar', menus_path, class: 'btn btn-outline-dark' %></div>
-    <div class="col-auto"><%= link_to 'editar', edit_menu_path, class: 'btn btn-outline-warning' %></div>
+    <% if user_owner_signed_in? %>
+        <div class="col-auto"><%= link_to 'editar', edit_menu_path, class: 'btn btn-outline-warning' %></div>
+    <% end %>
   </div>
 </div><br>

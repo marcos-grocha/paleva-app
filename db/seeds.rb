@@ -98,5 +98,30 @@ MenuDish.create!(menu: janta, dish: feijoada)
 MenuBeverage.create!(menu: janta, beverage: heineken)
 MenuBeverage.create!(menu: janta, beverage: caipirinha)
 
+# 6 pedidos
+order1 = Order.create!(customer_name: 'João Campus', contact_phone: '11999998888', contact_email: 'joao.campus@campuscode.com', cpf: CPF.generate, establishment: establishment)
+OrderItem.create!(quantity: 2, note: 'Sem pimenta', order: order1, portion: feijoada.portions.find_by(description: 'Feijoada M'), dish: feijoada)
+OrderItem.create!(quantity: 1, note: '', order: order1, portion: coca.portions.find_by(description: 'Coca G'), beverage: coca)
+
+order2 = Order.create!(customer_name: 'Helena Oliveira', contact_phone: '21999997777', contact_email: 'helena.oliveira@email.com', cpf: CPF.generate, establishment: establishment)
+OrderItem.create!(quantity: 1, note: 'Extra queijo', order: order2, portion: parmegiana.portions.find_by(description: 'Bife G'), dish: parmegiana)
+OrderItem.create!(quantity: 2, note: '', order: order2, portion: agua_gas.portions.find_by(description: 'Água P'), beverage: agua_gas)
+
+order3 = Order.create!(customer_name: 'Matheus Silva', contact_phone: '31988886666', contact_email: 'matheus.silva@email.com', cpf: CPF.generate, establishment: establishment)
+OrderItem.create!(quantity: 3, note: '', order: order3, portion: fritas.portions.find_by(description: 'Batata M'), dish: fritas)
+OrderItem.create!(quantity: 1, note: 'Com menos gelo', order: order3, portion: caipirinha.portions.find_by(description: 'Caipirinha M'), beverage: caipirinha)
+
+order4 = Order.create!(customer_name: 'Leticia Amado', contact_phone: '42977775555', contact_email: 'leticiaamadoaa@email.com', cpf: CPF.generate, establishment: establishment)
+OrderItem.create!(quantity: 1, note: 'Sem pirão', order: order4, portion: moqueca.portions.find_by(description: 'Moqueca P'), dish: moqueca)
+OrderItem.create!(quantity: 2, note: '', order: order4, portion: suco_laranja.portions.find_by(description: 'Suco G'), beverage: suco_laranja)
+
+order5 = Order.create!(customer_name: 'Marcos Guimarães', contact_phone: '51966664444', contact_email: 'marcos.grocha@campuscode.com', cpf: CPF.generate, establishment: establishment)
+OrderItem.create!(quantity: 1, note: '', order: order5, portion: bolonhesa.portions.find_by(description: 'Espaguete G'), dish: bolonhesa)
+OrderItem.create!(quantity: 2, note: '', order: order5, portion: heineken.portions.find_by(description: 'Heineken G'), beverage: heineken)
+
+order6 = Order.create!(customer_name: 'Patrícia Lima', contact_phone: '61955553333', contact_email: 'patricia.lima@email.com', cpf: CPF.generate, establishment: establishment)
+OrderItem.create!(quantity: 2, note: '', order: order6, portion: feijoada.portions.find_by(description: 'Feijoada G'), dish: feijoada)
+OrderItem.create!(quantity: 1, note: '', order: order6, portion: agua_gas.portions.find_by(description: 'Água M'), beverage: agua_gas)
+
 ENV.delete('SEED_MODE')
 puts 'O PaLevá do Marcos foi populado com sucesso!'

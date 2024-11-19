@@ -47,6 +47,9 @@ describe 'Usuário cadastra um pedido' do
     click_on 'Salvar'
 
     expect(page).to have_content 'Pedido realizado com sucesso'
+    expect(page).to have_content 'Pedidos Disponíveis'
+    expect(page).to have_content 'Pedido # '
+    expect(page).to have_content 'Cliente: Cliente Marcos'
     expect(page).to have_content Order.last.order_code
     expect(page).not_to have_content 'Nenhum pedido disponível'
     expect(current_path).to eq orders_path

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário acessa os menus' do
-  it 'e vê a lista de itens para um pedido vazia' do
+describe 'Usuário acessa os cardápios' do
+  it 'e vê a lista de itens para o pedido atual vazia' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
     dish = Dish.create!(name: 'Feijoada', description: 'Descrição da feijoada', establishment: establishment)
@@ -63,7 +63,7 @@ describe 'Usuário acessa os menus' do
     expect(page).not_to have_content 'Nenhum item adicionado ao pedido.'
   end
 
-  it 'e remove itens ao pedido' do
+  it 'e remove itens do pedido' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
     dish = create_dish_feijoada(establishment)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário cadastra um restaurante' do
+describe 'Usuário cadastra um estabelecimento' do
   it 'e não está logado' do
     create_user_owner()
     
@@ -25,7 +25,7 @@ describe 'Usuário cadastra um restaurante' do
     check 'SEX'
     fill_in 'Abre', with: '15:00'
     fill_in 'Fecha', with: '23:00'
-    click_on 'Cadastrar estabelecimento'
+    click_on 'Salvar'
     
     expect(page).to have_content 'Estabelecimento cadastrado com sucesso!'
     expect(page).to have_content 'Fantasy'
@@ -46,7 +46,7 @@ describe 'Usuário cadastra um restaurante' do
     visit root_path
     fill_in 'Razão Social', with: ''
     fill_in 'E-mail', with: ''
-    click_on 'Cadastrar estabelecimento'
+    click_on 'Salvar'
     
     expect(page).to have_content 'Falha ao cadastrar estabelecimento!'
     expect(page).to have_content 'Razão Social não pode ficar em branco'

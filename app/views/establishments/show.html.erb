@@ -23,4 +23,10 @@
     <div class="card-footer text-body-secondary">
         <%= @establishment.email %> <b>-</b> <%= @establishment.telephone %>
     </div>
-</div>
+</div><br>
+
+<% if user_owner_signed_in? %>
+    <div class="d-flex justify-content-center">
+        <%= link_to 'editar', edit_establishment_path, class: 'btn btn-outline-warning' %>
+    </div>
+<% end %>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Funcionário acessa rota de menus' do
+describe 'Funcionário acessa rota de cardápios' do
   it 'sem estar logado' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
@@ -14,13 +14,12 @@ describe 'Funcionário acessa rota de menus' do
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 
-  it 'logado mas não tem vínculo' do
+  it 'está logado mas não tem vínculo' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
     menu = create_menu(establishment)
     create_employee_pre_registration(user_owner, establishment)
     create_user_employee(user_owner, establishment)
-
     user_owner_impostor = UserOwner.create!(name: 'User', last_name: 'Owner', 
                                     cpf: CPF.generate, email: 'impostor@owner.com', 
                                     password: 'password1234')
@@ -40,6 +39,8 @@ describe 'Funcionário acessa rota de menus' do
     login_as user_employee_impostor, scope: :user_employee
     visit menu_path(menu)
 
+    expect(current_path).not_to eq menu_path(menu)
+    expect(current_path).to eq menus_path
     expect(page).to have_content 'Você não possui acesso a este menu.'
   end
 

@@ -32,5 +32,6 @@ describe 'Dono visita a rota raiz' do
     click_on 'Log in'
 
     expect(current_path).to eq menus_path
+    expect(page).to have_content 'Nenhum cardápio disponível'
   end
 end

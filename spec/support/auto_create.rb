@@ -62,8 +62,12 @@ def create_order(establishment)
   Order.create!(customer_name: 'Cliente', contact_phone: '11977778888', contact_email: 'cliente@email.com', cpf: CPF.generate, establishment: establishment)
 end
 
-def create_order_item(order, portion)
-  OrderItem.create!(quantity: 1, note: "Sem cebola", order: order, portion: portion)
+def create_order_item_dish(order, portion, dish)
+  OrderItem.create!(quantity: 1, note: "Sem cebola", order: order, portion: portion, dish: dish)
+end
+
+def create_order_item_beverage(order, portion, beverage)
+  OrderItem.create!(quantity: 1, note: "Zero açucar", order: order, portion: portion, beverage: beverage)
 end
 
 def create_price_history(portion)
