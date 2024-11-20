@@ -1,17 +1,16 @@
-<h1>Pedidos Disponíveis</h1><br>
-<div>
-    <% if @orders.any? %>
-        <div class="order-list">
-            <% @orders.each do |o| %>
-                <%= link_to order_path(o) do %>
-                    <div class="order-item">
-                        <p>Pedido # <%= o.order_code %></p>
-                        <p>Cliente: <%= o.customer_name %></p>
-                    </div>
-                <% end %>
+<h1>Pedidos Realizados</h1>
+
+<% if @orders.any? %>
+    <div class="order-list">
+        <% @orders.each do |o| %>
+            <%= link_to order_path(o) do %>
+                <div class="order-item">
+                    <p>Pedido # <%= o.order_code %></p>
+                    <p>Cliente: <%= o.customer_name %></p>
+                </div>
             <% end %>
-        </div>
-    <% else %>
-        <p>Nenhum pedido disponível</p>
-    <% end %>
-</div><br>
+        <% end %>
+    </div>
+<% else %>
+    <p>Nenhum pedido disponível</p>
+<% end %>

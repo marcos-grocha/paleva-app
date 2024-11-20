@@ -19,10 +19,10 @@ describe 'Funcionário visita a rota raiz' do
     UserEmployee.create!(name: 'User', last_name: 'Employee', cpf: '59306160003', email: 'usuario@funcionario.com', password: 'password1234', user_owner: user_owner, establishment: establishment)
 
     visit root_path
-    click_on 'Funcionário'
+    click_on 'Colaborador'
     fill_in 'E-mail', with: 'usuario@funcionario.com'
     fill_in 'Senha', with: 'password1234'
-    click_on 'Log in'
+    click_on 'Entrar'
 
     expect(current_path).to eq menus_path
   end

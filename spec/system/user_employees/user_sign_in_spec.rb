@@ -8,10 +8,10 @@ describe 'Funcionário faz login' do
     UserEmployee.create!(name: 'Usuário', last_name: 'Funcionário', cpf: '59306160003', email: 'usuario@funcionario.com', password: 'password1234')
 
     visit root_path
-    click_on 'Funcionário'
+    click_on 'Colaborador'
     fill_in 'E-mail', with: 'usuario@funcionario.com'
     fill_in 'Senha', with: 'password1234'
-    click_on 'Log in'
+    click_on 'Entrar'
     
     expect(page).to have_content 'Login efetuado com sucesso.'
     expect(page).to have_button 'Sair'
@@ -24,10 +24,10 @@ describe 'Funcionário faz login' do
     UserEmployee.create!(name: 'Usuário', last_name: 'Funcionário', cpf: '59306160003', email: 'usuario@funcionario.com', password: 'password1234')
 
     visit root_path
-    click_on 'Funcionário'
+    click_on 'Colaborador'
     fill_in 'E-mail', with: 'email@errado.com'
     fill_in 'Senha', with: 'password5555'
-    click_on 'Log in'
+    click_on 'Entrar'
     
     expect(page).to have_content 'E-mail ou senha inválidos.'
     expect(page).not_to have_button 'Sair'

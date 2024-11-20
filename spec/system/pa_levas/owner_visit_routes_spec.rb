@@ -16,7 +16,7 @@ describe 'Dono visita a rota raiz' do
     click_on 'Administrador'
     fill_in 'E-mail', with: 'user@owner.com'
     fill_in 'Senha', with: 'password1234'
-    click_on 'Log in'
+    click_on 'Entrar'
 
     expect(current_path).to eq new_establishment_path
   end
@@ -29,7 +29,7 @@ describe 'Dono visita a rota raiz' do
     click_on 'Administrador'
     fill_in 'E-mail', with: 'user@owner.com'
     fill_in 'Senha', with: 'password1234'
-    click_on 'Log in'
+    click_on 'Entrar'
 
     expect(current_path).to eq menus_path
     expect(page).to have_content 'Nenhum cardápio disponível'

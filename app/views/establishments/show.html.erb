@@ -20,10 +20,18 @@
         <h4 class="card-title"><b>Horário de Funcionamento</b></h4>
         Abre: <%= I18n.l @establishment.opening_time, format: :short %> <b>/</b> Fecha: <%= I18n.l @establishment.closing_time, format: :short %>
     </div>
+    <div class="card-body">
+        <% if @establishment.open_now? %>
+        <p style="color: green;"><b>Aberto agora</b></p>
+        <% else %>
+        <p style="color: red;"><b>Fechado agora</b></p>
+        <% end %>
+    </div><br>
     <div class="card-footer text-body-secondary">
         <%= @establishment.email %> <b>-</b> <%= @establishment.telephone %>
     </div>
 </div><br>
+
 
 <% if user_owner_signed_in? %>
     <div class="d-flex justify-content-center">

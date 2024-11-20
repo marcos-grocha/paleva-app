@@ -2,7 +2,7 @@ class EmployeePreRegistrationsController < ApplicationController
   before_action :authenticate_user_owner!
 
   def index
-    @pre_registrations = EmployeePreRegistration.all
+    @pre_registrations = current_user_owner.employee_pre_registrations
   end
 
   def new

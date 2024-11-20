@@ -4,14 +4,14 @@ describe 'Usuário cria uma conta de dono' do
   it 'com sucesso' do
     visit root_path
     click_on 'Administrador'
-    click_on 'Sign up'
+    click_on 'Cadastrar'
     fill_in 'Nome', with: 'Usuário'
     fill_in 'Sobrenome', with: 'Dono'
     fill_in 'CPF', with: CPF.generate
     fill_in 'E-mail', with: 'usuario@email.com'
     fill_in 'Senha', with: 'password1234'
     fill_in 'Confirme sua senha', with: 'password1234'
-    click_on 'Sign up'
+    click_on 'Cadastrar'
 
     expect(page).to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
     expect(page).to have_content 'Usuário'
@@ -23,14 +23,14 @@ describe 'Usuário cria uma conta de dono' do
   it 'com os dados errados' do
     visit root_path
     click_on 'Administrador'
-    click_on 'Sign up'
+    click_on 'Cadastrar'
     fill_in 'Nome', with: ''
     fill_in 'Sobrenome', with: ''
     fill_in 'CPF', with: ''
     fill_in 'E-mail', with: ''
     fill_in 'Senha', with: 'password1111'
     fill_in 'Confirme sua senha', with: 'password2222'
-    click_on 'Sign up'
+    click_on 'Cadastrar'
 
     expect(page).to have_content 'Não foi possível salvar dono de estabelecimento'
     expect(page).to have_content 'E-mail não pode ficar em branco'
