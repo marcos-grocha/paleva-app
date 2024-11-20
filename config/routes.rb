@@ -33,7 +33,9 @@ Rails.application.routes.draw do
     delete "remove_item_from_order", on: :member
   end
 
-  resources :orders, only: [ :index, :new, :create, :show ]
+  resources :orders, only: [ :index, :new, :create, :show ] do
+    get "search", on: :collection
+  end
 
   namespace :api do
     namespace :v1 do

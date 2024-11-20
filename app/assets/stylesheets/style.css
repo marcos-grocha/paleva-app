@@ -9,6 +9,19 @@ header {
     z-index: 1000;
     top: 0;
 }
+div.header-session {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: xx-large;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+header img {
+    margin-right: 10px;
+}
+header span {
+    margin-left: 10px;
+}
 nav {
     padding: 10px;
 }

@@ -61,9 +61,12 @@
           </div>
         <% end %>
         <% unless user_owner_signed_in? || user_employee_signed_in? %>
-          <%= link_to pa_leva_session_path do %>
-            <%= image_tag 'android-chrome-192x192.png', class: 'img-fluid rounded-start', style: 'width: 80px' %>
-          <% end %>
+          <div class="header-session">
+            <%= link_to pa_leva_session_path do %>
+              <%= image_tag 'android-chrome-192x192.png', class: 'img-fluid rounded-start', style: 'width: 80px' %>
+            <% end %>
+              <span>Estabelecimento!</span>
+          </div>
         <% end %>
       </div>
       <nav>

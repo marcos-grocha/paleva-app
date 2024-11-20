@@ -1,4 +1,9 @@
-<h1>Quem é você?</h1><br>
+<h1>Quem é você?</h1>
 
-<%= link_to 'Administrador', new_user_owner_session_path, class: 'btn btn-warning' %>
-<%= link_to 'Funcionário', new_user_employee_session_path, class: 'btn btn-primary' %>
+<%= link_to 'Administrador', new_user_owner_session_path, class: 'btn btn-warning btn-lg' %>
+<%= link_to 'Funcionário', new_user_employee_session_path, class: 'btn btn-primary btn-lg' %>
+
+<div style="padding-top: 30px;">
+    <h3>Ou então...</h3>
+    <%= link_to 'Rastrear pedido ativo', search_orders_path, class: 'btn btn-light', style: 'border-radius: 30px;' %>
+</div>

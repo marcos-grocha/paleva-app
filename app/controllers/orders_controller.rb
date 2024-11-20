@@ -59,6 +59,10 @@ class OrdersController < ApplicationController
     end
   end
 
+  def search
+    @order = Order.find_by(order_code: params[:order_code])
+  end
+
   private
 
   def save_params
