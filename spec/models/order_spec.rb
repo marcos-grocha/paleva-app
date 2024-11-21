@@ -76,6 +76,14 @@ RSpec.describe Order, type: :model do
 
         expect(order.valid?).to eq false
       end
+      # validates :cancellation_reason, presence: true, if: -> { cancelled? }
+      it 'falso quando pedido é cancelado e não tem motivo' do
+        user_owner = create_user_owner
+        establishment = create_establishment(user_owner)
+        order = Order.new(customer_name: 'Cliente', contact_phone: '11977778888', contact_email: 'cliente@email.com', cpf: CPF.generate, establishment: establishment, status: :cancelled)
+
+        expect(order.valid?).to eq false
+      end
     end
 
     context 'amarrações obrigatórias:' do # belongs_to :establishment

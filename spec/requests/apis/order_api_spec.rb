@@ -137,4 +137,39 @@ describe 'Order API' do
     end
   end
 
+  context 'PATCH /api/v1/establishments/:establishment_code/orders/:order_code/cancel' do
+    it 'Cancela um pedido: "waiting_confirmation" => "cancelled"' do
+      user_owner = create_user_owner
+      allow(SecureRandom).to receive(:alphanumeric).with(6).and_return('CODE01')
+      establishment = create_establishment(user_owner)
+      allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ORDER001')
+      Order.create!(customer_name: 'Cliente 1', contact_phone: '79988887771', contact_email: 'cliente1@email.com', 
+      status: 'waiting_confirmation', establishment: establishment)
+
+      patch "/api/v1/establishments/CODE01/orders/ORDER001/cancel", params: { reason: 'Cabô a cebola!' }
+  
+      expect(response.status).to eq 200
+      json_response = JSON.parse(response.body)
+      expect(json_response['customer_name']).to eq 'Cliente 1'
+      expect(json_response['status']).to eq 'cancelled'
+      expect(json_response['cancellation_reason']).to eq 'Cabô a cebola!'
+    end
+
+    it 'Cancela um pedido: "in_preparation" => "cancelled"' do
+      user_owner = create_user_owner
+      allow(SecureRandom).to receive(:alphanumeric).with(6).and_return('CODE01')
+      establishment = create_establishment(user_owner)
+      allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ORDER001')
+      Order.create!(customer_name: 'Cliente 1', contact_phone: '79988887771', contact_email: 'cliente1@email.com', 
+      status: 'in_preparation', establishment: establishment)
+
+      patch "/api/v1/establishments/CODE01/orders/ORDER001/cancel", params: { reason: 'Cabô a cebola!' }
+  
+      expect(response.status).to eq 200
+      json_response = JSON.parse(response.body)
+      expect(json_response['customer_name']).to eq 'Cliente 1'
+      expect(json_response['status']).to eq 'cancelled'
+      expect(json_response['cancellation_reason']).to eq 'Cabô a cebola!'
+    end
+  end
 end

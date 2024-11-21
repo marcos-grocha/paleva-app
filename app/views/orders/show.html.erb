@@ -1,8 +1,10 @@
-
 <div class="order-details">
     <h2>Detalhes do Pedido <br># <%= @order.order_code %></h2><br>
     <p>Cliente: <b><%= @order.customer_name %></b></p>
     <p>Status: <b><%= I18n.t("enums.order.status.#{@order.status}") %></b></p>
+    <% if @order.status == 'cancelled' %>
+        <p>Motivo: <b><%= @order.cancellation_reason %></b></p>
+    <% end %>
     <% if @order.order_items.any? %>
         <div class="order-list">
             <% @order.order_items.each do |item| %>

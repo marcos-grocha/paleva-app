@@ -1,6 +1,6 @@
 class Api::V1::OrdersController < Api::V1::ApiController
   before_action :set_establishment
-  before_action :set_order, only: [:show, :update]
+  before_action :set_order, only: [:show, :update, :cancel]
 
   def index
     orders = @establishment.orders
@@ -23,14 +23,34 @@ class Api::V1::OrdersController < Api::V1::ApiController
 
   def update
     if @order.waiting_confirmation?
-      @order.update(status: :in_preparation)
+      @order.update(status: :in_preparation, in_preparation_date: DateTime.now)
     elsif @order.in_preparation?
-      @order.update(status: :ready)
+      @order.update(status: :ready, ready_date: DateTime.now)
     end
 
     order_details = @order.as_json(
       only: [:id, :customer_name, :contact_phone, :contact_email, 
-              :cpf, :status, :order_code, :created_at],
+              :cpf, :status, :order_code, :created_at, 
+              :in_preparation_date, :ready_date],
+      methods: [:order_items_details]
+    )
+
+    render status: 200, json: order_details
+  end
+
+  def cancel
+    reason = params[:reason]
+    if reason.blank?
+      render status: 400, json: { error: "O motivo do cancelamento é obrigatório." }
+      return
+    end
+
+    @order.update(status: :cancelled, cancellation_reason: reason)
+
+    order_details = @order.as_json(
+      only: [:id, :customer_name, :contact_phone, :contact_email, 
+              :cpf, :status, :order_code, :created_at, 
+              :in_preparation_date, :ready_date, :cancellation_reason],
       methods: [:order_items_details]
     )
 

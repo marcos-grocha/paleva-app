@@ -9,6 +9,7 @@ class Order < ApplicationRecord
   validate :contact_validator
   validates :contact_email, format: { with: URI::MailTo::EMAIL_REGEXP, message: 'inválido' }, if: -> { contact_email.present? }
   validates :contact_phone, length: { in: 10..11, message: 'deve conter 10 ou 11 dígitos' }, if: -> { contact_phone.present? }
+  validates :cancellation_reason, presence: true, if: -> { cancelled? }
 
   before_validation :generate_code, on: :create
 
