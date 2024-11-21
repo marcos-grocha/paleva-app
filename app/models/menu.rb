@@ -7,4 +7,5 @@ class Menu < ApplicationRecord
   has_many :order_items
 
   validates :name, presence: true, uniqueness: { scope: :establishment_id, message: "Já existe um cardápio com esse nome" }
+  scope :active, -> { where(status: true) }
 end

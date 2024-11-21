@@ -16,9 +16,9 @@ class Establishment < ApplicationRecord
 
   def open_now?
     current_time = Time.zone.now
-    current_day = current_time.strftime('%A').downcase # Exemplo: "monday", "tuesday"
+    current_day = current_time.strftime('%A').downcase
     
-    return false unless self.send(current_day) # Verifica se o restaurante abre hoje
+    return false unless self.send(current_day)
 
     opening_time_today = opening_time
     closing_time_today = closing_time
@@ -29,10 +29,10 @@ class Establishment < ApplicationRecord
       closing_time_in_seconds = closing_time_today.seconds_since_midnight
 
       if opening_time_in_seconds < closing_time_in_seconds
-        # Horário normal (ex.: 08:00 a 20:00)
+        # normal (08:00 a 20:00)
         current_time_in_seconds.between?(opening_time_in_seconds, closing_time_in_seconds)
       else
-        # Horário cruzando meia-noite (ex.: 23:50 a 09:40)
+        # cruzando meia-noite (23:50 a 09:40)
         current_time_in_seconds >= opening_time_in_seconds || current_time_in_seconds < closing_time_in_seconds
       end
     else

@@ -82,10 +82,17 @@
 </div><br>
 
 <div class="d-flex justify-content-center">
-  <div class="row g-2 align-items-center">
-    <div class="col-auto"><%= link_to 'voltar', menus_path, class: 'btn btn-outline-dark' %></div>
-    <% if user_owner_signed_in? %>
-        <div class="col-auto"><%= link_to 'editar', edit_menu_path, class: 'btn btn-outline-warning' %></div>
-    <% end %>
-  </div>
+    <div class="row g-2 align-items-center">
+        <div class="col-auto"><%= link_to 'voltar', menus_path, class: 'btn btn-outline-dark' %></div>
+        <% if user_owner_signed_in? %>
+            <div class="col-auto"><%= link_to 'editar', edit_menu_path, class: 'btn btn-outline-warning' %></div>
+            <div class="col-auto">
+                <%= form_with url: change_status_menu_path(@menu), method: :patch do %>
+                    <%= hidden_field_tag :status, !@menu.status %>
+                    <%= button_tag 'Desativar', type: 'submit', class: 'btn btn-outline-danger' if @menu.status == true %>
+                    <%= button_tag 'Ativar', type: 'submit', class: 'btn btn-outline-success' if @menu.status == false %>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
 </div><br>

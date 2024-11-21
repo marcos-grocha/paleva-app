@@ -1,4 +1,4 @@
-# Apagando todos os dados
+puts 'Apagando todos os dados...'
 OrderItem.destroy_all
 Order.destroy_all
 MenuDish.destroy_all
@@ -16,14 +16,16 @@ UserOwner.destroy_all
 
 ENV['SEED_MODE'] = 'true'
 
-# Cria 01 dono, 01 restaurante, 01 funcionário e 02 pré-cadastros
+puts 'Criando 01 administrador, 01 restaurante, 01 colaborador e 02 pré-cadastros...'
 user_owner = UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
-establishment = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('14:20'), closing_time: Time.parse('21:45'), sunday: true, wednesday: true, thursday: true, friday: true, saturday: true)
+establishment = Establishment.create!(fantasy_name: 'Fantasy', corporate_name: 'Irã LTDA', cnpj: CNPJ.generate, address: 'Av Dulce Diniz, 18', telephone: '79977778888', email: 'fantasy@contato.com', user_owner: user_owner, opening_time: Time.parse('04:20'), closing_time: Time.parse('17:45'), monday: true, tuesday: true, wednesday: true, thursday: true, friday: true, saturday: true)
 EmployeePreRegistration.create!(email: 'out@employee.com', cpf: CPF.generate, user_owner: user_owner, establishment: establishment)
 EmployeePreRegistration.create!(email: 'user@employee.com', cpf: '59306160003', user_owner: user_owner, establishment: establishment)
 UserEmployee.create!(name: 'User', last_name: 'Employee', cpf: '59306160003', email: 'user@employee.com', password: 'password1234', user_owner: user_owner, establishment: establishment)
 
-# 5 pratos
+ENV.delete('SEED_MODE')
+
+puts 'Criando 5 pratos...'
 feijoada = Dish.create!(name: 'Feijoada', description: 'Feijão preto com carne', establishment: establishment)
 AdditionalFeature.create!(name: 'Apimentado', active: true, dish: feijoada)
 Portion.create!(description: 'Feijoada P', price: '19.00', dish: feijoada)
@@ -54,7 +56,7 @@ Portion.create!(description: 'Espaguete P', price: '22.00', dish: bolonhesa)
 Portion.create!(description: 'Espaguete M', price: '32.00', dish: bolonhesa)
 Portion.create!(description: 'Espaguete G', price: '42.00', dish: bolonhesa)
 
-# 5 bebidas
+puts 'Criando 5 bebidas...'
 coca = Beverage.create!(name: 'Coca-Cola', description: 'Refrigerante de cola', establishment: establishment, alcoholic: false)
 Portion.create!(description: 'Coca P', price: '10.00', beverage: coca)
 Portion.create!(description: 'Coca M', price: '20.00', beverage: coca)
@@ -80,7 +82,7 @@ Portion.create!(description: 'Caipirinha P', price: '15.00', beverage: caipirinh
 Portion.create!(description: 'Caipirinha M', price: '20.00', beverage: caipirinha)
 Portion.create!(description: 'Caipirinha G', price: '25.00', beverage: caipirinha)
 
-# 3 menus
+puts 'Criando 3 menus...'
 cafe = Menu.create!(name: 'Café da manhã', establishment: establishment)
 MenuDish.create!(menu: cafe, dish: fritas)
 MenuDish.create!(menu: cafe, dish: bolonhesa)
@@ -98,7 +100,7 @@ MenuDish.create!(menu: janta, dish: feijoada)
 MenuBeverage.create!(menu: janta, beverage: heineken)
 MenuBeverage.create!(menu: janta, beverage: caipirinha)
 
-# 6 pedidos
+puts 'Criando 6 pedidos...'
 order1 = Order.create!(customer_name: 'João Campus', contact_phone: '11999998888', contact_email: 'joao.campus@campuscode.com', cpf: CPF.generate, establishment: establishment)
 OrderItem.create!(quantity: 2, note: 'Sem pimenta', order: order1, portion: feijoada.portions.find_by(description: 'Feijoada M'), dish: feijoada)
 OrderItem.create!(quantity: 1, note: '', order: order1, portion: coca.portions.find_by(description: 'Coca G'), beverage: coca)
@@ -123,5 +125,13 @@ order6 = Order.create!(customer_name: 'Patrícia Lima', contact_phone: '61955553
 OrderItem.create!(quantity: 2, note: '', order: order6, portion: feijoada.portions.find_by(description: 'Feijoada G'), dish: feijoada)
 OrderItem.create!(quantity: 1, note: '', order: order6, portion: agua_gas.portions.find_by(description: 'Água M'), beverage: agua_gas)
 
-ENV.delete('SEED_MODE')
+# Cria outro administrador que tem um estabelecimento que funciona de madrugada
+user2_owner = UserOwner.create!(name: 'User2', last_name: 'Owner', cpf: CPF.generate, email: 'user2@owner.com', password: 'password1234')
+Establishment.create!(fantasy_name: 'Madrugão', corporate_name: 'Mag LTDA', cnpj: CNPJ.generate, address: 'Av Galegos, 1', telephone: '79933338888', email: 'madrugao@contato.com', user_owner: user2_owner, opening_time: Time.parse('17:46'), closing_time: Time.parse('04:19'), sunday: true, wednesday: true, thursday: true, friday: true, saturday: true)
+
+# Cria outro menu que está desativado
+sazonal = Menu.create!(name: 'Cardápio Sazonal', establishment: establishment, status: false)
+MenuDish.create!(menu: sazonal, dish: parmegiana)
+MenuBeverage.create!(menu: sazonal, beverage: heineken)
+
 puts 'O PaLevá do Marcos foi populado com sucesso!'

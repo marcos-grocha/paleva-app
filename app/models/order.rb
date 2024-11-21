@@ -4,9 +4,9 @@ class Order < ApplicationRecord
 
   enum :status, { waiting_confirmation: 0, in_preparation: 2, cancelled: 4, ready: 6, delivered: 8 }, default: 0
 
-  validates :customer_name, presence: true
   validate :cpf_validator, if: -> { cpf.present? }
   validate :contact_validator
+  validates :customer_name, presence: true
   validates :contact_email, format: { with: URI::MailTo::EMAIL_REGEXP, message: 'inválido' }, if: -> { contact_email.present? }
   validates :contact_phone, length: { in: 10..11, message: 'deve conter 10 ou 11 dígitos' }, if: -> { contact_phone.present? }
   validates :cancellation_reason, presence: true, if: -> { cancelled? }

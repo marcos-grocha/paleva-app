@@ -1,11 +1,11 @@
 class MenusController < ApplicationController
-  before_action :authenticate_user_owner!, only: [ :new, :create, :edit, :update ]
-  before_action :set_params_and_check_user_owner, only: [ :edit, :update ]
+  before_action :authenticate_user_owner!, only: [ :new, :create, :edit, :update, :change_status ]
+  before_action :set_params_and_check_user_owner, only: [ :edit, :update, :change_status ]
   def index
     if user_owner_signed_in?
       @menus = current_user_owner.menus
     elsif user_employee_signed_in?
-      @menus = current_user_employee.user_owner.menus
+      @menus = current_user_employee.user_owner.menus.active
     else
       redirect_to root_path, alert: 'Acesso negado.'
     end
@@ -48,6 +48,15 @@ class MenusController < ApplicationController
     else
       flash.now[:alert] = "Falha ao atualizar cardápio"
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def change_status
+    @menu.status = !@menu.status
+    if @menu.save
+      redirect_to @menu, notice: 'Status do cardápio atualizado com sucesso.'
+    else
+      redirect_to @menu, alert: 'Não foi possível atualizar o status do cardápio.'
     end
   end
 

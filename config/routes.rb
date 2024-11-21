@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   end
 
   resources :menus, only: [ :index, :new, :create, :show, :edit, :update ] do
+    patch "change_status", on: :member
     post "add_item_to_order", on: :member
     delete "remove_item_from_order", on: :member
   end
