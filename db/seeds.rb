@@ -1,4 +1,6 @@
-puts 'Apagando todos os dados...'
+require "open-uri"
+
+puts '...Apagando todos os dados...'
 OrderItem.destroy_all
 Order.destroy_all
 MenuDish.destroy_all
@@ -26,63 +28,100 @@ UserEmployee.create!(name: 'User', last_name: 'Employee', cpf: '59306160003', em
 ENV.delete('SEED_MODE')
 
 puts 'Criando 5 pratos...'
-feijoada = Dish.create!(name: 'Feijoada', description: 'Feijão preto com carne', establishment: establishment)
+sleep(5)
+feijoada = Dish.create!(name: 'Feijoada', description: 'Feijão preto com carne', establishment: establishment, calories: 54)
 AdditionalFeature.create!(name: 'Apimentado', active: true, dish: feijoada)
 Portion.create!(description: 'Feijoada P', price: '19.00', dish: feijoada)
 Portion.create!(description: 'Feijoada M', price: '29.00', dish: feijoada)
 Portion.create!(description: 'Feijoada G', price: '39.00', dish: feijoada)
 
-fritas = Dish.create!(name: 'Batata-Frita', description: 'Fritas em forma de tirinhas', establishment: establishment)
+fritas = Dish.create!(name: 'Batata-Frita', description: 'Fritas em forma de tirinhas', establishment: establishment, calories: 61)
 AdditionalFeature.create!(name: 'Tira-Gosto', active: true, dish: fritas)
 Portion.create!(description: 'Batata P', price: '18.00', dish: fritas)
 Portion.create!(description: 'Batata M', price: '28.00', dish: fritas)
 Portion.create!(description: 'Batata G', price: '38.00', dish: fritas)
 
-parmegiana = Dish.create!(name: 'Bife à Parmegiana', description: 'Bife empanado com molho de tomate e queijo', establishment: establishment)
+parmegiana = Dish.create!(name: 'Bife à Parmegiana', description: 'Bife empanado com molho de tomate e queijo', establishment: establishment, calories: 57)
 AdditionalFeature.create!(name: 'Com Queijo Extra', active: true, dish: parmegiana)
 Portion.create!(description: 'Bife P', price: '25.00', dish: parmegiana)
 Portion.create!(description: 'Bife M', price: '35.00', dish: parmegiana)
 Portion.create!(description: 'Bife G', price: '45.00', dish: parmegiana)
 
-moqueca = Dish.create!(name: 'Moqueca de Peixe', description: 'Peixe cozido com leite de coco e temperos', establishment: establishment)
+moqueca = Dish.create!(name: 'Moqueca de Peixe', description: 'Peixe cozido com leite de coco e temperos', establishment: establishment, calories: 44)
 AdditionalFeature.create!(name: 'Acompanha Pirão', active: true, dish: moqueca)
 Portion.create!(description: 'Moqueca P', price: '30.00', dish: moqueca)
 Portion.create!(description: 'Moqueca M', price: '45.00', dish: moqueca)
 Portion.create!(description: 'Moqueca G', price: '55.00', dish: moqueca)
 
-bolonhesa = Dish.create!(name: 'Espaguete à Bolonhesa', description: 'Massa com molho de carne moída', establishment: establishment)
+bolonhesa = Dish.create!(name: 'Espaguete à Bolonhesa', description: 'Massa com molho de carne moída', establishment: establishment, calories: 36)
 AdditionalFeature.create!(name: 'Com Parmesão', active: true, dish: bolonhesa)
 Portion.create!(description: 'Espaguete P', price: '22.00', dish: bolonhesa)
 Portion.create!(description: 'Espaguete M', price: '32.00', dish: bolonhesa)
 Portion.create!(description: 'Espaguete G', price: '42.00', dish: bolonhesa)
 
 puts 'Criando 5 bebidas...'
-coca = Beverage.create!(name: 'Coca-Cola', description: 'Refrigerante de cola', establishment: establishment, alcoholic: false)
+sleep(5)
+coca = Beverage.create!(name: 'Coca-Cola', description: 'Refrigerante de cola', establishment: establishment, alcoholic: false, calories: 0)
 Portion.create!(description: 'Coca P', price: '10.00', beverage: coca)
 Portion.create!(description: 'Coca M', price: '20.00', beverage: coca)
 Portion.create!(description: 'Coca G', price: '30.00', beverage: coca)
 
-heineken = Beverage.create!(name: 'Heineken', description: 'Cerveja puro-malte', establishment: establishment, alcoholic: true)
+heineken = Beverage.create!(name: 'Heineken', description: 'Cerveja puro-malte', establishment: establishment, alcoholic: true, calories: 2)
 Portion.create!(description: 'Heineken P', price: '11.00', beverage: heineken)
 Portion.create!(description: 'Heineken M', price: '21.00', beverage: heineken)
 Portion.create!(description: 'Heineken G', price: '31.00', beverage: heineken)
 
-suco_laranja = Beverage.create!(name: 'Suco de Laranja', description: 'Suco natural de laranja', establishment: establishment, alcoholic: false)
+suco_laranja = Beverage.create!(name: 'Suco de Laranja', description: 'Suco natural de laranja', establishment: establishment, alcoholic: false, calories: 18)
 Portion.create!(description: 'Suco P', price: '8.00', beverage: suco_laranja)
 Portion.create!(description: 'Suco M', price: '12.00', beverage: suco_laranja)
 Portion.create!(description: 'Suco G', price: '16.00', beverage: suco_laranja)
 
-agua_gas = Beverage.create!(name: 'Água com Gás', description: 'Água mineral gaseificada', establishment: establishment, alcoholic: false)
+agua_gas = Beverage.create!(name: 'Água com Gás', description: 'Água mineral gaseificada', establishment: establishment, alcoholic: false, calories: 3)
 Portion.create!(description: 'Água P', price: '5.00', beverage: agua_gas)
 Portion.create!(description: 'Água M', price: '8.00', beverage: agua_gas)
 Portion.create!(description: 'Água G', price: '10.00', beverage: agua_gas)
 
-caipirinha = Beverage.create!(name: 'Caipirinha', description: 'Bebida com limão, açúcar e cachaça', establishment: establishment, alcoholic: true)
+caipirinha = Beverage.create!(name: 'Caipirinha', description: 'Bebida com limão, açúcar e cachaça', establishment: establishment, alcoholic: true, calories: 17)
 Portion.create!(description: 'Caipirinha P', price: '15.00', beverage: caipirinha)
 Portion.create!(description: 'Caipirinha M', price: '20.00', beverage: caipirinha)
 Portion.create!(description: 'Caipirinha G', price: '25.00', beverage: caipirinha)
 
+puts 'Anexando as fotos dos pratos... (Levará cerca de 30 segundos)'
+sleep(5)
+file = URI.open(Rails.root.join("app/assets/images/items/feijoada.jpg"))
+feijoada.photo.attach(io: File.open(file), filename: "feijoada.jpg", content_type: "image/jpeg")
+sleep(5)
+file = URI.open(Rails.root.join("app/assets/images/items/fritas.jpg"))
+fritas.photo.attach(io: File.open(file), filename: "fritas.jpg", content_type: "image/jpeg")
+sleep(5)
+file = URI.open(Rails.root.join("app/assets/images/items/parmegiana.jpg"))
+parmegiana.photo.attach(io: File.open(file), filename: "parmegiana.jpg", content_type: "image/jpeg")
+sleep(5)
+file = URI.open(Rails.root.join("app/assets/images/items/moqueca.jpg"))
+moqueca.photo.attach(io: File.open(file), filename: "moqueca.jpg", content_type: "image/jpeg")
+sleep(5)
+file = URI.open(Rails.root.join("app/assets/images/items/bolonhesa.jpg"))
+bolonhesa.photo.attach(io: File.open(file), filename: "bolonhesa.jpg", content_type: "image/jpeg")
+
+puts 'Anexando as fotos das bebidas... (Levará cerca de 30 segundos)'
+sleep(5)
+file = URI.open(Rails.root.join("app/assets/images/items/coca.jpg"))
+coca.photo.attach(io: File.open(file), filename: "coca.jpg", content_type: "image/jpeg")
+sleep(5)
+file = URI.open(Rails.root.join("app/assets/images/items/heineken.jpg"))
+heineken.photo.attach(io: File.open(file), filename: "heineken.jpg", content_type: "image/jpeg")
+sleep(5)
+file = URI.open(Rails.root.join("app/assets/images/items/suco-laranja.png"))
+suco_laranja.photo.attach(io: File.open(file), filename: "suco-laranja.png", content_type: "image/jpeg")
+sleep(5)
+file = URI.open(Rails.root.join("app/assets/images/items/agua-com-gas.jpg"))
+agua_gas.photo.attach(io: File.open(file), filename: "agua-com-gas.jpg", content_type: "image/jpeg")
+sleep(5)
+file = URI.open(Rails.root.join("app/assets/images/items/caipirinha.png"))
+caipirinha.photo.attach(io: File.open(file), filename: "caipirinha.jpg", content_type: "image/jpeg")
+
 puts 'Criando 3 menus...'
+sleep(5)
 cafe = Menu.create!(name: 'Café da manhã', establishment: establishment)
 MenuDish.create!(menu: cafe, dish: fritas)
 MenuDish.create!(menu: cafe, dish: bolonhesa)
@@ -101,6 +140,7 @@ MenuBeverage.create!(menu: janta, beverage: heineken)
 MenuBeverage.create!(menu: janta, beverage: caipirinha)
 
 puts 'Criando 6 pedidos...'
+sleep(5)
 order1 = Order.create!(customer_name: 'João Campus', contact_phone: '11999998888', contact_email: 'joao.campus@campuscode.com', cpf: CPF.generate, establishment: establishment)
 OrderItem.create!(quantity: 2, note: 'Sem pimenta', order: order1, portion: feijoada.portions.find_by(description: 'Feijoada M'), dish: feijoada)
 OrderItem.create!(quantity: 1, note: '', order: order1, portion: coca.portions.find_by(description: 'Coca G'), beverage: coca)
@@ -134,4 +174,4 @@ sazonal = Menu.create!(name: 'Cardápio Sazonal', establishment: establishment, 
 MenuDish.create!(menu: sazonal, dish: parmegiana)
 MenuBeverage.create!(menu: sazonal, beverage: heineken)
 
-puts 'O PaLevá do Marcos foi populado com sucesso!'
+puts 'OK! O PaLevá do Marcos foi populado com sucesso!'

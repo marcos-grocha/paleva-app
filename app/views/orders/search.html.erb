@@ -19,15 +19,15 @@
       <p><b>Pedido # <%= @order.order_code %></b></p>
       <p>Cliente: <b><%= @order.customer_name %></b></p>
       <p>Status: <b><%= I18n.t("enums.order.status.#{@order.status}") %></b></p>
-      <p>Criado em: <b><%= l(@order.created_at, format: :long) %></b></p>
+      <p>Criado em: <b><%= l(@order.created_at.in_time_zone('Brasilia'), format: :long) %></b></p>
       <% if @order.in_preparation_date %>
-        <p>Início do preparo: <b><%= l(@order.in_preparation_date, format: :long) %></b></p>
+        <p>Início do preparo: <b><%= l(@order.in_preparation_date.in_time_zone('Brasilia'), format: :long) %></b></p>
       <% end %>
       <% if @order.ready_date %>
-        <p>Concluído em: <b><%= l(@order.ready_date, format: :long) %></b></p>
+        <p>Concluído em: <b><%= l(@order.ready_date.in_time_zone('Brasilia'), format: :long) %></b></p>
       <% end %>
       <% if @order.status == 'cancelled' %>
-        <p>Cancelado em: <b><%= l(@order.updated_at, format: :long) %></b></p>
+        <p>Cancelado em: <b><%= l(@order.updated_at.in_time_zone('Brasilia'), format: :long) %></b></p>
         <p>Motivo: <b><%= @order.cancellation_reason %></b></p>
       <% end %>
     
