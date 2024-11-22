@@ -6,7 +6,7 @@
 
 ## Principais Funcionalidades
 
-- **API para pedidos**: Consuma a API com o [Projeto PaLevá-Cozinha](https://github.com/marcos-grocha/paleva-cozinha-vuejs)
+- **API para pedidos**: Consuma a API com o [Projeto PaLevá - Cozinha](https://github.com/marcos-grocha/paleva-cozinha-vuejs)
 - **Gerenciamento de Estabelecimentos**: Cadastro de restaurantes, incluindo horários de funcionamento e informações básicas.
 - **Gestão de Menus**: Criação de cardápios personalizados com pratos e bebidas.
 - **Gerenciamento de Itens**:
@@ -21,10 +21,10 @@
 ## Tecnologias Utilizadas
 
 - **Ruby on Rails**: Framework principal para desenvolvimento backend.
-- **Rspec e capybara**: Projeto todo criado usando TDD, conta com 190+ testes.
+- **Rspec e Capybara**: Projeto todo criado usando TDD, conta com 190+ testes.
 - **Bootstrap 5**: Estilização frontend responsiva.
 - **Active Storage**: Gerenciamento de anexos e imagens.
-- **msqlite3**: ">= 1.4" Banco de dados para desenvolvimento/teste.
+- **SQLite3** ">= 1.4": Banco de dados para desenvolvimento/teste.
 - **PWA (Progressive Web App)**: Suporte para service workers e manifest para experiência de aplicativo.
 
 ---
@@ -65,12 +65,24 @@ rails server
 
 ---
 
-## Conteúdo do seed.rb
+## Usuários já disponíveis
 - **Usuário Administrador**: email: user@owner.com / senha: password1234
 - **Usuário Colaborador**: email: user@employee.com / senha: password1234
 - Administrador extra: email: user2@owner.com / senha: password1234
 
 ---
 
+## Testes
+- O projeto conta com mais de 190 testes, pois foi construindo com desenvolvimento orientado por testes (Test Driven Development).
+- Você pode roda-los com o seguinte comando
+
+```bash
+rspec
+```
+
+---
+
 ## Autor
 Desenvolvido por [Marcos Guimarães Rocha](https://www.linkedin.com/in/marcos-grocha/).
+
+![PaLevá](https://github.com/marcos-grocha/paleva-app/blob/main/app/assets/images/Screenshot/PaLev%C3%A1%20-%20Estabelecimento%20-%20Seu%20PaLev%C3%A1.png?raw=true)
