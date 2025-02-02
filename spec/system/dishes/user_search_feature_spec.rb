@@ -19,7 +19,7 @@ describe 'Usuário procura por um marcador' do
     expect(page).to have_content 'Feijoada'
     expect(page).not_to have_content 'Arroz'
   end
-  
+
   it 'e encontra pratos veganos' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)

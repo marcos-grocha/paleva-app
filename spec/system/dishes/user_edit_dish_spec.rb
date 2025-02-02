@@ -7,7 +7,7 @@ describe 'Usuário edita um prato' do
     dish = Dish.create!(name: 'Feijoada', description: 'Descrição da feijoada', establishment: establishment)
 
     visit edit_dish_path(dish)
-    
+
     expect(current_path).to eq new_user_owner_session_path
   end
 
@@ -23,7 +23,7 @@ describe 'Usuário edita um prato' do
     expect(current_path).to eq new_establishment_path
     expect(page).to have_content 'Você não possui acesso a este prato.'
   end
-  
+
   it 'com sucesso' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)

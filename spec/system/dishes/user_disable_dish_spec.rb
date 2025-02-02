@@ -11,7 +11,7 @@ describe 'Usuário clica em Pratos' do
     click_on 'Pratos'
     click_on 'Feijoada'
     click_on 'Desativar'
-    
+
     expect(page).to have_content 'Status do prato atualizado com sucesso.'
     expect(page).to have_content 'Feijoada'
     expect(page).to have_content 'Feijão preto com carne'

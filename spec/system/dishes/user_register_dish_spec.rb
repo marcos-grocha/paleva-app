@@ -4,7 +4,7 @@ describe 'Usuário cadastra um prato' do
   it 'e não está logado' do
     user_owner = create_user_owner()
     create_establishment(user_owner)
-    
+
     visit new_dish_path
 
     expect(current_path).to eq new_user_owner_session_path
@@ -13,7 +13,7 @@ describe 'Usuário cadastra um prato' do
   it 'com sucesso' do
     user_owner = create_user_owner()
     create_establishment(user_owner)
-    
+
     login_as user_owner
     visit root_path
     click_on 'Pratos'
@@ -29,11 +29,11 @@ describe 'Usuário cadastra um prato' do
     expect(page).to have_content 'Feijoada'
     expect(page).to have_content 'Ativado'
   end
-  
+
   it 'com sucesso e vê detalhes' do
     user_owner = create_user_owner()
     create_establishment(user_owner)
-    
+
     login_as user_owner
     visit root_path
     click_on 'Pratos'
@@ -44,16 +44,16 @@ describe 'Usuário cadastra um prato' do
     attach_file 'Foto do Prato', Rails.root.join('spec', 'support', 'feijoada.jpg')
     click_on 'Salvar'
     click_on 'Feijoada'
-    
+
     expect(page).to have_content 'Feijoada'
     expect(page).to have_content 'Feijão preto com carne'
     expect(page).to have_css("img[src*='feijoada.jpg']")
   end
-  
+
   it 'com os dados errados' do
     user_owner = create_user_owner()
     create_establishment(user_owner)
-    
+
     login_as user_owner
     visit root_path
     click_on 'Pratos'
