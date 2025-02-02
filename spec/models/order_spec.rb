@@ -11,15 +11,15 @@ RSpec.describe Order, type: :model do
     end
 
     context 'presença obrigatória:' do
-      it 'falso quando nome do cliente está vazio' do # validates :customer_name, presence: true
+      it 'falso quando nome do cliente está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         order = Order.new(customer_name: '', contact_phone: '11977778888', contact_email: 'cliente@email.com', cpf: CPF.generate, establishment: establishment)
 
         expect(order.valid?).to eq false
       end
-      
-      it 'falso quando telefone e email estão vazios' do # validate :contact_validator
+
+      it 'falso quando telefone e email estão vazios' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         order = Order.new(customer_name: 'Cliente', contact_phone: '', contact_email: '', cpf: CPF.generate, establishment: establishment)
@@ -28,7 +28,7 @@ RSpec.describe Order, type: :model do
       end
     end
 
-    context 'atributo único:' do # before_validation :generate_code, on: :create
+    context 'atributo único:' do
       it 'gera um código único e aleatório ao criar um estabelecimento' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
@@ -44,7 +44,6 @@ RSpec.describe Order, type: :model do
     end
 
     context 'atributo correto:' do
-      # validate :cpf_validator, if: -> { cpf.present? }
       it 'falso quando cnpj não existe' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
@@ -52,7 +51,7 @@ RSpec.describe Order, type: :model do
 
         expect(order.valid?).to eq false
       end
-      # validates :contact_email, if: -> { email.present? }, format: { with: URI::MailTo::EMAIL_REGEXP, message: 'inválido' }
+
       it 'falso quando email não existe' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
@@ -60,7 +59,7 @@ RSpec.describe Order, type: :model do
 
         expect(order.valid?).to eq false
       end
-      # validates :contact_phone, if: -> { telephone.present? }, length: { in: 10..11, message: 'deve conter 10 ou 11 dígitos' }
+
       it 'falso quando telefone é muito grande' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
@@ -76,7 +75,7 @@ RSpec.describe Order, type: :model do
 
         expect(order.valid?).to eq false
       end
-      # validates :cancellation_reason, presence: true, if: -> { cancelled? }
+
       it 'falso quando pedido é cancelado e não tem motivo' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
@@ -86,7 +85,7 @@ RSpec.describe Order, type: :model do
       end
     end
 
-    context 'amarrações obrigatórias:' do # belongs_to :establishment
+    context 'amarrações obrigatórias:' do
       it 'falso quando estabelecimento está vazio' do
         user_owner = create_user_owner
         create_establishment(user_owner)

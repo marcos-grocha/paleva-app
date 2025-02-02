@@ -13,7 +13,7 @@ RSpec.describe OrderItem, type: :model do
       expect(order_item.valid?).to eq true
     end
 
-    context 'presença obrigatória:' do # validates :quantity, presence: true
+    context 'presença obrigatória:' do
       it 'falso quando quantidade está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
@@ -26,7 +26,7 @@ RSpec.describe OrderItem, type: :model do
       end
     end
 
-    context 'atributo correto:' do # validates :quantity, numericality: { greater_than: 0 }
+    context 'atributo correto:' do
       it 'falso quando quantidade é menor que 1' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
@@ -40,7 +40,7 @@ RSpec.describe OrderItem, type: :model do
     end
 
     context 'amarrações obrigatórias:' do
-      it 'falso quando pedido está vazio' do # belongs_to :order
+      it 'falso quando pedido está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         dish = create_dish_arroz(establishment)
@@ -50,8 +50,8 @@ RSpec.describe OrderItem, type: :model do
 
         expect(order_item.valid?).to eq false
       end
-      
-      it 'falso quando porção está vazio' do # belongs_to :portion
+
+      it 'falso quando porção está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         dish = create_dish_arroz(establishment)

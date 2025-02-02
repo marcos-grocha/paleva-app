@@ -10,12 +10,12 @@ RSpec.describe Dish, type: :model do
       expect(dish.valid?).to eq true
     end
 
-    context 'presença obrigatória:' do # validates :name, :description, presence: true
+    context 'presença obrigatória:' do
       it 'falso quando nome está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         dish = Dish.new(name: '', description: 'Feijão preto com carne', establishment: establishment)
-        
+
         expect(dish.valid?).to eq false
       end
 
@@ -23,12 +23,12 @@ RSpec.describe Dish, type: :model do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         dish = Dish.new(name: 'Feijoada', description: '', establishment: establishment)
-        
+
         expect(dish.valid?).to eq false
       end
     end
 
-    context 'amarrações obrigatórias:' do # belongs_to :establishment
+    context 'amarrações obrigatórias:' do
       it 'falso quando estabelecimento está vazio' do
         user_owner = create_user_owner
         create_establishment(user_owner)

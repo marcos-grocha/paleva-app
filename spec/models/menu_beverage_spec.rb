@@ -13,7 +13,7 @@ RSpec.describe MenuBeverage, type: :model do
     end
 
     context 'amarrações obrigatórias:' do
-      it 'falso quando menu está vazio' do # belongs_to :menu
+      it 'falso quando menu está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         beverage = create_beverage_cerveja(establishment)
@@ -22,8 +22,8 @@ RSpec.describe MenuBeverage, type: :model do
 
         expect(menu_beverage.valid?).to eq false
       end
-      
-      it 'falso quando beverage está vazio' do # belongs_to :beverage
+
+      it 'falso quando beverage está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         create_beverage_cerveja(establishment)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Menu, type: :model do  
+RSpec.describe Menu, type: :model do
   describe 'É válido?' do
     it 'sucesso' do
       user_owner = UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
@@ -10,7 +10,7 @@ RSpec.describe Menu, type: :model do
       expect(menu.valid?).to eq true
     end
 
-    context 'presença obrigatória:' do # validates :name, presence: true
+    context 'presença obrigatória:' do
       it 'falso quando nome está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
@@ -20,7 +20,7 @@ RSpec.describe Menu, type: :model do
       end
     end
 
-    context 'atributo único:' do # validates :name, uniqueness: { scope: :establishment_id }
+    context 'atributo único:' do
       it 'falso quando nome já foi cadastrado' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
@@ -29,10 +29,9 @@ RSpec.describe Menu, type: :model do
 
         expect(menu.valid?).to eq false
       end
-      
     end
 
-    context 'amarrações obrigatórias:' do # belongs_to :establishment
+    context 'amarrações obrigatórias:' do
       it 'falso quando nome está vazio' do
         user_owner = create_user_owner
         create_establishment(user_owner)

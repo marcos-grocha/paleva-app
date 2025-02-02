@@ -13,7 +13,7 @@ RSpec.describe MenuDish, type: :model do
     end
 
     context 'amarrações obrigatórias:' do
-      it 'falso quando menu está vazio' do # belongs_to :menu
+      it 'falso quando menu está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         dish = create_dish_arroz(establishment)
@@ -22,8 +22,8 @@ RSpec.describe MenuDish, type: :model do
 
         expect(menu_dish.valid?).to eq false
       end
-      
-      it 'falso quando dish está vazio' do # belongs_to :dish
+
+      it 'falso quando dish está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         create_dish_arroz(establishment)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AdditionalFeature, type: :model do  
+RSpec.describe AdditionalFeature, type: :model do
   describe 'É válido?' do
     it 'sucesso' do
       user_owner = UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
@@ -12,23 +12,23 @@ RSpec.describe AdditionalFeature, type: :model do
     end
 
     context 'presença obrigatória:' do
-      it 'falso quando nome está vazio' do # validates :name, presence: true
+      it 'falso quando nome está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         dish = create_dish_arroz(establishment)
         additional_feature = AdditionalFeature.new(name: '', dish: dish)
-  
+
         expect(additional_feature.valid?).to eq false
       end
     end
 
-    context 'amarrações obrigatórias:' do # belongs_to :dish
+    context 'amarrações obrigatórias:' do
       it 'falso quando prato está vazio' do
         user_owner = create_user_owner
         establishment = create_establishment(user_owner)
         create_dish_arroz(establishment)
         additional_feature = AdditionalFeature.new(name: 'Acebolado', dish: nil)
-  
+
         expect(additional_feature.valid?).to eq false
       end
     end
