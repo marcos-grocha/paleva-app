@@ -11,14 +11,14 @@ describe 'Usuário clica em Bebidas' do
     click_on 'Bebidas'
     click_on 'Coca-Cola'
     click_on 'Desativar'
-    
+
     expect(page).to have_content 'Status da bebida atualizado com sucesso.'
     expect(page).to have_content 'Coca-Cola'
     expect(page).to have_content 'Refrigerante de cola'
     expect(page).to have_content 'Desativado'
     expect(page).not_to have_content 'Ativado'
   end
-  
+
   it 'vai em detalhes e habilita uma bebida' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)

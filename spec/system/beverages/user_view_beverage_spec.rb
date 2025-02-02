@@ -7,7 +7,7 @@ describe 'Usuário acessa rota de bebidas' do
     beverage = create_beverage_refri(establishment)
 
     visit beverage_path(beverage)
-    
+
     expect(current_path).to eq new_user_owner_session_path
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end

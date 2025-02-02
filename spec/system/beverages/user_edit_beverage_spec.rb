@@ -7,7 +7,7 @@ describe 'Usuário edita uma bebida' do
     beverage = Beverage.create!(name: 'Heineken', description: 'Descrição da cerveja', establishment: estab)
 
     visit edit_beverage_path(beverage)
-    
+
     expect(current_path).to eq new_user_owner_session_path
   end
 
@@ -41,5 +41,5 @@ describe 'Usuário edita uma bebida' do
     expect(page).to have_content 'Heineken'
     expect(page).to have_content 'Editei a descrição'
     expect(page).not_to have_content 'Descrição da cerveja'
-  end  
+  end
 end
