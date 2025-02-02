@@ -6,7 +6,7 @@ describe 'Usuário edita um estabelecimento' do
     establishment = create_establishment(user_owner)
 
     visit edit_establishment_path(establishment)
-    
+
     expect(current_path).to eq new_user_owner_session_path
   end
 
@@ -17,7 +17,7 @@ describe 'Usuário edita um estabelecimento' do
 
     login_as user_impostor
     visit edit_establishment_path(establishment)
-    
+
     expect(current_path).to eq new_establishment_path
     expect(page).to have_content 'Você não possui acesso a este estabelecimento.'
   end

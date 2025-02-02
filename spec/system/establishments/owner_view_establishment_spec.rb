@@ -6,11 +6,11 @@ describe 'Dono acessa rota do estabelecimento' do
     establishment = create_establishment(user_owner)
 
     visit establishment_path(establishment)
-    
+
     expect(current_path).to eq pa_leva_session_path
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
-  
+
   it 'está logado mas não tem vínculo' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
@@ -18,7 +18,7 @@ describe 'Dono acessa rota do estabelecimento' do
 
     login_as user_impostor
     visit establishment_path(establishment)
-    
+
     expect(current_path).to eq new_establishment_path
     expect(page).to have_content 'Você não possui acesso a este estabelecimento.'
   end
@@ -29,7 +29,7 @@ describe 'Dono acessa rota do estabelecimento' do
 
     login_as user_owner
     visit establishment_path(establishment)
-    
+
     expect(current_path).to eq establishment_path(establishment)
   end
 end
