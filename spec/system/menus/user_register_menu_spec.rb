@@ -6,7 +6,7 @@ describe 'Usuário cadastra um menu' do
     establishment = create_establishment(user_owner)
     create_dish_feijoada(establishment)
     create_beverage_refri(establishment)
-    
+
     visit new_menu_path
 
     expect(current_path).to eq new_user_owner_session_path

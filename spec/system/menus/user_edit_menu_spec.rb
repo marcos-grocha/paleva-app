@@ -7,7 +7,7 @@ describe 'Usuário edita um cardápio' do
     menu = Menu.create!(name: 'Menu', establishment: establishment)
 
     visit edit_menu_path(menu)
-    
+
     expect(current_path).to eq new_user_owner_session_path
   end
 
@@ -19,7 +19,7 @@ describe 'Usuário edita um cardápio' do
 
     login_as user_impostor
     visit edit_menu_path(menu)
-    
+
     expect(current_path).to eq new_establishment_path
     expect(page).to have_content 'Você não possui acesso a este cardápio.'
   end
@@ -40,7 +40,7 @@ describe 'Usuário edita um cardápio' do
     Portion.create!(description: 'Batata P', price: '18.00', dish: fritas)
     heineken = Beverage.create!(name: 'Heineken', description: 'Cerveja puro-malte', establishment: establishment, alcoholic: true)
     Portion.create!(description: 'Heineken P', price: '11.00', beverage: heineken)
-    
+
     login_as user_owner
     visit root_path
     click_on 'Cardápios'

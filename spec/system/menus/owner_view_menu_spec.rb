@@ -7,7 +7,7 @@ describe 'Dono acessa rota de cardápios' do
     menu = create_menu(establishment)
 
     visit menu_path(menu)
-    
+
     expect(current_path).to eq pa_leva_session_path
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
@@ -30,7 +30,7 @@ describe 'Dono acessa rota de cardápios' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
     menu = create_menu(establishment)
-    
+
     login_as user_owner
     visit menu_path(menu)
 
