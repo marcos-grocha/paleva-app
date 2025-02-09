@@ -42,7 +42,7 @@ describe 'Usuário acessa os cardápios' do
     menu = Menu.create!(name: 'Primeiro Cardápio', establishment: establishment)
     MenuDish.create!(menu: menu, dish: dish)
     MenuBeverage.create!(menu: menu, beverage: beverage)
-  
+
     login_as user_owner
     visit root_path
     click_on 'Primeiro Cardápio'
@@ -56,7 +56,7 @@ describe 'Usuário acessa os cardápios' do
         click_on 'Adicionar ao Pedido'
       end
     end
-  
+
     expect(page).to have_content 'Item adicionado ao pedido.'
     expect(page).to have_content 'Remover'
     expect(page).to have_content 'Finalizar Pedido'

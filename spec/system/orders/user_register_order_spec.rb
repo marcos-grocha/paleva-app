@@ -7,7 +7,7 @@ describe 'Usuário cadastra um pedido' do
     create_dish_feijoada(establishment)
     create_beverage_refri(establishment)
     create_menu(establishment)
-    
+
     visit new_order_path
 
     expect(current_path).to eq pa_leva_session_path

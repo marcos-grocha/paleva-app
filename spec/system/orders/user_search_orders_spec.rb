@@ -23,7 +23,6 @@ describe 'Usuário busca um pedido' do
   end
 
   it 'que não existe' do
-
     visit root_path
     click_on 'Rastrear pedido ativo'
     fill_in 'Código do pedido', with: 'CODEERRADO'
