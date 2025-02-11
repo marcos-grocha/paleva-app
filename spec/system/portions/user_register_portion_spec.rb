@@ -57,7 +57,7 @@ describe 'Usuário cadastra uma porção' do
     expect(page).to have_content 'Descrição não pode ficar em branco'
     expect(page).to have_content 'Preço não pode ficar em branco'
   end
-  
+
   it 'de bebida com dados errados' do
     user_owner = create_user_owner()
     establishment = create_establishment(user_owner)
