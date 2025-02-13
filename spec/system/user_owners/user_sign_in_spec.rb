@@ -9,7 +9,7 @@ describe 'Dono faz login' do
     fill_in 'E-mail', with: 'marcos@email.com'
     fill_in 'Senha', with: 'password1234'
     click_on 'Entrar'
-    
+
     expect(page).to have_content 'Login efetuado com sucesso.'
     expect(page).to have_button 'Sair'
   end
@@ -22,7 +22,7 @@ describe 'Dono faz login' do
     fill_in 'E-mail', with: 'joao@email.com'
     fill_in 'Senha', with: 'password5555'
     click_on 'Entrar'
-    
+
     expect(page).to have_content 'E-mail ou senha inválidos.'
     expect(page).not_to have_button 'Sair'
   end

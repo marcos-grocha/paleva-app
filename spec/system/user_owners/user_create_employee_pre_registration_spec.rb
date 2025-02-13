@@ -4,7 +4,7 @@ describe 'Usuário cria um pré cadastro para um funcionário' do
   it 'e não está logado' do
     user_owner = create_user_owner()
     create_establishment(user_owner)
-    
+
     visit new_employee_pre_registration_path
 
     expect(current_path).to eq new_user_owner_session_path
@@ -13,7 +13,7 @@ describe 'Usuário cria um pré cadastro para um funcionário' do
   it 'com sucesso' do
     user_owner = create_user_owner()
     create_establishment(user_owner)
-    
+
     login_as user_owner
     visit root_path
     click_on 'Funcionários'
@@ -33,7 +33,7 @@ describe 'Usuário cria um pré cadastro para um funcionário' do
   it 'com os dados errados' do
     user_owner = create_user_owner()
     create_establishment(user_owner)
-    
+
     login_as user_owner
     visit root_path
     click_on 'Funcionários'
@@ -49,4 +49,3 @@ describe 'Usuário cria um pré cadastro para um funcionário' do
     expect(page).to have_content 'Email inválido'
   end
 end
-
