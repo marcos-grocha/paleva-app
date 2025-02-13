@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Dono visita a rota raiz' do
   it 'e não está logado' do
     UserOwner.create!(name: 'User', last_name: 'Owner', cpf: CPF.generate, email: 'user@owner.com', password: 'password1234')
-    
+
     visit root_path
 
     expect(current_path).to eq pa_leva_session_path

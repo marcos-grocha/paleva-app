@@ -6,7 +6,7 @@ describe 'Funcionário visita a rota raiz' do
     establishment = create_establishment(user_owner)
     EmployeePreRegistration.create!(email: 'usuario@funcionario.com', cpf: '59306160003', user_owner: user_owner, establishment: establishment)
     UserEmployee.create!(name: 'User', last_name: 'Employee', cpf: '59306160003', email: 'usuario@funcionario.com', password: 'password1234', user_owner: user_owner, establishment: establishment)
-    
+
     visit root_path
 
     expect(current_path).to eq pa_leva_session_path
