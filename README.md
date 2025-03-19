@@ -85,4 +85,6 @@ rspec
 ## Autor
 Desenvolvido por [Marcos Guimarães Rocha](https://www.linkedin.com/in/marcos-grocha/).
 
-![PaLevá](https://github.com/marcos-grocha/paleva-app/blob/main/app/assets/images/Screenshot/PaLev%C3%A1%20-%20Estabelecimento%20-%20Seu%20PaLev%C3%A1.png?raw=true)
+![Novo-PaLevá](https://github.com/user-attachments/assets/749d2bc6-69c1-4bb6-a79a-b0eb6c3e05a9)
+
+<!-- ![PaLevá](https://github.com/marcos-grocha/paleva-app/blob/main/app/assets/images/Screenshot/PaLev%C3%A1%20-%20Estabelecimento%20-%20Seu%20PaLev%C3%A1.png?raw=true) -->
